@@ -39,19 +39,20 @@
         <div class="stage__ghost" id="ghost" aria-hidden="true"></div>
         <div class="stage__track" id="track"></div>
 
-        <div class="stage__controls">
-          <p class="stage__price" id="st-price"></p>
-          <div class="stage__arrows">
-            <button class="arrow" id="prev" aria-label="Previous item">&larr;</button>
-            <button class="arrow" id="next" aria-label="Next item">&rarr;</button>
+        <div class="stage__info">
+          <div class="stage__text" id="stage-text" aria-live="polite">
+            <p class="stage__eyebrow" id="st-eyebrow"></p>
+            <h2 class="stage__title" id="st-title"></h2>
+            <p class="stage__desc" id="st-desc"></p>
           </div>
-          <a class="btn btn--outline" href="#shop">Explore</a>
-        </div>
-
-        <div class="stage__text" id="stage-text" aria-live="polite">
-          <p class="stage__eyebrow" id="st-eyebrow"></p>
-          <h2 class="stage__title" id="st-title"></h2>
-          <p class="stage__desc" id="st-desc"></p>
+          <div class="stage__controls">
+            <p class="stage__price" id="st-price"></p>
+            <div class="stage__arrows">
+              <button class="arrow" id="prev" aria-label="Previous item">&larr;</button>
+              <button class="arrow" id="next" aria-label="Next item">&rarr;</button>
+            </div>
+            <a class="btn btn--outline" href="#shop">Explore</a>
+          </div>
         </div>
 
         <p class="stage__hint" id="hint" aria-hidden="true">Scroll &darr;</p>
