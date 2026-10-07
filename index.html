@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SCUDARO — Streetwear inspirerad av racing</title>
+  <meta name="description" content="SCUDARO. Oversized streetwear med racing i blodet. Första kollektionen är här.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="announce">Fri frakt över 799 kr &nbsp;•&nbsp; Kollektion 01 är släppt</div>
+
+  <header class="site-header">
+    <nav class="nav nav--left" aria-label="Huvudmeny">
+      <a href="#" class="is-active">Hem</a>
+      <a href="#produkter">Shop</a>
+      <a href="#om-oss">Om oss</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="#" class="brand" aria-label="SCUDARO startsida">
+      <img src="assets/logo-white.png" alt="SCUDARO" width="647" height="213">
+    </a>
+    <nav class="nav nav--right" aria-label="Konto">
+      <a href="#">Sök</a>
+      <a href="#">Logga in</a>
+      <a href="#" id="cart-link" aria-label="Varukorg">Varukorg <span class="cart-count" id="cart-count">0</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="hero__eyebrow">Kollektion 01</p>
+      <h1 id="hero-title" class="hero__title">Byggd för <em>pole position</em></h1>
+      <p class="hero__sub">Oversized tees och hoodies med racing i blodet. Begränsade upplagor.</p>
+      <a class="btn" href="#produkter">Shoppa kollektionen</a>
+      <p class="hero__note">Heroytan är en placeholder – byt ut mot kampanjbild (se README).</p>
+    </section>
+
+    <section class="shop" id="produkter" aria-labelledby="shop-title">
+      <div class="shop__head">
+        <h2 id="shop-title">Nyheter</h2>
+        <div class="filters" role="group" aria-label="Filtrera produkter">
+          <button class="chip is-active" data-filter="alla">Alla</button>
+          <button class="chip" data-filter="tee">T-shirts</button>
+          <button class="chip" data-filter="hoodie">Hoodies</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="about" id="om-oss">
+      <h2>Racing är en känsla, inte en sport.</h2>
+      <p>SCUDARO görs för dem som älskar fart, garagekultur och lördagar vid banan. Tunga bomullskvaliteter, överdimensionerade passformer och tryck på ryggen – för det är där du syns när du lämnar de andra bakom dig.</p>
+    </section>
+
+    <section class="usp" aria-label="Våra löften">
+      <div><strong>Begränsade upplagor</strong><span>Slut är slut. Inga omtryck.</span></div>
+      <div><strong>Oversized fit</strong><span>Tung bomull, boxig passform.</span></div>
+      <div><strong>30 dagars returrätt</strong><span>Passar det inte, skicka tillbaka.</span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="kontakt">
+    <img src="assets/logo-white.png" alt="SCUDARO" class="footer-logo" width="647" height="213">
+    <form class="newsletter" id="newsletter">
+      <label for="email">Få besked om nästa drop</label>
+      <div class="newsletter__row">
+        <input id="email" type="email" placeholder="din@epost.se" required>
+        <button class="btn btn--light" type="submit">Prenumerera</button>
+      </div>
+      <p class="newsletter__msg" id="newsletter-msg" role="status"></p>
+    </form>
+    <p class="legal">© 2026 SCUDARO. Alla rättigheter förbehållna.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
