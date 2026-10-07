@@ -32,12 +32,30 @@
   </header>
 
   <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <p class="hero__eyebrow">Kollektion 01</p>
-      <h1 id="hero-title" class="hero__title">Byggd för <em>pole position</em></h1>
-      <p class="hero__sub">Oversized tees och hoodies med racing i blodet. Begränsade upplagor.</p>
-      <a class="btn" href="#produkter">Shoppa kollektionen</a>
-      <p class="hero__note">Heroytan är en placeholder – byt ut mot kampanjbild (se README).</p>
+    <h1 class="sr-only">SCUDARO – streetwear med racing i blodet</h1>
+
+    <section class="stage-wrap" id="stage-wrap" aria-label="Kollektion 01 – bläddra med scroll">
+      <div class="stage" id="stage">
+        <div class="stage__ghost" id="ghost" aria-hidden="true"></div>
+        <div class="stage__track" id="track"></div>
+
+        <div class="stage__info">
+          <div class="stage__text" id="stage-text" aria-live="polite">
+            <p class="stage__eyebrow" id="st-eyebrow"></p>
+            <h2 class="stage__title" id="st-title"></h2>
+            <p class="stage__desc" id="st-desc"></p>
+          </div>
+          <div class="stage__controls">
+            <p class="stage__price" id="st-price"></p>
+            <div class="stage__arrows">
+              <button class="arrow" id="prev" aria-label="Föregående plagg">&larr;</button>
+              <button class="arrow" id="next" aria-label="Nästa plagg">&rarr;</button>
+            </div>
+            <a class="btn btn--outline" href="#produkter">Utforska</a>
+          </div>
+        </div>
+        <p class="stage__hint" id="hint" aria-hidden="true">Scrolla &darr;</p>
+      </div>
     </section>
 
     <section class="shop" id="produkter" aria-labelledby="shop-title">

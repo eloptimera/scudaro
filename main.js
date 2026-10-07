@@ -1,29 +1,46 @@
 // Produktdata – byt ut mot riktig katalog (t.ex. Shopify/Stripe) när det är dags.
 const PRODUCTS = [
-  { id: 1, name: "Apex – Oversized Tee",       type: "tee",    price: 599, was: 749, tile: "#1d4f91", shirt: "#0e0e10", ink: "#f4f4f2", word: "APEX",   tag: "Nytt" },
-  { id: 2, name: "Paddock – Oversized Tee",    type: "tee",    price: 599, was: null, tile: "#7a0f14", shirt: "#c4161c", ink: "#f4f4f2", word: "PADDOCK" },
-  { id: 3, name: "Slipstream – Oversized Tee", type: "tee",    price: 599, was: 749, tile: "#1d4f91", shirt: "#0e0e10", ink: "#e8a317", word: "SLIP",   tag: "Nytt" },
-  { id: 4, name: "Parc Fermé – Hoodie",        type: "hoodie", price: 1149, was: null, tile: "#2a2a2e", shirt: "#e9e9e7", ink: "#0e0e10", word: "PARC" },
-  { id: 5, name: "Chicane – Hoodie",           type: "hoodie", price: 1149, was: null, tile: "#0f0f10", shirt: "#c4161c", ink: "#f4f4f2", word: "CHICANE" },
-  { id: 6, name: "Pit Lane – Oversized Tee",   type: "tee",    price: 599, was: null, tile: "#4a4f57", shirt: "#0e0e10", ink: "#f4f4f2", word: "PIT" },
+  { id: 1, name: "Apex – Oversized Tee",       type: "tee",    price: 599,  was: 749,  tile: "#1d4f91", shirt: "#0e0e10", ink: "#f4f4f2", word: "APEX",    tag: "Nytt",
+    desc: "Tung bomull, boxig passform och ett ryggtryck som syns redan i första kurvan." },
+  { id: 2, name: "Paddock – Oversized Tee",    type: "tee",    price: 599,  was: null, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "PADDOCK",
+    desc: "Racingröd i rejäl kvalitet. Överdimensionerad, mjuk men tung." },
+  { id: 3, name: "Slipstream – Oversized Tee", type: "tee",    price: 599,  was: 749,  tile: "#e8a317", shirt: "#0e0e10", ink: "#e8a317", word: "SLIP",    tag: "Nytt",
+    desc: "Svart tee med guldigt ryggtryck. Begränsad upplaga, inga omtryck." },
+  { id: 4, name: "Parc Fermé – Hoodie",        type: "hoodie", price: 1149, was: null, tile: "#4a4f57", shirt: "#d9d9d4", ink: "#0e0e10", word: "PARC",
+    desc: "Efter målgång. Tung hoodie i off-white med stort tryck på ryggen." },
+  { id: 5, name: "Chicane – Hoodie",           type: "hoodie", price: 1149, was: null, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "CHICANE",
+    desc: "Röd hoodie för kalla morgnar i depån. Boxig, rejäl och byggd för att hålla." },
+  { id: 6, name: "Pit Lane – Oversized Tee",   type: "tee",    price: 599,  was: null, tile: "#4a4f57", shirt: "#0e0e10", ink: "#f4f4f2", word: "PIT",
+    desc: "Grundplagget. Svart, tungt och lika bra till garaget som till stan." },
 ];
 
 const fmt = (n) => new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK", maximumFractionDigits: 0 }).format(n);
 
 // Platshållargrafik: tröja/hoodie sedd bakifrån med tryck. Byts mot riktiga produktbilder.
-function garment(p) {
+function garment(p, uid) {
   const hood = p.type === "hoodie";
-  const body = hood
-    ? `<path d="M70 70 Q100 20 130 70 L170 82 L190 230 L158 238 L152 150 L152 330 L48 330 L48 150 L42 238 L10 230 L30 82 Z" fill="${p.shirt}"/>
-       <path d="M70 70 Q100 100 130 70 Q100 30 70 70Z" fill="rgba(0,0,0,.25)"/>`
-    : `<path d="M62 40 Q100 62 138 40 L188 62 L172 120 L150 110 L150 320 L50 320 L50 110 L28 120 L12 62 Z" fill="${p.shirt}"/>`;
+  const shape = hood
+    ? "M70 70 Q100 20 130 70 L170 82 L190 230 L158 238 L152 150 L152 330 L48 330 L48 150 L42 238 L10 230 L30 82 Z"
+    : "M62 40 Q100 62 138 40 L188 62 L172 120 L150 110 L150 320 L50 320 L50 110 L28 120 L12 62 Z";
+  const hoodInner = hood ? `<path d="M70 70 Q100 100 130 70 Q100 30 70 70Z" fill="rgba(0,0,0,.25)"/>` : "";
   return `<svg viewBox="0 0 200 340" role="img" aria-label="${p.name}" xmlns="http://www.w3.org/2000/svg">
-    ${body}
+    <defs>
+      <linearGradient id="sh-${uid}" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#000" stop-opacity=".38"/>
+        <stop offset=".35" stop-color="#fff" stop-opacity=".12"/>
+        <stop offset=".62" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity=".42"/>
+      </linearGradient>
+    </defs>
+    <path d="${shape}" fill="${p.shirt}"/>
+    ${hoodInner}
+    <path d="${shape}" fill="url(#sh-${uid})"/>
     <text x="100" y="${hood ? 190 : 170}" text-anchor="middle" font-family="Barlow Condensed, Impact, sans-serif" font-weight="800" font-style="italic" font-size="${p.word.length > 5 ? 30 : 44}" fill="${p.ink}">${p.word}</text>
     <text x="100" y="${hood ? 208 : 188}" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="6" letter-spacing="2" fill="${p.ink}" opacity=".7">SCUDARO · KOLLEKTION 01</text>
   </svg>`;
 }
 
+/* ---------- Produktgrid ---------- */
 const grid = document.getElementById("grid");
 
 function render(filter = "alla") {
@@ -33,7 +50,7 @@ function render(filter = "alla") {
       <article class="card">
         <div class="card__media" style="--tile:${p.tile}">
           ${p.tag ? `<span class="card__tag">${p.tag}</span>` : ""}
-          ${garment(p)}
+          ${garment(p, "g" + p.id)}
           <button class="card__add" data-id="${p.id}">Lägg i varukorg</button>
         </div>
         <div class="card__info">
@@ -44,7 +61,6 @@ function render(filter = "alla") {
     .join("");
 }
 
-// Filter
 document.querySelector(".filters").addEventListener("click", (e) => {
   const chip = e.target.closest(".chip");
   if (!chip) return;
@@ -52,7 +68,6 @@ document.querySelector(".filters").addEventListener("click", (e) => {
   render(chip.dataset.filter);
 });
 
-// Varukorg (endast räknare i utkastet)
 let cart = 0;
 grid.addEventListener("click", (e) => {
   if (!e.target.closest(".card__add")) return;
@@ -60,7 +75,6 @@ grid.addEventListener("click", (e) => {
   document.getElementById("cart-count").textContent = cart;
 });
 
-// Nyhetsbrev (ingen backend ännu)
 document.getElementById("newsletter").addEventListener("submit", (e) => {
   e.preventDefault();
   document.getElementById("newsletter-msg").textContent = "Tack! Du är med på listan (demo – inget sparas ännu).";
@@ -68,3 +82,127 @@ document.getElementById("newsletter").addEventListener("submit", (e) => {
 });
 
 render();
+
+/* ---------- 3D-karusell styrd av scroll ----------
+   Sidan scrollar som vanligt. Scenen "fastnar" medan du scrollar förbi den, och scrollframsteget
+   (0 → n-1) styr vilket plagg som står i mitten. Ingen scroll-kapning: efter sista plagget
+   fortsätter sidan nedåt. */
+(() => {
+  const wrap = document.getElementById("stage-wrap");
+  const stage = document.getElementById("stage");
+  const track = document.getElementById("track");
+  const ghost = document.getElementById("ghost");
+  const textBox = document.getElementById("stage-text");
+  const header = document.querySelector(".site-header");
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const n = PRODUCTS.length;
+  wrap.style.setProperty("--n", n);
+
+  const items = PRODUCTS.map((p, i) => {
+    const b = document.createElement("button");
+    b.className = "stage__item";
+    b.style.setProperty("--tile", p.tile);
+    b.setAttribute("aria-label", `Visa ${p.name}`);
+    b.innerHTML = garment(p, "s" + p.id);
+    b.addEventListener("click", () => goTo(i));
+    track.appendChild(b);
+    return b;
+  });
+
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  let pos = 0;          // nuvarande (utjämnad) position
+  let target = 0;       // position enligt scroll
+  let shown = -1;       // index som texten visar
+  let raf = null;
+  let snapTimer = null;
+
+  function metrics() {
+    const top = header.offsetHeight;
+    document.documentElement.style.setProperty("--header-h", top + "px");
+    const total = wrap.offsetHeight - stage.offsetHeight;
+    const wrapTop = wrap.getBoundingClientRect().top + window.scrollY;
+    return { top, total, wrapTop };
+  }
+
+  function readScroll() {
+    const { top, total, wrapTop } = metrics();
+    const scrolled = clamp(window.scrollY - (wrapTop - top), 0, total);
+    target = total > 0 ? (scrolled / total) * (n - 1) : 0;
+    return { scrolled, total };
+  }
+
+  function layout() {
+    const w = stage.clientWidth;
+    const spacing = w < 700 ? w * 0.5 : Math.min(w * 0.27, 360);
+    items.forEach((el, i) => {
+      const d = i - pos, ad = Math.abs(d), s = Math.sign(d);
+      const x = s * (Math.min(ad, 1) * spacing + Math.max(ad - 1, 0) * spacing * 0.7);
+      const z = -Math.min(ad, 2) * 260;
+      const rot = -clamp(d, -1.5, 1.5) * 32;
+      const scale = 1 - Math.min(ad, 1) * 0.08;
+      const opacity = clamp(1 - Math.max(ad - 0.3, 0) * 0.55, 0, 1);
+      const blur = Math.min(ad, 1) * 2.5;
+      el.style.transform = `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) rotateY(${rot}deg) scale(${scale})`;
+      el.style.opacity = opacity;
+      el.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : "none";
+      el.style.zIndex = Math.round(100 - ad * 10);
+      el.style.pointerEvents = opacity < 0.05 ? "none" : "auto";
+      if (Math.round(pos) === i) el.setAttribute("aria-current", "true");
+      else el.removeAttribute("aria-current");
+    });
+    const idx = clamp(Math.round(pos), 0, n - 1);
+    if (idx !== shown) updateText(idx);
+  }
+
+  function updateText(idx) {
+    shown = idx;
+    const p = PRODUCTS[idx];
+    document.getElementById("st-eyebrow").textContent = `Kollektion 01 — ${idx + 1} / ${n}`;
+    document.getElementById("st-title").textContent = p.name;
+    document.getElementById("st-desc").textContent = p.desc;
+    document.getElementById("st-price").textContent = fmt(p.price);
+    ghost.textContent = p.word;
+    textBox.classList.remove("swap");
+    void textBox.offsetWidth; // starta om animationen
+    textBox.classList.add("swap");
+  }
+
+  function tick() {
+    const diff = target - pos;
+    pos = reduceMotion || Math.abs(diff) < 0.001 ? target : pos + diff * 0.14;
+    layout();
+    raf = pos === target ? null : requestAnimationFrame(tick);
+  }
+  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  function goTo(i) {
+    const { top, total, wrapTop } = metrics();
+    const y = wrapTop - top + (clamp(i, 0, n - 1) / (n - 1)) * total;
+    window.scrollTo({ top: y, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
+  // Mjuk "snap" till närmaste plagg när scrollen stannat inne i scenen.
+  function scheduleSnap() {
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(() => {
+      const { scrolled, total } = readScroll();
+      if (scrolled <= 0 || scrolled >= total) return;
+      if (Math.abs(target - Math.round(target)) > 0.02) goTo(Math.round(target));
+    }, 160);
+  }
+
+  window.addEventListener("scroll", () => {
+    readScroll();
+    kick();
+    scheduleSnap();
+    document.getElementById("hint").classList.toggle("is-gone", window.scrollY > 40);
+  }, { passive: true });
+  window.addEventListener("resize", () => { readScroll(); layout(); });
+
+  document.getElementById("prev").addEventListener("click", () => goTo(Math.round(target) - 1));
+  document.getElementById("next").addEventListener("click", () => goTo(Math.round(target) + 1));
+
+  readScroll();
+  pos = target;
+  layout();
+})();
