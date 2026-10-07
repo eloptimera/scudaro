@@ -9,8 +9,14 @@ import { getProduct, getProducts } from "@/lib/shopify";
 type Props = { params: Promise<{ handle: string }> };
 
 export async function generateStaticParams() {
-  const products = await getProducts();
-  return products.map((p) => ({ handle: p.handle }));
+  try {
+    const products = await getProducts();
+    return products.map((p) => ({ handle: p.handle }));
+  } catch (err) {
+    // Never let a Shopify problem block a deploy: pages are rendered on first visit instead.
+    console.error("generateStaticParams: could not load products", err);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

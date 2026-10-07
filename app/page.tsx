@@ -2,6 +2,9 @@ import Shop from "@/components/Shop";
 import Stage from "@/components/Stage";
 import { getProducts } from "@/lib/shopify";
 
+// Rendered per request (product data itself is cached 5 min) so a Shopify hiccup can never fail a deploy.
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const products = await getProducts();
 

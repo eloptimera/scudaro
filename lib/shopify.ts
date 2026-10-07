@@ -64,7 +64,10 @@ async function storefront<T>(query: string, variables: Record<string, unknown> =
       ? { next: { revalidate: opts.revalidate, tags: opts.tags } }
       : { cache: "no-store" as const }),
   });
-  if (!res.ok) throw new Error(`Shopify Storefront API ${res.status}: ${res.statusText}`);
+  if (!res.ok) {
+    const body = (await res.text().catch(() => "")).slice(0, 500);
+    throw new Error(`Shopify Storefront API ${res.status} ${res.statusText} (version ${API_VERSION}, store ${storeDomain}): ${body}`);
+  }
   const json = (await res.json()) as { data?: T; errors?: { message: string }[] };
   if (json.errors?.length) throw new Error(`Shopify Storefront API: ${json.errors.map((e) => e.message).join("; ")}`);
   return json.data as T;
