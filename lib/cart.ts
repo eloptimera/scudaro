@@ -83,12 +83,16 @@ function buildDemoCart(map: DemoMap): Cart {
 
 /* -------------------------------- API --------------------------------- */
 
+/** In live mode the cookie must hold a Shopify cart id; ignore anything else (e.g. a leftover demo cart). */
+const liveCartId = (raw: string | undefined) => (raw?.startsWith("gid://shopify/Cart/") ? raw : undefined);
+
 export async function getCart(): Promise<Cart> {
   const store = await cookies();
   const raw = store.get(COOKIE)?.value;
   if (!isShopifyEnabled) return buildDemoCart(readDemo(raw));
-  if (!raw) return EMPTY_CART;
-  const cart = await shopifyGetCart(raw);
+  const cartId = liveCartId(raw);
+  if (!cartId) return EMPTY_CART;
+  const cart = await shopifyGetCart(cartId);
   if (!cart) {
     store.delete(COOKIE); // expired / completed cart
     return EMPTY_CART;
@@ -109,9 +113,10 @@ export async function addToCart(variantId: string, quantity: number): Promise<Ca
     return buildDemoCart(map);
   }
 
-  if (raw) {
+  const cartId = liveCartId(raw);
+  if (cartId) {
     try {
-      return await shopifyAddLine(raw, variantId, quantity);
+      return await shopifyAddLine(cartId, variantId, quantity);
     } catch {
       // cart may have expired or been completed – start a fresh one below
     }
@@ -134,8 +139,9 @@ export async function updateLine(lineId: string, quantity: number): Promise<Cart
     return buildDemoCart(map);
   }
 
-  if (!raw) return EMPTY_CART;
-  return quantity <= 0 ? shopifyRemoveLine(raw, lineId) : shopifyUpdateLine(raw, lineId, quantity);
+  const cartId = liveCartId(raw);
+  if (!cartId) return EMPTY_CART;
+  return quantity <= 0 ? shopifyRemoveLine(cartId, lineId) : shopifyUpdateLine(cartId, lineId, quantity);
 }
 
 export async function removeLine(lineId: string): Promise<Cart> {

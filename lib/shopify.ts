@@ -1,4 +1,5 @@
 import "server-only";
+import { headers } from "next/headers";
 import { MOCK_PRODUCTS } from "./mock";
 import type { Cart, CartLine, Img, Money, Product, ProductKind, Variant } from "./types";
 
@@ -9,21 +10,54 @@ import type { Cart, CartLine, Img, Money, Product, ProductKind, Variant } from "
  * by fake products).
  * ------------------------------------------------------------------ */
 
-const rawDomain = process.env.SHOPIFY_STORE_DOMAIN?.trim();
-const token = process.env.SHOPIFY_STOREFRONT_TOKEN?.trim();
-const version = process.env.SHOPIFY_API_VERSION?.trim() || "2026-04";
+/**
+ * Explicit, pinned Storefront API version (a new version ships every quarter and each is supported for
+ * at least 12 months). Override with SHOPIFY_API_VERSION, e.g. when upgrading.
+ */
+export const API_VERSION = process.env.SHOPIFY_API_VERSION?.trim() || "2026-10";
+if (!/^\d{4}-(01|04|07|10)$/.test(API_VERSION)) {
+  throw new Error(`Invalid SHOPIFY_API_VERSION "${API_VERSION}" – expected e.g. 2026-10`);
+}
 
-export const storeDomain = rawDomain ? rawDomain.replace(/^https?:\/\//, "").replace(/\/+$/, "") : "";
-export const isShopifyEnabled = Boolean(storeDomain && token);
+const rawDomain = process.env.SHOPIFY_STORE_DOMAIN?.trim() ?? "";
+export const storeDomain = rawDomain.replace(/^https?:\/\//, "").replace(/\/+$/, "");
+if (storeDomain && !/^[a-z0-9]([a-z0-9.-]*[a-z0-9])?$/i.test(storeDomain)) {
+  throw new Error("SHOPIFY_STORE_DOMAIN must be a bare domain such as your-store.myshopify.com");
+}
+
+// Server-only secrets. Never prefix these with NEXT_PUBLIC_ – that would ship them to the browser.
+const privateToken = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN?.trim();
+const publicToken = process.env.SHOPIFY_STOREFRONT_TOKEN?.trim();
+
+/** Shopify is "on" as soon as a store domain is set. A token is optional (see authHeaders). */
+export const isShopifyEnabled = Boolean(storeDomain);
+
+async function authHeaders(forCart: boolean): Promise<Record<string, string>> {
+  if (privateToken) {
+    const h: Record<string, string> = { "Shopify-Storefront-Private-Token": privateToken };
+    if (forCart) {
+      // Forward the shopper's IP so Shopify rate-limits per buyer, not per server.
+      try {
+        const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim();
+        if (ip) h["Shopify-Storefront-Buyer-IP"] = ip;
+      } catch {
+        /* outside a request scope */
+      }
+    }
+    return h;
+  }
+  if (publicToken) return { "X-Shopify-Storefront-Access-Token": publicToken };
+  return {}; // tokenless access: products + cart only, lower query-complexity limit (1,000)
+}
 
 type GqlOptions = { revalidate?: number; tags?: string[] };
 
 async function storefront<T>(query: string, variables: Record<string, unknown> = {}, opts: GqlOptions = {}): Promise<T> {
-  const res = await fetch(`https://${storeDomain}/api/${version}/graphql.json`, {
+  const res = await fetch(`https://${storeDomain}/api/${API_VERSION}/graphql.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": token as string,
+      ...(await authHeaders(opts.revalidate === undefined)),
     },
     body: JSON.stringify({ query, variables }),
     ...(opts.revalidate !== undefined
@@ -46,8 +80,8 @@ const PRODUCT_FRAGMENT = /* GraphQL */ `
     description
     productType
     tags
-    images(first: 8) { nodes { url altText } }
-    variants(first: 30) {
+    images(first: 4) { nodes { url altText } }
+    variants(first: 12) {
       nodes {
         id
         title
@@ -133,7 +167,7 @@ export async function getProducts(): Promise<Product[]> {
     /* GraphQL */ `
       ${PRODUCT_FRAGMENT}
       query Products {
-        products(first: 50, sortKey: CREATED_AT, reverse: true) { nodes { ...ProductFields } }
+        products(first: 24, sortKey: CREATED_AT, reverse: true) { nodes { ...ProductFields } }
       }
     `,
     {},
@@ -165,7 +199,7 @@ const CART_FRAGMENT = /* GraphQL */ `
     checkoutUrl
     totalQuantity
     cost { subtotalAmount { amount currencyCode } }
-    lines(first: 50) {
+    lines(first: 25) {
       nodes {
         id
         quantity
