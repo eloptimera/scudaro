@@ -1,24 +1,24 @@
 # SCUDARO
 
-Första utkastet av webbshopen. Ren HTML/CSS/JS utan byggsteg.
+First draft of the web shop. Plain HTML/CSS/JS, no build step.
 
-## Kör lokalt
+## Run locally
 
 ```bash
 python3 -m http.server 8000
-# öppna http://localhost:8000
+# open http://localhost:8000
 ```
 
-## Struktur
+## Structure
 
-- `index.html` – sidans struktur
-- `styles.css` – mörkt tema, rödaccent, responsiv grid (3 → 2 kolumner)
-- `main.js` – produktdata, scroll-styrd 3D-karusell, filter och varukorgsräknare
-- `assets/` – logotyper (vit och svart, transparent bakgrund)
+- `index.html` – page structure
+- `styles.css` – dark theme, red accent, responsive grid (3 → 2 columns)
+- `main.js` – product data, scroll-driven 3D carousel, filters and cart counter
+- `assets/` – logos (white and black, transparent background)
 
-## Det som är placeholder
+## Placeholders
 
-- **Produktbilder:** tröjorna är SVG-grafik. Byt ut mot riktiga foton (3:4) i `main.js`.
-- **3D-karusellen:** plaggen är SVG som vrids i 3D med CSS. Med riktiga produktbilder (helst PNG med transparent bakgrund, bakifrån, 3:4) blir effekten mycket starkare. Byt ut `garment()` i `main.js` mot `<img>`.
-- **Produktnamn och priser:** påhittade. Använd egna namn som inte innehåller andras varumärken (stallnamn, förare, loggor) utan licens.
-- **Varukorg, inloggning, sök och nyhetsbrev:** inte kopplade till något. Nästa steg är en betalningslösning (t.ex. Shopify eller Stripe).
+- **Product images:** the garments are SVG graphics. Replace them with real photos (3:4) in `main.js`.
+- **3D carousel:** the garments are SVG rotated in 3D with CSS. Real product images (ideally PNGs with a transparent background, seen from behind, 3:4) make the effect much stronger. Swap `garment()` in `main.js` for an `<img>`.
+- **Product names and prices:** made up. Use your own names that don't contain other people's trademarks (team names, drivers, logos) without a licence.
+- **Cart, login, search and newsletter:** not connected to anything. Next step is a payment solution (e.g. Shopify or Stripe).

@@ -1,22 +1,22 @@
-// Produktdata – byt ut mot riktig katalog (t.ex. Shopify/Stripe) när det är dags.
+// Product data – replace with a real catalogue (e.g. Shopify/Stripe) when the time comes.
 const PRODUCTS = [
-  { id: 1, name: "Apex – Oversized Tee",       type: "tee",    price: 599,  was: 749,  tile: "#1d4f91", shirt: "#0e0e10", ink: "#f4f4f2", word: "APEX",    tag: "Nytt",
-    desc: "Tung bomull, boxig passform och ett ryggtryck som syns redan i första kurvan." },
+  { id: 1, name: "Apex – Oversized Tee",       type: "tee",    price: 599,  was: 749,  tile: "#1d4f91", shirt: "#0e0e10", ink: "#f4f4f2", word: "APEX",    tag: "New",
+    desc: "Heavyweight cotton, boxy fit and a back print you can spot from the first corner." },
   { id: 2, name: "Paddock – Oversized Tee",    type: "tee",    price: 599,  was: null, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "PADDOCK",
-    desc: "Racingröd i rejäl kvalitet. Överdimensionerad, mjuk men tung." },
-  { id: 3, name: "Slipstream – Oversized Tee", type: "tee",    price: 599,  was: 749,  tile: "#e8a317", shirt: "#0e0e10", ink: "#e8a317", word: "SLIP",    tag: "Nytt",
-    desc: "Svart tee med guldigt ryggtryck. Begränsad upplaga, inga omtryck." },
+    desc: "Racing red in a proper heavyweight weave. Oversized, soft but substantial." },
+  { id: 3, name: "Slipstream – Oversized Tee", type: "tee",    price: 599,  was: 749,  tile: "#e8a317", shirt: "#0e0e10", ink: "#e8a317", word: "SLIP",    tag: "New",
+    desc: "Black tee with a gold back print. Limited run, no reprints." },
   { id: 4, name: "Parc Fermé – Hoodie",        type: "hoodie", price: 1149, was: null, tile: "#4a4f57", shirt: "#d9d9d4", ink: "#0e0e10", word: "PARC",
-    desc: "Efter målgång. Tung hoodie i off-white med stort tryck på ryggen." },
+    desc: "After the finish line. Heavyweight off-white hoodie with a large back print." },
   { id: 5, name: "Chicane – Hoodie",           type: "hoodie", price: 1149, was: null, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "CHICANE",
-    desc: "Röd hoodie för kalla morgnar i depån. Boxig, rejäl och byggd för att hålla." },
+    desc: "Red hoodie for cold mornings in the pits. Boxy, sturdy and built to last." },
   { id: 6, name: "Pit Lane – Oversized Tee",   type: "tee",    price: 599,  was: null, tile: "#4a4f57", shirt: "#0e0e10", ink: "#f4f4f2", word: "PIT",
-    desc: "Grundplagget. Svart, tungt och lika bra till garaget som till stan." },
+    desc: "The essential. Black, heavy and as good in the garage as in the city." },
 ];
 
-const fmt = (n) => new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK", maximumFractionDigits: 0 }).format(n);
+const fmt = (n) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "SEK", maximumFractionDigits: 0 }).format(n);
 
-// Platshållargrafik: tröja/hoodie sedd bakifrån med tryck. Byts mot riktiga produktbilder.
+// Placeholder graphic: tee/hoodie seen from behind with a print. Replace with real product images.
 function garment(p, uid) {
   const hood = p.type === "hoodie";
   const shape = hood
@@ -36,22 +36,22 @@ function garment(p, uid) {
     ${hoodInner}
     <path d="${shape}" fill="url(#sh-${uid})"/>
     <text x="100" y="${hood ? 190 : 170}" text-anchor="middle" font-family="Barlow Condensed, Impact, sans-serif" font-weight="800" font-style="italic" font-size="${p.word.length > 5 ? 30 : 44}" fill="${p.ink}">${p.word}</text>
-    <text x="100" y="${hood ? 208 : 188}" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="6" letter-spacing="2" fill="${p.ink}" opacity=".7">SCUDARO · KOLLEKTION 01</text>
+    <text x="100" y="${hood ? 208 : 188}" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="6" letter-spacing="2" fill="${p.ink}" opacity=".7">SCUDARO · COLLECTION 01</text>
   </svg>`;
 }
 
-/* ---------- Produktgrid ---------- */
+/* ---------- Product grid ---------- */
 const grid = document.getElementById("grid");
 
-function render(filter = "alla") {
+function render(filter = "all") {
   grid.innerHTML = PRODUCTS
-    .filter((p) => filter === "alla" || p.type === filter)
+    .filter((p) => filter === "all" || p.type === filter)
     .map((p) => `
       <article class="card">
         <div class="card__media" style="--tile:${p.tile}">
           ${p.tag ? `<span class="card__tag">${p.tag}</span>` : ""}
           ${garment(p, "g" + p.id)}
-          <button class="card__add" data-id="${p.id}">Lägg i varukorg</button>
+          <button class="card__add" data-id="${p.id}">Add to cart</button>
         </div>
         <div class="card__info">
           <h3 class="card__name">${p.name}</h3>
@@ -77,16 +77,16 @@ grid.addEventListener("click", (e) => {
 
 document.getElementById("newsletter").addEventListener("submit", (e) => {
   e.preventDefault();
-  document.getElementById("newsletter-msg").textContent = "Tack! Du är med på listan (demo – inget sparas ännu).";
+  document.getElementById("newsletter-msg").textContent = "Thanks! You're on the list (demo – nothing is saved yet).";
   e.target.reset();
 });
 
 render();
 
-/* ---------- 3D-karusell styrd av scroll ----------
-   Sidan scrollar som vanligt. Scenen "fastnar" medan du scrollar förbi den, och scrollframsteget
-   (0 → n-1) styr vilket plagg som står i mitten. Ingen scroll-kapning: efter sista plagget
-   fortsätter sidan nedåt. */
+/* ---------- Scroll-driven 3D carousel ----------
+   The page scrolls normally. The stage sticks while you scroll past it, and the scroll progress
+   (0 → n-1) decides which item sits in the middle. No scroll hijacking: after the last item
+   the page simply continues down. */
 (() => {
   const wrap = document.getElementById("stage-wrap");
   const stage = document.getElementById("stage");
@@ -102,7 +102,7 @@ render();
     const b = document.createElement("button");
     b.className = "stage__item";
     b.style.setProperty("--tile", p.tile);
-    b.setAttribute("aria-label", `Visa ${p.name}`);
+    b.setAttribute("aria-label", `View ${p.name}`);
     b.innerHTML = garment(p, "s" + p.id);
     b.addEventListener("click", () => goTo(i));
     track.appendChild(b);
@@ -110,9 +110,9 @@ render();
   });
 
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-  let pos = 0;          // nuvarande (utjämnad) position
-  let target = 0;       // position enligt scroll
-  let shown = -1;       // index som texten visar
+  let pos = 0;          // current (smoothed) position
+  let target = 0;       // position according to scroll
+  let shown = -1;       // index the text is showing
   let raf = null;
   let snapTimer = null;
 
@@ -157,13 +157,13 @@ render();
   function updateText(idx) {
     shown = idx;
     const p = PRODUCTS[idx];
-    document.getElementById("st-eyebrow").textContent = `Kollektion 01 — ${idx + 1} / ${n}`;
+    document.getElementById("st-eyebrow").textContent = `Collection 01 — ${idx + 1} / ${n}`;
     document.getElementById("st-title").textContent = p.name;
     document.getElementById("st-desc").textContent = p.desc;
     document.getElementById("st-price").textContent = fmt(p.price);
     ghost.textContent = p.word;
     textBox.classList.remove("swap");
-    void textBox.offsetWidth; // starta om animationen
+    void textBox.offsetWidth; // restart the animation
     textBox.classList.add("swap");
   }
 
@@ -181,7 +181,7 @@ render();
     window.scrollTo({ top: y, behavior: reduceMotion ? "auto" : "smooth" });
   }
 
-  // Mjuk "snap" till närmaste plagg när scrollen stannat inne i scenen.
+  // Gentle snap to the nearest item once scrolling stops inside the stage.
   function scheduleSnap() {
     clearTimeout(snapTimer);
     snapTimer = setTimeout(() => {
