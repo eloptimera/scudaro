@@ -263,6 +263,27 @@ button { font: inherit; cursor: pointer; }
 .newsletter input::placeholder { color: #666; }
 .newsletter__msg { min-height: 1.5em; margin: 10px 0 0; font-size: 13px; color: var(--muted); }
 .legal { margin: 40px 0 0; font-size: 12px; color: #666; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; margin: 44px 0 0; }
+.footer-links a { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.footer-links a:hover { color: var(--ink); }
+.footer-company { display: grid; gap: 4px; margin: 24px 0 0; font-style: normal; font-size: 12px; color: #777; }
+.footer-company a:hover { color: var(--ink); }
+
+/* Policy / legal pages */
+.policy { max-width: 780px; margin: 0 auto; padding: 48px 32px 72px; }
+.policy h1 { margin: 0 0 32px; font-family: var(--display); font-weight: 800; font-size: clamp(36px, 5vw, 64px); line-height: .95; text-transform: uppercase; }
+.prose { color: var(--muted); font-size: 15px; line-height: 1.7; }
+.prose h2, .prose h3 { margin: 32px 0 8px; color: var(--ink); font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
+.prose h2 { font-size: 24px; }
+.prose h3 { font-size: 19px; }
+.prose p, .prose ul, .prose ol { margin: 0 0 16px; }
+.prose ul, .prose ol { padding-left: 22px; }
+.prose a { color: var(--ink); text-decoration: underline; }
+.prose strong { color: var(--ink); }
+.prose table { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 14px; }
+.prose th, .prose td { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.prose code { font-size: .9em; color: var(--ink); }
+@media (max-width: 700px) { .policy { padding: 32px 16px 56px; } }
 
 /* Responsive */
 @media (max-width: 900px) {

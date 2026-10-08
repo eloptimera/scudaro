@@ -1,7 +1,7 @@
 import "server-only";
 import { headers } from "next/headers";
 import { MOCK_COLLECTIONS, MOCK_PRODUCTS, mockCollectionProducts } from "./mock";
-import type { Cart, CartLine, Collection, Img, Money, Product, ProductKind, Variant } from "./types";
+import type { Cart, CartLine, Collection, Img, Money, Policy, Product, ProductKind, Variant } from "./types";
 
 /* ------------------------------------------------------------------ *
  * Shopify Storefront API client.
@@ -305,6 +305,44 @@ export async function getCollection(handle: string): Promise<{ collection: Colle
     collection: toCollection({ ...raw, products: { nodes } }),
     products: nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct),
   };
+}
+
+/* ------------------------------ Policies ------------------------------ */
+
+/**
+ * The shop's legal policies as written in Shopify admin (Settings → Policies), in the order
+ * they are shown in the footer. Policies that are empty are left out. Never throws: if Shopify
+ * is unreachable (or the token may not read policies) the site simply shows no policy links.
+ */
+export async function getPolicies(): Promise<Policy[]> {
+  if (!isShopifyEnabled) return [];
+  try {
+    type RawPolicy = { handle: string; title: string; body: string } | null;
+    const data = await storefront<{
+      shop: { termsOfService: RawPolicy; privacyPolicy: RawPolicy; refundPolicy: RawPolicy; shippingPolicy: RawPolicy };
+    }>(
+      /* GraphQL */ `
+        fragment PolicyFields on ShopPolicy { handle title body }
+        query Policies {
+          shop {
+            termsOfService { ...PolicyFields }
+            privacyPolicy { ...PolicyFields }
+            refundPolicy { ...PolicyFields }
+            shippingPolicy { ...PolicyFields }
+          }
+        }
+      `,
+      {},
+      { revalidate: 300, tags: ["policies"] },
+    );
+    const { termsOfService, privacyPolicy, refundPolicy, shippingPolicy } = data.shop;
+    return [termsOfService, privacyPolicy, refundPolicy, shippingPolicy].filter(
+      (p): p is NonNullable<RawPolicy> => Boolean(p && p.handle && p.body?.trim()),
+    );
+  } catch (err) {
+    console.error("getPolicies: could not load shop policies", err);
+    return [];
+  }
 }
 
 /* ------------------------------- Cart -------------------------------- */

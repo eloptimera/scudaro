@@ -54,6 +54,13 @@ export type Collection = {
   price: Money | null;
 };
 
+/** A shop policy written in Shopify admin (Settings → Policies). `body` is HTML. */
+export type Policy = {
+  handle: string;
+  title: string;
+  body: string;
+};
+
 export type CartLine = {
   id: string;
   variantId: string;
