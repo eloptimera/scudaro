@@ -1,7 +1,7 @@
 import "server-only";
 import { headers } from "next/headers";
-import { MOCK_PRODUCTS } from "./mock";
-import type { Cart, CartLine, Img, Money, Product, ProductKind, Variant } from "./types";
+import { MOCK_COLLECTIONS, MOCK_PRODUCTS, mockCollectionProducts } from "./mock";
+import type { Cart, CartLine, Collection, Img, Money, Product, ProductKind, Variant } from "./types";
 
 /* ------------------------------------------------------------------ *
  * Shopify Storefront API client.
@@ -192,6 +192,116 @@ export async function getProduct(handle: string): Promise<Product | null> {
     { revalidate: 300, tags: ["products"] },
   );
   return data.product && data.product.variants.nodes.length ? toProduct(data.product) : null;
+}
+
+/* ---------------------------- Collections ---------------------------- */
+
+const COLLECTION_FRAGMENT = /* GraphQL */ `
+  fragment CollectionFields on Collection {
+    id
+    handle
+    title
+    description
+    image { url altText }
+    products(first: 20) {
+      nodes {
+        featuredImage { url altText }
+        priceRange { minVariantPrice { amount currencyCode } }
+      }
+    }
+  }
+`;
+
+type RawCollection = {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  image: { url: string; altText: string | null } | null;
+  products: {
+    nodes: {
+      featuredImage: { url: string; altText: string | null } | null;
+      priceRange: { minVariantPrice: RawMoney };
+    }[];
+  };
+};
+
+/** Shopify's built-in "Home page" collection (handle `frontpage`) just mirrors the whole catalogue. */
+const HIDDEN_COLLECTIONS = new Set(["frontpage"]);
+
+function toCollection(c: RawCollection): Collection {
+  const firstImage = c.image ?? c.products.nodes.find((p) => p.featuredImage)?.featuredImage ?? null;
+  const prices = c.products.nodes.map((p) => money(p.priceRange.minVariantPrice));
+  const cheapest = prices.length ? prices.reduce((a, b) => (b.amount < a.amount ? b : a)) : null;
+  return {
+    id: c.id,
+    handle: c.handle,
+    title: c.title,
+    description: c.description,
+    word: (c.title.split(/[\s–-]+/)[0] ?? c.title).toUpperCase(),
+    tile: "#c4161c",
+    kind: "other",
+    shirt: "#0e0e10",
+    ink: "#f4f4f2",
+    image: firstImage ? { url: firstImage.url, alt: firstImage.altText ?? c.title } : null,
+    price: cheapest,
+  };
+}
+
+/** All non-empty collections, newest first – these are the slides of the home carousel. */
+export async function getCollections(): Promise<Collection[]> {
+  if (!isShopifyEnabled) return MOCK_COLLECTIONS;
+  const data = await storefront<{ collections: { nodes: RawCollection[] } }>(
+    /* GraphQL */ `
+      ${COLLECTION_FRAGMENT}
+      query Collections {
+        collections(first: 12, sortKey: ID, reverse: true) { nodes { ...CollectionFields } }
+      }
+    `,
+    {},
+    { revalidate: 300, tags: ["collections"] },
+  );
+  return data.collections.nodes
+    .filter((c) => !HIDDEN_COLLECTIONS.has(c.handle) && c.products.nodes.length > 0)
+    .map(toCollection);
+}
+
+/** One collection plus the products in it (for /collections/[handle]). */
+export async function getCollection(handle: string): Promise<{ collection: Collection; products: Product[] } | null> {
+  if (!isShopifyEnabled) {
+    const collection = MOCK_COLLECTIONS.find((c) => c.handle === handle);
+    return collection ? { collection, products: mockCollectionProducts(handle) } : null;
+  }
+  const data = await storefront<{ collection: (RawCollection & { products: { nodes: RawProduct[] } }) | null }>(
+    /* GraphQL */ `
+      ${PRODUCT_FRAGMENT}
+      query Collection($handle: String!) {
+        collection(handle: $handle) {
+          id
+          handle
+          title
+          description
+          image { url altText }
+          products(first: 24) {
+            nodes {
+              ...ProductFields
+              featuredImage { url altText }
+              priceRange { minVariantPrice { amount currencyCode } }
+            }
+          }
+        }
+      }
+    `,
+    { handle },
+    { revalidate: 300, tags: ["collections", "products"] },
+  );
+  const raw = data.collection;
+  if (!raw) return null;
+  const nodes = raw.products.nodes as unknown as (RawProduct & RawCollection["products"]["nodes"][number])[];
+  return {
+    collection: toCollection({ ...raw, products: { nodes } }),
+    products: nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct),
+  };
 }
 
 /* ------------------------------- Cart -------------------------------- */

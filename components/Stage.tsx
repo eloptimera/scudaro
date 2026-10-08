@@ -4,8 +4,8 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { formatMoney } from "@/lib/format";
-import type { Product } from "@/lib/types";
-import ProductVisual from "./ProductVisual";
+import type { Collection } from "@/lib/types";
+import CollectionVisual from "./CollectionVisual";
 
 /* ---------- Scroll-driven 3D carousel ----------
    The page scrolls normally. The stage sticks while you scroll past it, and the scroll progress
@@ -33,9 +33,9 @@ function itemStyle(d: number, spacing: number) {
   };
 }
 
-export default function Stage({ products }: { products: Product[] }) {
+export default function Stage({ collections }: { collections: Collection[] }) {
   const router = useRouter();
-  const n = products.length;
+  const n = collections.length;
   const wrapRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLParagraphElement>(null);
@@ -151,7 +151,7 @@ export default function Stage({ products }: { products: Product[] }) {
 
   if (n === 0) return null;
 
-  const current = products[Math.min(shown, n - 1)];
+  const current = collections[Math.min(shown, n - 1)];
   const step = (delta: number) => goToRef.current(Math.round(targetRef.current) + delta);
 
   return (
@@ -159,27 +159,27 @@ export default function Stage({ products }: { products: Product[] }) {
       ref={wrapRef}
       className="stage-wrap"
       id="stage-wrap"
-      aria-label="Collection 01 – scroll to browse"
+      aria-label="Collections – scroll to browse"
       style={{ "--n": n } as CSSProperties}
     >
       <div className="stage" ref={stageRef}>
         <div className="stage__ghost" aria-hidden="true">{current.word}</div>
 
         <div className="stage__track">
-          {products.map((p, i) => (
+          {collections.map((c, i) => (
             <button
-              key={p.id}
+              key={c.id}
               ref={(el) => {
                 itemRefs.current[i] = el;
               }}
               className="stage__item"
-              style={{ ...itemStyle(i, 340), "--tile": p.tile } as CSSProperties}
-              aria-label={`View ${p.title}`}
+              style={{ ...itemStyle(i, 340), "--tile": c.tile } as CSSProperties}
+              aria-label={`View ${c.title}`}
               onClick={() =>
-                i === Math.round(targetRef.current) ? router.push(`/products/${p.handle}`) : goToRef.current(i)
+                i === Math.round(targetRef.current) ? router.push(`/collections/${c.handle}`) : goToRef.current(i)
               }
             >
-              <ProductVisual product={p} priority={i < 3} />
+              <CollectionVisual collection={c} priority={i < 3} />
             </button>
           ))}
         </div>
@@ -187,18 +187,18 @@ export default function Stage({ products }: { products: Product[] }) {
         <div className="stage__info">
           <div className="stage__text" aria-live="polite">
             <div className="stage__swap" key={shown}>
-              <p className="stage__eyebrow">Collection 01 — {shown + 1} / {n}</p>
+              <p className="stage__eyebrow">Collections — {shown + 1} / {n}</p>
               <h2 className="stage__title">{current.title}</h2>
-              <p className="stage__desc">{current.description}</p>
+              {current.description && <p className="stage__desc">{current.description}</p>}
             </div>
           </div>
           <div className="stage__controls">
-            <p className="stage__price">{formatMoney(current.price)}</p>
+            <p className="stage__price">{current.price ? `From ${formatMoney(current.price)}` : ""}</p>
             <div className="stage__arrows">
-              <button className="arrow" onClick={() => step(-1)} aria-label="Previous item">&larr;</button>
-              <button className="arrow" onClick={() => step(1)} aria-label="Next item">&rarr;</button>
+              <button className="arrow" onClick={() => step(-1)} aria-label="Previous collection">&larr;</button>
+              <button className="arrow" onClick={() => step(1)} aria-label="Next collection">&rarr;</button>
             </div>
-            <Link className="btn btn--outline" href={`/products/${current.handle}`}>Explore</Link>
+            <Link className="btn btn--outline" href={`/collections/${current.handle}`}>Explore</Link>
           </div>
         </div>
 

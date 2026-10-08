@@ -32,6 +32,26 @@ export type Product = {
   compareAt: Money | null;
 };
 
+/** A Shopify collection (product series) – what the home carousel is built from. */
+export type Collection = {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  /** Large faded word behind the artwork in the carousel. */
+  word: string;
+  /** Accent colour used for the glow behind the artwork. */
+  tile: string;
+  /** Only used by the SVG placeholder when a collection has no image at all. */
+  kind: ProductKind;
+  shirt: string;
+  ink: string;
+  /** The collection's own image, else the first product image found in it. */
+  image: Img | null;
+  /** Cheapest product price in the collection. */
+  price: Money | null;
+};
+
 export type CartLine = {
   id: string;
   variantId: string;

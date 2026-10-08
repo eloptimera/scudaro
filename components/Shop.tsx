@@ -8,7 +8,7 @@ import ProductVisual from "./ProductVisual";
 
 const LABELS: Record<string, string> = { tee: "T-shirts", hoodie: "Hoodies", other: "Other" };
 
-export default function Shop({ products }: { products: Product[] }) {
+export default function Shop({ products, title = "New arrivals" }: { products: Product[]; title?: string }) {
   const [filter, setFilter] = useState("all");
   const kinds = Array.from(new Set(products.map((p) => p.kind)));
   const visible = products.filter((p) => filter === "all" || p.kind === filter);
@@ -16,7 +16,7 @@ export default function Shop({ products }: { products: Product[] }) {
   return (
     <section className="shop" id="shop" aria-labelledby="shop-title">
       <div className="shop__head">
-        <h2 id="shop-title">New arrivals</h2>
+        <h2 id="shop-title">{title}</h2>
         {kinds.length > 1 && (
           <div className="filters" role="group" aria-label="Filter products">
             {["all", ...kinds].map((k) => (

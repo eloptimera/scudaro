@@ -1,18 +1,18 @@
 import Shop from "@/components/Shop";
 import Stage from "@/components/Stage";
-import { getProducts } from "@/lib/shopify";
+import { getCollections, getProducts } from "@/lib/shopify";
 
 // Rendered per request (product data itself is cached 5 min) so a Shopify hiccup can never fail a deploy.
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const products = await getProducts();
+  const [products, collections] = await Promise.all([getProducts(), getCollections()]);
 
   return (
     <>
       <h1 className="sr-only">SCUDARO – streetwear with racing in its blood</h1>
 
-      <Stage products={products} />
+      <Stage collections={collections} />
       <Shop products={products} />
 
       <section className="about" id="about">

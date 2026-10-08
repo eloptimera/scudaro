@@ -1,4 +1,4 @@
-import type { Product, ProductKind } from "./types";
+import type { Collection, Product, ProductKind } from "./types";
 
 /**
  * Demo catalogue. Used only while Shopify is not connected
@@ -37,6 +37,16 @@ const seeds: Seed[] = [
     description: "The essential. Black, heavy and as good in the garage as in the city." },
 ];
 
+const MOCK_SERIES: { handle: string; title: string; kind: ProductKind; word: string; description: string }[] = [
+  { handle: "tees", title: "Oversized Tees", kind: "tee", word: "TEES", description: "Heavyweight cotton, boxy fit, back prints." },
+  { handle: "hoodies", title: "Hoodies", kind: "hoodie", word: "HOODIES", description: "Boxy, sturdy and built for cold mornings in the pits." },
+];
+
+export function mockCollectionProducts(handle: string): Product[] {
+  const series = MOCK_SERIES.find((s) => s.handle === handle);
+  return series ? MOCK_PRODUCTS.filter((p) => p.kind === series.kind) : [];
+}
+
 export const MOCK_PRODUCTS: Product[] = seeds.map((s) => ({
   id: `mock-${s.n}`,
   handle: s.handle,
@@ -59,3 +69,22 @@ export const MOCK_PRODUCTS: Product[] = seeds.map((s) => ({
     compareAt: s.was ? { amount: s.was, currencyCode: CUR } : null,
   })),
 }));
+
+// Defined after MOCK_PRODUCTS on purpose: it is read while this module loads.
+export const MOCK_COLLECTIONS: Collection[] = MOCK_SERIES.map((s) => {
+  const items = mockCollectionProducts(s.handle);
+  const first = items[0];
+  return {
+    id: `mock-collection-${s.handle}`,
+    handle: s.handle,
+    title: s.title,
+    description: s.description,
+    word: s.word,
+    tile: first?.tile ?? "#c4161c",
+    kind: s.kind,
+    shirt: first?.shirt ?? "#0e0e10",
+    ink: first?.ink ?? "#f4f4f2",
+    image: null,
+    price: items.reduce<Product["price"] | null>((a, p) => (a === null || p.price.amount < a.amount ? p.price : a), null),
+  };
+});
