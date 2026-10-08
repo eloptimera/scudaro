@@ -3,7 +3,7 @@
 import { useEffect, useRef, type MouseEvent } from "react";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
-import Price from "./Price";
+import { formatMoney } from "@/lib/format";
 
 export default function CartDrawer() {
   const { cart, isOpen, busy, error, close, setQuantity, remove } = useCart();
@@ -71,7 +71,7 @@ export default function CartDrawer() {
                 </div>
               </div>
               <div className="line__side">
-                <span><Price money={{ amount: l.price.amount * l.quantity, currencyCode: l.price.currencyCode }} /></span>
+                <span>{formatMoney({ amount: l.price.amount * l.quantity, currencyCode: l.price.currencyCode })}</span>
                 <button className="line__remove" onClick={() => remove(l.id)} disabled={busy}>Remove</button>
               </div>
             </div>
@@ -82,9 +82,9 @@ export default function CartDrawer() {
 
       {lines.length > 0 && cart && (
         <div className="drawer__foot">
-          <p className="drawer__sub"><span>Subtotal</span><span><Price money={cart.subtotal} /></span></p>
+          <p className="drawer__sub"><span>Subtotal</span><span>{formatMoney(cart.subtotal)}</span></p>
           <p className="drawer__note">
-            {live ? "Shipping and taxes are calculated at checkout. EUR amounts are approximate – you pay in SEK." : "Demo mode – connect Shopify to enable checkout."}
+            {live ? "Shipping and taxes are calculated at checkout." : "Demo mode – connect Shopify to enable checkout."}
           </p>
           {live ? (
             <a className="btn btn--light btn--block" href={cart.checkoutUrl as string}>Checkout</a>

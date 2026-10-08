@@ -162,7 +162,7 @@ function toProduct(p: RawProduct): Product {
     ink: "#f4f4f2",
     images: p.images.nodes.map((i): Img => ({ url: i.url, alt: i.altText ?? p.title })),
     variants,
-    price: cheapest?.price ?? { amount: 0, currencyCode: "SEK" },
+    price: cheapest?.price ?? { amount: 0, currencyCode: "EUR" },
     compareAt: cheapest?.compareAt && cheapest.compareAt.amount > cheapest.price.amount ? cheapest.compareAt : null,
   };
 }

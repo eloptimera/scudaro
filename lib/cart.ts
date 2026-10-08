@@ -30,7 +30,7 @@ export const EMPTY_CART: Cart = {
   id: null,
   checkoutUrl: null,
   totalQuantity: 0,
-  subtotal: { amount: 0, currencyCode: "SEK" },
+  subtotal: { amount: 0, currencyCode: "EUR" },
   lines: [],
 };
 
@@ -76,7 +76,7 @@ function buildDemoCart(map: DemoMap): Cart {
     id: "demo",
     checkoutUrl: null,
     totalQuantity: lines.reduce((n, l) => n + l.quantity, 0),
-    subtotal: { amount: subtotal, currencyCode: "SEK" },
+    subtotal: { amount: subtotal, currencyCode: "EUR" },
     lines,
   };
 }

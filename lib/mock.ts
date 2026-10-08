@@ -5,7 +5,7 @@ import type { Collection, Product, ProductKind } from "./types";
  * (SHOPIFY_STORE_DOMAIN / SHOPIFY_STOREFRONT_TOKEN missing).
  */
 const SIZES = ["S", "M", "L", "XL"];
-const CUR = "SEK";
+const CUR = "EUR";
 
 type Seed = {
   n: number;
@@ -23,17 +23,17 @@ type Seed = {
 };
 
 const seeds: Seed[] = [
-  { n: 1, handle: "apex-oversized-tee", title: "Apex – Oversized Tee", kind: "tee", price: 599, was: 749, tile: "#1d4f91", shirt: "#0e0e10", ink: "#f4f4f2", word: "APEX", tag: "New",
+  { n: 1, handle: "apex-oversized-tee", title: "Apex – Oversized Tee", kind: "tee", price: 59, was: 75, tile: "#1d4f91", shirt: "#0e0e10", ink: "#f4f4f2", word: "APEX", tag: "New",
     description: "Heavyweight cotton, boxy fit and a back print you can spot from the first corner." },
-  { n: 2, handle: "paddock-oversized-tee", title: "Paddock – Oversized Tee", kind: "tee", price: 599, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "PADDOCK",
+  { n: 2, handle: "paddock-oversized-tee", title: "Paddock – Oversized Tee", kind: "tee", price: 59, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "PADDOCK",
     description: "Racing red in a proper heavyweight weave. Oversized, soft but substantial." },
-  { n: 3, handle: "slipstream-oversized-tee", title: "Slipstream – Oversized Tee", kind: "tee", price: 599, was: 749, tile: "#e8a317", shirt: "#0e0e10", ink: "#e8a317", word: "SLIP", tag: "New",
+  { n: 3, handle: "slipstream-oversized-tee", title: "Slipstream – Oversized Tee", kind: "tee", price: 59, was: 75, tile: "#e8a317", shirt: "#0e0e10", ink: "#e8a317", word: "SLIP", tag: "New",
     description: "Black tee with a gold back print. Limited run, no reprints." },
-  { n: 4, handle: "parc-ferme-hoodie", title: "Parc Fermé – Hoodie", kind: "hoodie", price: 1149, tile: "#4a4f57", shirt: "#d9d9d4", ink: "#0e0e10", word: "PARC",
+  { n: 4, handle: "parc-ferme-hoodie", title: "Parc Fermé – Hoodie", kind: "hoodie", price: 109, tile: "#4a4f57", shirt: "#d9d9d4", ink: "#0e0e10", word: "PARC",
     description: "After the finish line. Heavyweight off-white hoodie with a large back print." },
-  { n: 5, handle: "chicane-hoodie", title: "Chicane – Hoodie", kind: "hoodie", price: 1149, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "CHICANE",
+  { n: 5, handle: "chicane-hoodie", title: "Chicane – Hoodie", kind: "hoodie", price: 109, tile: "#c4161c", shirt: "#c4161c", ink: "#f4f4f2", word: "CHICANE",
     description: "Red hoodie for cold mornings in the pits. Boxy, sturdy and built to last." },
-  { n: 6, handle: "pit-lane-oversized-tee", title: "Pit Lane – Oversized Tee", kind: "tee", price: 599, tile: "#4a4f57", shirt: "#0e0e10", ink: "#f4f4f2", word: "PIT",
+  { n: 6, handle: "pit-lane-oversized-tee", title: "Pit Lane – Oversized Tee", kind: "tee", price: 59, tile: "#4a4f57", shirt: "#0e0e10", ink: "#f4f4f2", word: "PIT",
     description: "The essential. Black, heavy and as good in the garage as in the city." },
 ];
 

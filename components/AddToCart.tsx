@@ -3,7 +3,8 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import type { Product, Variant } from "@/lib/types";
 import { useCart } from "./CartProvider";
-import Price from "./Price";
+import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
+import { formatMoney } from "@/lib/format";
 
 type Group = { name: string; values: string[] };
 type Choice = Record<string, string>;
@@ -83,8 +84,8 @@ export default function AddToCart({ product }: { product: Product }) {
   return (
     <>
       <p className="pdp__price">
-        <Price money={price} />
-        {compareAt && compareAt.amount > price.amount && <s><Price money={compareAt} /></s>}
+        {formatMoney(price)}
+        {compareAt && compareAt.amount > price.amount && <s>{formatMoney(compareAt)}</s>}
       </p>
 
       <div className="pdp__desc">{product.description}</div>
@@ -121,10 +122,7 @@ export default function AddToCart({ product }: { product: Product }) {
       >
         {buttonLabel}
       </button>
-      <p className="pdp__note">
-        Free shipping over <Price money={{ amount: 799, currencyCode: "SEK" }} /> · 30-day returns
-      </p>
-      <p className="pdp__note pdp__note--fx">Prices in EUR are approximate – you pay in SEK at checkout.</p>
+      <p className="pdp__note">Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} · 30-day returns</p>
     </>
   );
 }

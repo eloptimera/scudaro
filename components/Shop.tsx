@@ -3,7 +3,7 @@
 import { useState, type CSSProperties } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
-import Price from "./Price";
+import { formatMoney } from "@/lib/format";
 import ProductVisual from "./ProductVisual";
 
 const LABELS: Record<string, string> = { tee: "T-shirts", hoodie: "Hoodies", other: "Other" };
@@ -50,8 +50,8 @@ export default function Shop({ products, title = "New arrivals" }: { products: P
                 <div className="card__info">
                   <h3 className="card__name">{p.title}</h3>
                   <p className="card__price">
-                    <Price money={p.price} />
-                    {p.compareAt && <s><Price money={p.compareAt} /></s>}
+                    {formatMoney(p.price)}
+                    {p.compareAt && <s>{formatMoney(p.compareAt)}</s>}
                   </p>
                 </div>
               </Link>

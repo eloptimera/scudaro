@@ -11,9 +11,8 @@ import CartDrawer from "@/components/CartDrawer";
 import CartProvider from "@/components/CartProvider";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { CurrencyProvider } from "@/components/CurrencyProvider";
-import Price from "@/components/Price";
-import { getEurPerSek } from "@/lib/currency";
+import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
+import { formatMoney } from "@/lib/format";
 import { isShopifyEnabled, storeDomain } from "@/lib/shopify";
 
 export const metadata: Metadata = {
@@ -23,24 +22,21 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#0b0b0c" };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const eurPerSek = await getEurPerSek();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const accountUrl = isShopifyEnabled ? `https://${storeDomain}/account` : null;
 
   return (
     <html lang="en">
       <body>
-        <CurrencyProvider eurPerSek={eurPerSek}>
-          <CartProvider>
-            <div className="announce">
-              Free shipping over <Price money={{ amount: 799, currencyCode: "SEK" }} /> &nbsp;•&nbsp; Collection 01 is out now
-            </div>
-            <Header accountUrl={accountUrl} />
-            <main>{children}</main>
-            <Footer />
-            <CartDrawer />
-          </CartProvider>
-        </CurrencyProvider>
+        <CartProvider>
+          <div className="announce">
+            Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} &nbsp;•&nbsp; Collection 01 is out now
+          </div>
+          <Header accountUrl={accountUrl} />
+          <main>{children}</main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );
