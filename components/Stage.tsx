@@ -75,7 +75,9 @@ export default function Stage({ collections }: { collections: Collection[] }) {
 
     const layout = () => {
       const w = stage.clientWidth;
-      const spacing = w < 700 ? w * 0.5 : Math.min(w * 0.27, 360);
+      // Neighbour spacing follows the (CSS-defined) item width so bigger items don't collide.
+      const itemW = itemRefs.current[0]?.offsetWidth ?? 0;
+      const spacing = w < 700 ? w * 0.5 : itemW ? Math.min(itemW * 1.15, w * 0.36) : Math.min(w * 0.27, 360);
       const centre = Math.round(pos);
       itemRefs.current.forEach((el, i) => {
         if (!el) return;
