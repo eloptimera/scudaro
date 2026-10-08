@@ -238,7 +238,7 @@ function toCollection(c: RawCollection): Collection {
     handle: c.handle,
     title: c.title,
     description: c.description,
-    word: (c.title.split(/[\s–-]+/)[0] ?? c.title).toUpperCase(),
+    word: (c.title.trim().split(/\s+/)[0] ?? c.title).toUpperCase(), // whitespace only, so "T-shirts" stays whole
     tile: "#c4161c",
     kind: "other",
     shirt: "#0e0e10",
