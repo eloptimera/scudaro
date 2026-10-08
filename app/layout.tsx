@@ -11,6 +11,9 @@ import CartDrawer from "@/components/CartDrawer";
 import CartProvider from "@/components/CartProvider";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { CurrencyProvider } from "@/components/CurrencyProvider";
+import Price from "@/components/Price";
+import { getEurPerSek } from "@/lib/currency";
 import { isShopifyEnabled, storeDomain } from "@/lib/shopify";
 
 export const metadata: Metadata = {
@@ -20,19 +23,24 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#0b0b0c" };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const eurPerSek = await getEurPerSek();
   const accountUrl = isShopifyEnabled ? `https://${storeDomain}/account` : null;
 
   return (
     <html lang="en">
       <body>
-        <CartProvider>
-          <div className="announce">Free shipping over SEK 799 &nbsp;•&nbsp; Collection 01 is out now</div>
-          <Header accountUrl={accountUrl} />
-          <main>{children}</main>
-          <Footer />
-          <CartDrawer />
-        </CartProvider>
+        <CurrencyProvider eurPerSek={eurPerSek}>
+          <CartProvider>
+            <div className="announce">
+              Free shipping over <Price money={{ amount: 799, currencyCode: "SEK" }} /> &nbsp;•&nbsp; Collection 01 is out now
+            </div>
+            <Header accountUrl={accountUrl} />
+            <main>{children}</main>
+            <Footer />
+            <CartDrawer />
+          </CartProvider>
+        </CurrencyProvider>
       </body>
     </html>
   );

@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { formatMoney } from "@/lib/format";
 import type { Collection } from "@/lib/types";
 import CollectionVisual from "./CollectionVisual";
+import Price from "./Price";
 
 /* ---------- Scroll-driven 3D carousel ----------
    The page scrolls normally. The stage sticks while you scroll past it, and the scroll progress
@@ -195,7 +195,7 @@ export default function Stage({ collections }: { collections: Collection[] }) {
             </div>
           </div>
           <div className="stage__controls">
-            <p className="stage__price">{current.price ? `From ${formatMoney(current.price)}` : ""}</p>
+            <p className="stage__price">{current.price && <>From <Price money={current.price} /></>}</p>
             <div className="stage__arrows">
               <button className="arrow" onClick={() => step(-1)} aria-label="Previous collection">&larr;</button>
               <button className="arrow" onClick={() => step(1)} aria-label="Next collection">&rarr;</button>

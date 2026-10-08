@@ -88,6 +88,7 @@ const PRODUCT_FRAGMENT = /* GraphQL */ `
       nodes {
         id
         title
+        selectedOptions { name value }
         availableForSale
         price { amount currencyCode }
         compareAtPrice { amount currencyCode }
@@ -109,6 +110,7 @@ type RawProduct = {
     nodes: {
       id: string;
       title: string;
+      selectedOptions: { name: string; value: string }[];
       availableForSale: boolean;
       price: RawMoney;
       compareAtPrice: RawMoney | null;
@@ -140,6 +142,7 @@ function toProduct(p: RawProduct): Product {
   const variants: Variant[] = p.variants.nodes.map((v) => ({
     id: v.id,
     title: v.title,
+    options: v.selectedOptions?.length ? v.selectedOptions : [{ name: "Size", value: v.title }],
     availableForSale: v.availableForSale,
     price: money(v.price),
     compareAt: v.compareAtPrice ? money(v.compareAtPrice) : null,

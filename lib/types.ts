@@ -4,7 +4,9 @@ export type Img = { url: string; alt: string };
 
 export type Variant = {
   id: string;
-  title: string; // e.g. "M"
+  title: string; // e.g. "White / M"
+  /** One entry per product option, e.g. [{ name: "Color", value: "White" }, { name: "Size", value: "M" }]. */
+  options: { name: string; value: string }[];
   availableForSale: boolean;
   price: Money;
   compareAt: Money | null;

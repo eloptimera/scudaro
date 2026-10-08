@@ -64,6 +64,7 @@ export const MOCK_PRODUCTS: Product[] = seeds.map((s) => ({
   variants: SIZES.map((size) => ({
     id: `mock-${s.n}-${size}`,
     title: size,
+    options: [{ name: "Size", value: size }],
     availableForSale: !(s.n === 3 && size === "XL"), // one sold-out size to show the state
     price: { amount: s.price, currencyCode: CUR },
     compareAt: s.was ? { amount: s.was, currencyCode: CUR } : null,
