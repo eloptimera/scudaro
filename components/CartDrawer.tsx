@@ -4,6 +4,7 @@ import { useEffect, useRef, type MouseEvent } from "react";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
 import { formatMoney } from "@/lib/format";
+import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 
 export default function CartDrawer() {
   const { cart, isOpen, busy, error, close, setQuantity, remove } = useCart();
@@ -46,6 +47,23 @@ export default function CartDrawer() {
         <h2 id="drawer-title" className="drawer__title">Cart ({cart?.totalQuantity ?? 0})</h2>
         <button className="drawer__close" onClick={close} aria-label="Close cart">&times;</button>
       </div>
+
+      {lines.length > 0 && cart && (() => {
+        const left = Math.max(0, FREE_SHIPPING_THRESHOLD.amount - cart.subtotal.amount);
+        const pct = Math.min(100, (cart.subtotal.amount / FREE_SHIPPING_THRESHOLD.amount) * 100);
+        return (
+          <div className="ship">
+            <p className="ship__text">
+              {left > 0
+                ? <>Add <strong>{formatMoney({ amount: left, currencyCode: cart.subtotal.currencyCode })}</strong> more for free shipping</>
+                : <strong>You&apos;ve unlocked free shipping</strong>}
+            </p>
+            <div className="ship__bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)}>
+              <span style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        );
+      })()}
 
       <div className="drawer__body">
         {lines.length === 0 ? (
