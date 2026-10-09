@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CarZoom from "@/components/CarZoom";
 import RaceStrip from "@/components/RaceStrip";
 import Stage from "@/components/Stage";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
@@ -21,6 +22,7 @@ export default async function Home() {
       <div className="announce">
         Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} &nbsp;•&nbsp; Collection 01 is out now
       </div>
+      <CarZoom />
       <RaceStrip next={f1.next} last={f1.last} />
       <section className="cta" aria-labelledby="cta-title">
         <p className="cta__eyebrow">The full grid</p>
