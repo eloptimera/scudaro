@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import "@fontsource/barlow-condensed/500.css";
 import "@fontsource/barlow-condensed/700.css";
