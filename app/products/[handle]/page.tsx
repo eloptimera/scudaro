@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductDetail from "@/components/ProductDetail";
+import RelatedProducts from "@/components/RelatedProducts";
 import { getProduct, getProducts } from "@/lib/shopify";
 
 type Props = { params: Promise<{ handle: string }> };
@@ -28,5 +29,15 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProduct(handle);
   if (!product) notFound();
 
-  return <ProductDetail product={product} />;
+  // Other buyable products for "You may also like" (a failure here must never break the product page).
+  const others = await getProducts()
+    .then((all) => all.filter((p) => p.id !== product.id && p.variants.some((v) => v.availableForSale)))
+    .catch(() => []);
+
+  return (
+    <>
+      <ProductDetail product={product} />
+      <RelatedProducts products={others} />
+    </>
+  );
 }
