@@ -4,21 +4,18 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import type { LastRace, NextRace } from "@/lib/f1";
 
-function countdown(ms: number): string {
-  if (ms <= 0) return "Lights out";
-  const s = Math.floor(ms / 1000);
-  const d = Math.floor(s / 86400);
-  const h = Math.floor((s % 86400) / 3600);
-  const m = Math.floor((s % 3600) / 60);
-  return d > 0 ? `${d}d ${h}h ${m}m` : `${h}h ${m}m`;
-}
-
-// three.js is only downloaded when the panel is opened and a track exists.
+// three.js is only downloaded when a track exists and the browser reaches this component.
 const Track3D = dynamic(() => import("./Track3D"), { ssr: false });
 
-/** Next race with a live countdown. Click it to open the result of the last race. */
+function parts(ms: number) {
+  const s = Math.max(0, Math.floor(ms / 1000));
+  return { d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60) };
+}
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
+/** Race week board: next race with countdown + 3D circuit, and the last result. Always visible. */
 export default function RaceStrip({ next, last }: { next: NextRace | null; last: LastRace | null }) {
-  const [open, setOpen] = useState(false);
   const [now, setNow] = useState<number | null>(null); // null until mounted → no hydration mismatch
 
   useEffect(() => {
@@ -33,63 +30,72 @@ export default function RaceStrip({ next, last }: { next: NextRace | null; last:
     new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(
       new Date(iso),
     );
+  const left = next && now !== null ? parts(new Date(next.startsAt).getTime() - now) : null;
   const winner = last?.results[0];
 
   return (
-    <section className="race" aria-label="Formula 1 race info">
-      <button
-        type="button"
-        className="race__bar"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        aria-controls="race-panel"
-      >
-        <span className="race__label">{next ? "Next race" : "Last race"}</span>
-        <span className="race__name">{next ? next.name : last?.name}</span>
-        {next && (
-          <span className="race__when">
-            {now === null ? "" : `${when(next.startsAt)} · ${countdown(new Date(next.startsAt).getTime() - now)}`}
-          </span>
-        )}
-        <span className="race__toggle" aria-hidden="true">{open ? "−" : "+"}</span>
-      </button>
-
-      {open && (
-        <div className="race__panel" id="race-panel">
-          {next && (
-            <div className="race__col">
-              <h3>{next.name}</h3>
-              <p className="race__meta">{[next.circuit, next.country].filter(Boolean).join(" · ")}</p>
-              {next.track && <Track3D points={next.track} label={next.circuit || next.name} />}
-              <ul className="race__sessions">
-                {next.sessions.map((s) => (
-                  <li key={s.label}>
-                    <span>{s.label}</span>
-                    <span>{now === null ? "" : when(s.startsAt)}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="race__tz">Times shown in your local time.</p>
-            </div>
-          )}
-          {last && (
-            <div className="race__col">
-              <h3>Last result · {last.name}</h3>
-              {winner && <p className="race__meta">Winner: <strong>{winner.driver}</strong> ({winner.team})</p>}
-              <ol className="race__results">
-                {last.results.map((r) => (
-                  <li key={r.driverId + r.pos}>
-                    <span className="race__pos">{r.pos}</span>
-                    <span className="race__driver">{r.driver}</span>
-                    <span className="race__team">{r.team}</span>
-                    <span className="race__time">{r.time}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
+    <section className="rb" aria-labelledby="rb-title">
+      <header className="rb__head">
+        <div>
+          <p className="rb__eyebrow">{next ? `Race week · Round ${next.round}` : "Latest race"}</p>
+          <h2 id="rb-title" className="rb__title">{next ? next.name : last?.name}</h2>
+          {next && <p className="rb__sub">{[next.circuit, next.country].filter(Boolean).join(" · ")}</p>}
         </div>
-      )}
+        {next && (
+          <div className="rb__count" role="timer" aria-label="Time until the race">
+            {(["d", "h", "m"] as const).map((k) => (
+              <div key={k} className="rb__tile">
+                <strong>{left ? pad(left[k]) : "--"}</strong>
+                <span>{k === "d" ? "Days" : k === "h" ? "Hours" : "Min"}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div className="rb__grid">
+        {next && (
+          <div className="rb__left">
+            {next.track && <Track3D points={next.track} label={next.circuit || next.name} />}
+            <ul className="rb__sessions">
+              {next.sessions.map((s) => (
+                <li key={s.label} className={s.label === "Race" ? "is-race" : undefined}>
+                  <span>{s.label}</span>
+                  <span>{now === null ? "" : when(s.startsAt)}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="rb__note">Times shown in your local time.</p>
+          </div>
+        )}
+
+        {last && (
+          <div className="rb__right">
+            <div className="rb__rhead">
+              <h3>Last result</h3>
+              <p>{last.name}</p>
+            </div>
+            {winner && (
+              <p className="rb__winner">
+                <span>Winner</span> <strong>{winner.driver}</strong> <em>{winner.team}</em>
+              </p>
+            )}
+            <ol className="rb__table">
+              <li className="rb__row rb__row--head" aria-hidden="true">
+                <span>Pos</span><span>Driver</span><span className="rb__team">Team</span><span>Time</span>
+              </li>
+              {last.results.map((r, i) => (
+                <li key={r.driverId + r.pos} className={`rb__row${i === 0 ? " is-first" : ""}`}>
+                  <span className="rb__pos">{r.pos}</span>
+                  <span className="rb__driver">{r.driver}</span>
+                  <span className="rb__team">{r.team}</span>
+                  <span className="rb__time">{r.time}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

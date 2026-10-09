@@ -110,6 +110,11 @@ export default function Track3D({ points, label }: { points: [number, number][];
         renderer.domElement.style.width = "100%";
         renderer.domElement.style.height = "100%";
         camera.aspect = w / h;
+        // Pull the camera back enough that the whole circuit stays in frame while it rotates,
+        // also in wide-and-short or narrow containers.
+        const k = 1.15 * Math.max(1, 1.5 / camera.aspect);
+        camera.position.set(0, 95 * k, 105 * k);
+        camera.lookAt(0, 0, 0);
         camera.updateProjectionMatrix();
       };
       const ro = new ResizeObserver(resize);

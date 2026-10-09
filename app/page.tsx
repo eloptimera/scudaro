@@ -1,4 +1,5 @@
 import Shop from "@/components/Shop";
+import Link from "next/link";
 import RaceStrip from "@/components/RaceStrip";
 import Stage from "@/components/Stage";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
@@ -36,6 +37,13 @@ export default async function Home() {
         <div><strong>Limited runs</strong><span>Sold out is sold out. No reprints.</span></div>
         <div><strong>Oversized fit</strong><span>Heavyweight cotton, boxy cut.</span></div>
         <div><strong>30-day returns</strong><span>Doesn&apos;t fit? Send it back.</span></div>
+      </section>
+
+      <section className="cta" aria-labelledby="cta-title">
+        <p className="cta__eyebrow">The full grid</p>
+        <h2 id="cta-title">Wear the grid</h2>
+        <p>Every tee, hoodie and cap from the current collections. Limited runs, no reprints.</p>
+        <Link href="/products" className="btn btn--light">Shop all products</Link>
       </section>
     </>
   );
