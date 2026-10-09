@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties }
 import Link from "next/link";
 import type { Img, Product } from "@/lib/types";
 import AddToCart from "./AddToCart";
+import QuoteAudio from "./QuoteAudio";
+import { quoteAudioFor } from "@/lib/quoteAudio";
 import Garment from "./Garment";
 
 /** Product page: swipeable images on top (full width on phones), details and the add-to-cart bar below. */
@@ -88,6 +90,7 @@ export default function ProductDetail({ product }: { product: Product }) {
       <div className="pdp__info">
         <Link href="/#shop" className="pdp__crumbs">&larr; All products</Link>
         <h1 className="pdp__title">{product.title}</h1>
+        {quoteAudioFor(product.handle) && <QuoteAudio src={quoteAudioFor(product.handle) as string} />}
         <AddToCart product={product} onColorImage={onColorImage} />
       </div>
     </article>
