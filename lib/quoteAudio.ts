@@ -5,6 +5,9 @@
  * Files live in /public/audio. To add one: drop the mp3 there and add a line below.
  */
 export const QUOTE_AUDIO: { match: string; file: string }[] = [
+  // Most specific first: the first matching entry wins.
+  { match: "engine-14", file: "/audio/engine-14.mp3" },
+  { match: "engiene-14", file: "/audio/engine-14.mp3" },
   { match: "gp2", file: "/audio/gp2-engine.mp3" },
 ];
 
