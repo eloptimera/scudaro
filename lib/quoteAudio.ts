@@ -6,6 +6,9 @@
  */
 export const QUOTE_AUDIO: { match: string; file: string }[] = [
   // Most specific first: the first matching entry wins.
+  { match: "maria-carey-55", file: "/audio/maria-carey-55.mp3" },
+  { match: "maria-careyy-55", file: "/audio/maria-carey-55.mp3" },
+  { match: "mariah-carey-55", file: "/audio/maria-carey-55.mp3" },
   { match: "engine-14", file: "/audio/engine-14.mp3" },
   { match: "engiene-14", file: "/audio/engine-14.mp3" },
   { match: "gp2", file: "/audio/gp2-engine.mp3" },
