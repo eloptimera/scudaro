@@ -6,7 +6,12 @@
  */
 export const QUOTE_AUDIO: { match: string; file: string }[] = [
   // Most specific first: the first matching entry wins.
+  // Smooth Operator (tee + hoodie): the handles are spelled "smoooth-operatoor".
+  { match: "smoooth-operatoor", file: "/audio/smooth-operator.mp3" },
   { match: "smooth-operator", file: "/audio/smooth-operator.mp3" },
+  // I am stupid 16: the hoodie kept Gelato's generic handle, the cap is "Stupid".
+  { match: "premium-unisex-pullover-hoodie-justhoods-jh001", file: "/audio/i-am-stupid.mp3" },
+  { match: "collection-16-trucker-hat-stupid", file: "/audio/i-am-stupid.mp3" },
   { match: "balls-3", file: "/audio/balls-3.mp3" },
   { match: "i-am-stupid", file: "/audio/i-am-stupid.mp3" },
   { match: "tripod", file: "/audio/tripod-10.mp3" },
