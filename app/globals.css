@@ -596,19 +596,20 @@ body:has(dialog[open]) { overflow: hidden; }
 @media (max-width: 700px) { .cta { padding: 120px 20px 128px; } }
 
 /* Scroll-driven zoom into the cockpit */
-.carzoom { position: relative; height: 340svh; background: var(--bg); }
+.carzoom { position: relative; height: 230svh; background: var(--bg); }
 .carzoom__sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--bg); }
 .carzoom__car {
   position: absolute; left: 50%; top: 50%;
   width: min(94vw, 190svh);
   transform-origin: var(--cx) var(--cy);
-  transform: translate3d(-45.4%, -49.5%, 0) scale(1);
+  transform: translate3d(-45.4%, -49.5%, 0) rotate(var(--rot, 0deg)) scale(1);
   will-change: transform;
 }
 .carzoom__car img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
 .carzoom__fade { position: absolute; inset: 0; background: var(--bg); opacity: 0; pointer-events: none; will-change: opacity; }
 .carzoom__hint { position: absolute; left: 0; right: 0; bottom: 8svh; margin: 0; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
 @media (max-width: 700px) {
-  .carzoom { height: 300svh; }
-  .carzoom__car { width: 190vw; } /* the car is wide: fill the phone, the nose and tail run off the edges */
+  .carzoom { height: 190svh; --rot: 90deg; } /* phone: car stands upright, nose up */
+  .carzoom__hint { width: max-content; margin: 0 auto; padding: 8px 14px; background: rgba(11, 11, 12, .78); bottom: 3svh; }
+  .carzoom__car { width: min(92svh, 215vw); } /* its (unrotated) width becomes the on-screen height */
 }

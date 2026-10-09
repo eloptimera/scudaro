@@ -39,7 +39,7 @@ export default function CarZoom() {
 
       // Exponential zoom feels even: each bit of scrolling multiplies the size by the same factor.
       const scale = Math.exp(p * Math.log(MAX_ZOOM));
-      car.style.transform = `translate3d(-${COCKPIT.x}%, -${COCKPIT.y}%, 0) scale(${scale.toFixed(4)})`;
+      car.style.transform = `translate3d(-${COCKPIT.x}%, -${COCKPIT.y}%, 0) rotate(var(--rot, 0deg)) scale(${scale.toFixed(4)})`;
       // Last stretch: fade to black, which is the background of the race section that follows.
       fade.style.opacity = String(clamp((p - 0.72) / 0.26, 0, 1));
       hint.style.opacity = String(clamp(1 - p * 8, 0, 1));
