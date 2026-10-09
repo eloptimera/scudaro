@@ -1,14 +1,16 @@
 import Shop from "@/components/Shop";
+import RaceStrip from "@/components/RaceStrip";
 import Stage from "@/components/Stage";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
+import { getF1 } from "@/lib/f1";
 import { getCollections, getProducts } from "@/lib/shopify";
 
 // Rendered per request (product data itself is cached 5 min) so a Shopify hiccup can never fail a deploy.
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [products, collections] = await Promise.all([getProducts(), getCollections()]);
+  const [products, collections, f1] = await Promise.all([getProducts(), getCollections(), getF1()]);
 
   return (
     <>
@@ -19,6 +21,7 @@ export default async function Home() {
       <div className="announce">
         Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} &nbsp;•&nbsp; Collection 01 is out now
       </div>
+      <RaceStrip next={f1.next} last={f1.last} />
       <Shop products={products} />
 
       <section className="about" id="about">
