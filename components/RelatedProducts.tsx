@@ -6,7 +6,7 @@ import type { Product } from "@/lib/types";
 import { formatMoney } from "@/lib/format";
 import ProductVisual from "./ProductVisual";
 
-const COUNT = 4;
+const COUNT = 6;
 
 function shuffle<T>(list: T[]): T[] {
   const a = [...list];
@@ -32,7 +32,7 @@ export default function RelatedProducts({ products }: { products: Product[] }) {
       <div className="shop__head">
         <h2 id="related-title">You may also like</h2>
       </div>
-      <div className="grid">
+      <div className="related__row">
         {shown.map((p) => (
           <Link key={p.id} href={`/products/${p.handle}`} className="card">
             <div className="card__media" style={{ "--tile": p.tile } as CSSProperties}>
