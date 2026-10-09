@@ -12,8 +12,6 @@ import CartDrawer from "@/components/CartDrawer";
 import CartProvider from "@/components/CartProvider";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
-import { formatMoney } from "@/lib/format";
 import { isShopifyEnabled, storeDomain } from "@/lib/shopify";
 
 export const metadata: Metadata = {
@@ -30,9 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <CartProvider>
-          <div className="announce">
-            Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} &nbsp;•&nbsp; Collection 01 is out now
-          </div>
           <Header accountUrl={accountUrl} />
           <main>{children}</main>
           <Footer />

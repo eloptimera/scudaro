@@ -42,7 +42,8 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* Header */
-/* Transparent sticky shell; the floating pill inside is the visible bar. */
+/* Fully transparent floating header. White content + difference blending keeps it readable
+   over both the light stage and the dark sections. On the home page it overlays the stage. */
 .site-header {
   position: sticky;
   top: 0;
@@ -50,7 +51,9 @@ button { font: inherit; cursor: pointer; }
   padding: 12px 24px;
   background: transparent;
   pointer-events: none;
+  mix-blend-mode: difference;
 }
+body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); }
 .site-header__pill {
   pointer-events: auto;
   display: grid;
@@ -61,16 +64,15 @@ button { font: inherit; cursor: pointer; }
   margin: 0 auto;
   padding: 10px 12px 10px 32px;
   border-radius: 999px;
-  background: rgba(24, 24, 27, .94);
-  border: 1px solid #2f2f34;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, .35);
-  backdrop-filter: blur(12px);
+  background: transparent;
+  border: 0;
 }
 .brand img { height: 32px; width: auto; }
 .nav { display: flex; align-items: center; gap: 26px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .nav--right { justify-content: flex-end; gap: 10px; }
-.nav a, .nav__btn { color: #cfcfd3; transition: color .15s, background .15s, border-color .15s; }
-.nav a:hover, .nav a.is-active, .nav__btn:hover { color: #fff; }
+.nav a, .nav__btn { color: #fff; transition: color .15s, background .15s, border-color .15s; }
+.nav a:not(.nav__pill) { opacity: .75; }
+.nav a:hover, .nav a.is-active, .nav__btn:hover { opacity: 1; }
 .nav__btn { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; letter-spacing: inherit; text-transform: inherit; }
 .nav a.nav__pill, .nav button.nav__pill {
   display: inline-flex; align-items: center; gap: 4px;
@@ -79,15 +81,14 @@ button { font: inherit; cursor: pointer; }
   border: 1.5px solid rgba(255, 255, 255, .55);
   color: #fff;
 }
-.nav a.nav__pill:hover { background: #fff; border-color: #fff; color: #111; }
-.nav button.nav__pill--solid { background: var(--red); border-color: var(--red); }
-.nav button.nav__pill--solid:hover { background: #e01b22; border-color: #e01b22; color: #fff; }
+.nav a.nav__pill:hover { background: #fff; border-color: #fff; color: #000; }
+.nav button.nav__pill:hover { background: #fff; border-color: #fff; color: #000; }
 .cart-count {
   display: inline-grid; place-items: center;
   min-width: 18px; height: 18px; padding: 0 5px;
   margin-left: 4px;
   border-radius: 9px;
-  background: #fff; color: var(--red);
+  background: #fff; color: #000;
   font-size: 11px;
 }
 
@@ -98,19 +99,19 @@ button { font: inherit; cursor: pointer; }
 .stage-wrap {
   --n: 6;
   position: relative;
-  height: calc((100svh - var(--header-h)) + (var(--n) - 1) * 70svh);
+  height: calc(100svh + (var(--n) - 1) * 70svh);
   background: #f4f4f2;
 }
 .stage {
   position: sticky;
-  top: var(--header-h);
-  height: calc(100svh - var(--header-h));
+  top: 0;
+  height: 100svh;
   overflow: hidden;
   background: #f4f4f2;
   color: #111;
   perspective: 1400px;
   perspective-origin: 50% 38%;
-  --item-w: min(40vw, calc((100svh - var(--header-h)) * .4));
+  --item-w: min(40vw, calc(100svh * .4));
   --item-top: 38%;
 }
 .stage__ghost {
@@ -341,7 +342,7 @@ button { font: inherit; cursor: pointer; }
 @media (max-width: 700px) {
   .stage__info { flex-direction: column; align-items: flex-start; gap: 14px; padding: 0 16px 20px; }
   .stage__controls { width: 100%; justify-content: space-between; gap: 12px; }
-  .stage { --item-w: min(62vw, calc((100svh - var(--header-h)) * .34)); --item-top: 31%; }
+  .stage { --item-w: min(62vw, calc(100svh * .34)); --item-top: 31%; }
   .stage__hint { display: none; }
 }
 @media (max-width: 560px) {

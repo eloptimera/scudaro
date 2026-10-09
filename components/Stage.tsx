@@ -58,8 +58,9 @@ export default function Stage({ collections }: { collections: Collection[] }) {
     let snapTimer: ReturnType<typeof setTimeout> | undefined;
 
     const metrics = () => {
-      const top = header.offsetHeight;
-      document.documentElement.style.setProperty("--header-h", `${top}px`);
+      // The header floats over the stage, so the stage sticks to the very top of the viewport.
+      const top = 0;
+      document.documentElement.style.setProperty("--header-h", `${header.offsetHeight}px`);
       const total = wrap.offsetHeight - stage.offsetHeight;
       const wrapTop = wrap.getBoundingClientRect().top + window.scrollY;
       return { top, total, wrapTop };

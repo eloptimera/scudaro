@@ -1,5 +1,7 @@
 import Shop from "@/components/Shop";
 import Stage from "@/components/Stage";
+import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
+import { formatMoney } from "@/lib/format";
 import { getCollections, getProducts } from "@/lib/shopify";
 
 // Rendered per request (product data itself is cached 5 min) so a Shopify hiccup can never fail a deploy.
@@ -13,6 +15,10 @@ export default async function Home() {
       <h1 className="sr-only">SCUDARO – streetwear with racing in its blood</h1>
 
       <Stage collections={collections} />
+
+      <div className="announce">
+        Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} &nbsp;•&nbsp; Collection 01 is out now
+      </div>
       <Shop products={products} />
 
       <section className="about" id="about">
