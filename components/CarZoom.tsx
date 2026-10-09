@@ -1,28 +1,33 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { LastRace, NextRace } from "@/lib/f1";
+import RaceHead from "./RaceHead";
 
 /** Where the driver's seat is inside the picture (percent of width / height). */
 const COCKPIT = { x: 45.4, y: 49.5 };
 const MAX_ZOOM = 11;
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+const ZOOM_END = 0.8; // the zoom is done at 80 % of the section; the rest is the timing screen settling in
 
 /**
  * Scroll-driven zoom into the cockpit. Only `transform` and `opacity` change (compositor-only, no layout
  * or paint per frame), work is done once per animation frame, and nothing runs while the section is off screen.
  */
-export default function CarZoom() {
+export default function CarZoom({ next, last }: { next: NextRace | null; last: LastRace | null }) {
   const wrapRef = useRef<HTMLElement>(null);
   const carRef = useRef<HTMLDivElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLParagraphElement>(null);
+  const timingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const wrap = wrapRef.current;
     const car = carRef.current;
     const fade = fadeRef.current;
     const hint = hintRef.current;
+    const timing = timingRef.current;
     if (!wrap || !car || !fade || !hint) return;
 
     let raf = 0;
@@ -38,11 +43,19 @@ export default function CarZoom() {
       lastP = p;
 
       // Exponential zoom feels even: each bit of scrolling multiplies the size by the same factor.
-      const scale = Math.exp(p * Math.log(MAX_ZOOM));
+      const z = clamp(p / ZOOM_END, 0, 1);
+      const scale = Math.exp(z * Math.log(MAX_ZOOM));
       car.style.transform = `translate3d(-${COCKPIT.x}%, -${COCKPIT.y}%, 0) rotate(var(--rot, 0deg)) scale(${scale.toFixed(4)})`;
-      // Last stretch: fade to black, which is the background of the race section that follows.
-      fade.style.opacity = String(clamp((p - 0.72) / 0.26, 0, 1));
+      // Into the dark cockpit: the picture goes black and the timing screen "zooms up" out of it.
+      fade.style.opacity = String(clamp((p - 0.5) / 0.3, 0, 1));
       hint.style.opacity = String(clamp(1 - p * 8, 0, 1));
+      if (timing) {
+        const t = clamp((p - 0.6) / 0.28, 0, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        timing.style.opacity = String(t);
+        timing.style.transform = `scale(${(0.7 + 0.3 * eased).toFixed(4)})`;
+        timing.style.visibility = t > 0 ? "visible" : "hidden";
+      }
     };
 
     const schedule = () => {
@@ -79,6 +92,10 @@ export default function CarZoom() {
           <img src="/f1-car.webp" alt="Formula 1 car seen from above" width={1855} height={848} decoding="async" loading="lazy" draggable={false} />
         </div>
         <div className="carzoom__fade" ref={fadeRef} aria-hidden="true" />
+        <div className="carzoom__timing" ref={timingRef} style={{ visibility: "hidden" }}>
+          <RaceHead next={next} last={last} />
+          {(next || last) && <p className="carzoom__more">Timing &amp; results &darr;</p>}
+        </div>
         <p className="carzoom__hint" ref={hintRef}>Scroll to enter the cockpit &darr;</p>
       </div>
     </section>
