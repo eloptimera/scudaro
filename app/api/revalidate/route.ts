@@ -22,7 +22,9 @@ export async function POST(request: Request) {
     return new Response("Invalid signature", { status: 401 });
   }
 
-  revalidateTag("products", "max");
-  revalidateTag("collections", "max");
+  // expire: 0 = drop the cache right now. "max" would be stale-while-revalidate, i.e. the first
+  // visitor after a webhook still gets the OLD data and only the next one sees the new.
+  revalidateTag("products", { expire: 0 });
+  revalidateTag("collections", { expire: 0 });
   return Response.json({ revalidated: true });
 }
