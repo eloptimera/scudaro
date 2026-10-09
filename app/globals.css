@@ -346,6 +346,8 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
   /* On phones the shirt covers the middle, so the ghost word sits in the gap below it instead of behind it. */
   .stage__ghost { top: 65%; font-size: clamp(90px, 26vw, 200px); }
   .stage__hint { display: none; }
+  /* The ghost word already shows the collection name on phones. */
+  .stage__title, .stage__desc { display: none; }
 }
 @media (max-width: 560px) {
   .usp { grid-template-columns: 1fr; }
