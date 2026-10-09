@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import type { LastRace, NextRace } from "@/lib/f1";
 
 function countdown(ms: number): string {
@@ -11,6 +12,9 @@ function countdown(ms: number): string {
   const m = Math.floor((s % 3600) / 60);
   return d > 0 ? `${d}d ${h}h ${m}m` : `${h}h ${m}m`;
 }
+
+// three.js is only downloaded when the panel is opened and a track exists.
+const Track3D = dynamic(() => import("./Track3D"), { ssr: false });
 
 /** Next race with a live countdown. Click it to open the result of the last race. */
 export default function RaceStrip({ next, last }: { next: NextRace | null; last: LastRace | null }) {
@@ -56,6 +60,7 @@ export default function RaceStrip({ next, last }: { next: NextRace | null; last:
             <div className="race__col">
               <h3>{next.name}</h3>
               <p className="race__meta">{[next.circuit, next.country].filter(Boolean).join(" · ")}</p>
+              {next.track && <Track3D points={next.track} label={next.circuit || next.name} />}
               <ul className="race__sessions">
                 {next.sessions.map((s) => (
                   <li key={s.label}>

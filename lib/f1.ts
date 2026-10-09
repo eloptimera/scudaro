@@ -1,4 +1,5 @@
 import "server-only";
+import circuits from "./data/circuits.json";
 
 /**
  * Race data from Jolpica-F1 (the open successor of the Ergast API): https://api.jolpi.ca
@@ -15,6 +16,8 @@ export type NextRace = {
   country: string;
   startsAt: string; // ISO, UTC
   sessions: Session[];
+  /** Outline of the circuit (x/z in a ±50 box) for the 3D view, or null if we have no geometry for it. */
+  track: [number, number][] | null;
 };
 
 export type ResultRow = { pos: string; driverId: string; driver: string; team: string; time: string };
@@ -32,7 +35,7 @@ type RawRace = {
   round: string;
   date: string;
   time?: string;
-  Circuit?: { circuitName?: string; Location?: { country?: string } };
+  Circuit?: { circuitName?: string; Location?: { country?: string; lat?: string; long?: string } };
   FirstPractice?: RawSession;
   SecondPractice?: RawSession;
   ThirdPractice?: RawSession;
@@ -59,6 +62,24 @@ async function getRaces(path: string): Promise<RawRace[] | null> {
   } catch {
     return null;
   }
+}
+
+/**
+ * Circuit outlines come from the open dataset bacinger/f1-circuits (real-world coordinates, simplified).
+ * We match by the circuit's location (nearest within ~25 km) because Jolpica and the dataset use different ids.
+ */
+function trackFor(lat?: string, long?: string): [number, number][] | null {
+  const la = Number(lat);
+  const lo = Number(long);
+  if (!Number.isFinite(la) || !Number.isFinite(lo)) return null;
+  let best: { d: number; pts: [number, number][] } | null = null;
+  for (const c of circuits as unknown as { lat: number; lon: number; pts: [number, number][] }[]) {
+    const dy = (c.lat - la) * 110.5;
+    const dx = (c.lon - lo) * 111.3 * Math.cos((la * Math.PI) / 180);
+    const d = Math.hypot(dx, dy);
+    if (!best || d < best.d) best = { d, pts: c.pts };
+  }
+  return best && best.d < 25 ? best.pts : null;
 }
 
 const iso = (s?: RawSession): string | null => {
@@ -95,6 +116,7 @@ export async function getF1(): Promise<{ next: NextRace | null; last: LastRace |
       country: n.Circuit?.Location?.country ?? "",
       startsAt: start,
       sessions,
+      track: trackFor(n.Circuit?.Location?.lat, n.Circuit?.Location?.long),
     };
   }
 
