@@ -83,8 +83,9 @@ const PRODUCT_FRAGMENT = /* GraphQL */ `
     description
     productType
     tags
-    images(first: 12) { nodes { url altText } }
-    variants(first: 12) {
+    images(first: 30) { nodes { url altText } }
+    variants(first: 100) {
+      pageInfo { hasNextPage endCursor }
       nodes {
         id
         title
@@ -108,6 +109,7 @@ type RawProduct = {
   tags: string[];
   images: { nodes: { url: string; altText: string | null }[] };
   variants: {
+    pageInfo?: { hasNextPage: boolean; endCursor: string | null };
     nodes: {
       id: string;
       title: string;
@@ -185,6 +187,51 @@ export async function getProducts(): Promise<Product[]> {
   return data.products.nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct);
 }
 
+type RawVariant = RawProduct["variants"]["nodes"][number];
+
+/**
+ * A product's variants come in pages (max 100 per request). The fragment loads the first page; if
+ * Shopify says there are more, fetch the rest so the option picker is built from the COMPLETE list
+ * (a truncated list shows missing size/colour combinations as unavailable).
+ */
+async function loadAllVariants(p: RawProduct): Promise<RawProduct> {
+  const nodes: RawVariant[] = [...p.variants.nodes];
+  let { hasNextPage, endCursor } = p.variants.pageInfo ?? { hasNextPage: false, endCursor: null };
+  let guard = 0;
+  while (hasNextPage && endCursor && guard++ < 20) {
+    const page = await storefront<{
+      node: { variants: { pageInfo: { hasNextPage: boolean; endCursor: string | null }; nodes: RawVariant[] } } | null;
+    }>(
+      /* GraphQL */ `
+        query MoreVariants($id: ID!, $after: String) {
+          node(id: $id) {
+            ... on Product {
+              variants(first: 100, after: $after) {
+                pageInfo { hasNextPage endCursor }
+                nodes {
+                  id
+                  title
+                  selectedOptions { name value }
+                  availableForSale
+                  price { amount currencyCode }
+                  compareAtPrice { amount currencyCode }
+                  image { url altText }
+                }
+              }
+            }
+          }
+        }
+      `,
+      { id: p.id, after: endCursor },
+      { revalidate: 300, tags: ["products"] },
+    );
+    if (!page.node) break;
+    nodes.push(...page.node.variants.nodes);
+    ({ hasNextPage, endCursor } = page.node.variants.pageInfo);
+  }
+  return { ...p, variants: { nodes } };
+}
+
 export async function getProduct(handle: string): Promise<Product | null> {
   if (!isShopifyEnabled) return MOCK_PRODUCTS.find((p) => p.handle === handle) ?? null;
   const data = await storefront<{ product: RawProduct | null }>(
@@ -197,7 +244,8 @@ export async function getProduct(handle: string): Promise<Product | null> {
     { handle },
     { revalidate: 300, tags: ["products"] },
   );
-  return data.product && data.product.variants.nodes.length ? toProduct(data.product) : null;
+  if (!data.product || !data.product.variants.nodes.length) return null;
+  return toProduct(await loadAllVariants(data.product));
 }
 
 /* ---------------------------- Collections ---------------------------- */
