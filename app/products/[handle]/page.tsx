@@ -1,9 +1,6 @@
-import type { CSSProperties } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import AddToCart from "@/components/AddToCart";
-import ProductVisual from "@/components/ProductVisual";
+import ProductDetail from "@/components/ProductDetail";
 import { getProduct, getProducts } from "@/lib/shopify";
 
 type Props = { params: Promise<{ handle: string }> };
@@ -31,17 +28,5 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProduct(handle);
   if (!product) notFound();
 
-  return (
-    <article className="pdp">
-      <div className="pdp__media" style={{ "--tile": product.tile } as CSSProperties}>
-        <ProductVisual product={product} priority />
-      </div>
-
-      <div>
-        <Link href="/#shop" className="pdp__crumbs">&larr; All products</Link>
-        <h1 className="pdp__title">{product.title}</h1>
-        <AddToCart product={product} />
-      </div>
-    </article>
-  );
+  return <ProductDetail product={product} />;
 }

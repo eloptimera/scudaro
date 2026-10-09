@@ -83,7 +83,7 @@ const PRODUCT_FRAGMENT = /* GraphQL */ `
     description
     productType
     tags
-    images(first: 4) { nodes { url altText } }
+    images(first: 12) { nodes { url altText } }
     variants(first: 12) {
       nodes {
         id
@@ -92,6 +92,7 @@ const PRODUCT_FRAGMENT = /* GraphQL */ `
         availableForSale
         price { amount currencyCode }
         compareAtPrice { amount currencyCode }
+        image { url altText }
       }
     }
   }
@@ -114,6 +115,7 @@ type RawProduct = {
       availableForSale: boolean;
       price: RawMoney;
       compareAtPrice: RawMoney | null;
+      image?: { url: string; altText: string | null } | null;
     }[];
   };
 };
@@ -146,6 +148,7 @@ function toProduct(p: RawProduct): Product {
     availableForSale: v.availableForSale,
     price: money(v.price),
     compareAt: v.compareAtPrice ? money(v.compareAtPrice) : null,
+    image: v.image ? { url: v.image.url, alt: v.image.altText ?? p.title } : null,
   }));
   const cheapest = variants.reduce((a, b) => (b.price.amount < a.price.amount ? b : a), variants[0]);
   const hex = tagValue(p.tags, "tile");

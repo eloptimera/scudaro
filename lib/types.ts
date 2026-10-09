@@ -10,6 +10,8 @@ export type Variant = {
   availableForSale: boolean;
   price: Money;
   compareAt: Money | null;
+  /** The image Shopify has assigned to this variant (usually one per colour), if any. */
+  image?: Img | null;
 };
 
 export type ProductKind = "tee" | "hoodie" | "other";

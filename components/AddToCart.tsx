@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties } from "react";
-import type { Product, Variant } from "@/lib/types";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import type { Img, Product, Variant } from "@/lib/types";
 import { useCart } from "./CartProvider";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
@@ -13,7 +13,7 @@ const isColor = (name: string) => /colou?r/i.test(name);
 const hasValue = (v: Variant, name: string, value: string) => v.options.some((o) => o.name === name && o.value === value);
 const matches = (v: Variant, choice: Choice) => Object.entries(choice).every(([n, val]) => hasValue(v, n, val));
 
-export default function AddToCart({ product }: { product: Product }) {
+export default function AddToCart({ product, onColorImage }: { product: Product; onColorImage?: (img: Img) => void }) {
   const { add, busy } = useCart();
   const single = product.variants.length === 1 && product.variants[0].title === "Default Title";
 
@@ -60,6 +60,16 @@ export default function AddToCart({ product }: { product: Product }) {
   const inStock = (name: string, value: string) =>
     product.variants.some((v) => v.availableForSale && hasValue(v, name, value) && matches(v, { ...choice, [name]: value }));
 
+  // Show the picture that belongs to the chosen colour.
+  const colorGroup = groups.find((g) => isColor(g.name));
+  const colorName = colorGroup?.name;
+  const colorValue = colorName ? choice[colorName] : undefined;
+  useEffect(() => {
+    if (!onColorImage || !colorName || !colorValue) return;
+    const v = product.variants.find((x) => hasValue(x, colorName, colorValue) && x.image);
+    if (v?.image) onColorImage(v.image);
+  }, [colorName, colorValue, product.variants, onColorImage]);
+
   const missing = groups.filter((g) => !choice[g.name]);
   const selected = single
     ? (product.variants[0].availableForSale ? product.variants[0] : null)
@@ -88,11 +98,16 @@ export default function AddToCart({ product }: { product: Product }) {
         {compareAt && compareAt.amount > price.amount && <s>{formatMoney(compareAt)}</s>}
       </p>
 
-      <div className="pdp__desc">{product.description}</div>
+      {product.description && (
+        <details className="pdp__details">
+          <summary>Description</summary>
+          <div className="pdp__details-body">{product.description}</div>
+        </details>
+      )}
 
       {!single &&
-        groups.map((g) => (
-          <div className="opt" key={g.name}>
+        groups.map((g, i) => (
+          <div className="opt" key={g.name} id={`opt-wrap-${i}`}>
             <p className="pdp__label" id={`opt-${g.name}`}>
               {g.name}
               {choice[g.name] && <span className="pdp__label-value"> — {choice[g.name]}</span>}
@@ -115,13 +130,19 @@ export default function AddToCart({ product }: { product: Product }) {
           </div>
         ))}
 
-      <button
-        className="btn btn--light btn--block"
-        disabled={soldOut || !selected || busy}
-        onClick={() => selected && add(selected.id)}
-      >
-        {buttonLabel}
-      </button>
+      <div className="pdp__bar">
+        <button
+          className="btn btn--light btn--block"
+          disabled={soldOut || busy}
+          onClick={() => {
+            if (selected) return add(selected.id);
+            const first = groups.findIndex((g) => !choice[g.name]);
+            if (first >= 0) document.getElementById(`opt-wrap-${first}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+          }}
+        >
+          {buttonLabel}
+        </button>
+      </div>
       <p className="pdp__note">Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} · 30-day returns</p>
     </>
   );
