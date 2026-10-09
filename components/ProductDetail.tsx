@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useMemo, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import type { Img, Product } from "@/lib/types";
 import AddToCart from "./AddToCart";
 import Garment from "./Garment";
 
-/** Product page: image(s) on top (full width on phones), details and the add-to-cart bar below. */
+/** Product page: swipeable images on top (full width on phones), details and the add-to-cart bar below. */
 export default function ProductDetail({ product }: { product: Product }) {
   // Product images plus any variant (colour) images that are not already in the list.
   const gallery = useMemo<Img[]>(() => {
@@ -22,36 +22,66 @@ export default function ProductDetail({ product }: { product: Product }) {
   }, [product]);
 
   // Start on the image of the first in-stock variant, which is the colour AddToCart preselects.
-  const [activeUrl, setActiveUrl] = useState<string | undefined>(
-    () => product.variants.find((v) => v.availableForSale && v.image)?.image?.url ?? gallery[0]?.url,
+  const startIndex = useMemo(() => {
+    const url = product.variants.find((v) => v.availableForSale && v.image)?.image?.url;
+    return Math.max(0, gallery.findIndex((g) => g.url === url));
+  }, [product, gallery]);
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(startIndex);
+
+  const goTo = useCallback((i: number, smooth = true) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollTo({ left: i * el.clientWidth, behavior: smooth ? "smooth" : "auto" });
+  }, []);
+
+  useEffect(() => {
+    goTo(startIndex, false);
+  }, [startIndex, goTo]);
+
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (el && el.clientWidth) setIndex(Math.round(el.scrollLeft / el.clientWidth));
+  };
+
+  // Choosing a colour jumps to that colour's image.
+  const onColorImage = useCallback(
+    (img: Img) => {
+      const i = gallery.findIndex((g) => g.url === img.url);
+      if (i >= 0) goTo(i);
+    },
+    [gallery, goTo],
   );
-  const onColorImage = useCallback((img: Img) => setActiveUrl(img.url), []);
-  const active = gallery.find((i) => i.url === activeUrl) ?? gallery[0];
+
+  const many = gallery.length > 1;
 
   return (
     <article className="pdp">
       <div className="pdp__media" style={{ "--tile": product.tile } as CSSProperties}>
-        {active ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={active.url} alt={active.alt} decoding="async" draggable={false} />
-        ) : (
-          <Garment product={product} />
-        )}
-        {gallery.length > 1 && (
-          <div className="pdp__thumbs" role="group" aria-label="Product images">
-            {gallery.map((img, i) => (
-              <button
-                key={img.url}
-                className="pdp__thumb"
-                aria-label={`Show image ${i + 1}`}
-                aria-pressed={img.url === active?.url}
-                onClick={() => setActiveUrl(img.url)}
-              >
+        <div className="pdp__track" ref={trackRef} onScroll={onScroll} aria-label="Product images">
+          {gallery.length === 0 ? (
+            <div className="pdp__slide"><Garment product={product} /></div>
+          ) : (
+            gallery.map((img, i) => (
+              <div className="pdp__slide" key={img.url} aria-hidden={i !== index}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={img.url} alt="" loading="lazy" draggable={false} />
-              </button>
-            ))}
-          </div>
+                <img src={img.url} alt={img.alt} decoding="async" draggable={false} />
+              </div>
+            ))
+          )}
+        </div>
+
+        {many && (
+          <>
+            <button className="pdp__arrow pdp__arrow--prev" aria-label="Previous image" onClick={() => goTo(Math.max(0, index - 1))}>&larr;</button>
+            <button className="pdp__arrow pdp__arrow--next" aria-label="Next image" onClick={() => goTo(Math.min(gallery.length - 1, index + 1))}>&rarr;</button>
+            <div className="pdp__dots" aria-hidden="true">
+              {gallery.map((img, i) => (
+                <span key={img.url} className={i === index ? "is-active" : undefined} />
+              ))}
+            </div>
+          </>
         )}
       </div>
 
