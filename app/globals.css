@@ -242,16 +242,6 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
   background: var(--red); color: #fff;
   font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
 }
-.card__cta {
-  position: absolute; left: 12px; right: 12px; bottom: 12px;
-  padding: 12px; text-align: center;
-  background: var(--ink); color: #111; border: 0;
-  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  opacity: 0; transform: translateY(8px);
-  transition: opacity .2s, transform .2s, background .15s;
-}
-.card:hover .card__cta, .card:focus-visible .card__cta { opacity: 1; transform: none; }
-.card:hover .card__cta { background: var(--ink); color: #111; }
 .card__info { padding: 14px 16px 18px; }
 .card__name { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .card__price { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
@@ -337,7 +327,6 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
   .nav--left { display: none; }
   .nav a.nav__pill, .nav button.nav__pill { padding: 9px 14px; font-size: 12px; }
   .shop { padding: 40px 16px 16px; }
-  .card__cta { opacity: 1; transform: none; }
 }
 @media (max-width: 700px) {
   .stage__info { flex-direction: column; align-items: flex-start; gap: 14px; padding: 0 16px 20px; }

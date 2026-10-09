@@ -45,7 +45,6 @@ export default function Shop({ products, title = "New arrivals" }: { products: P
                 <div className="card__media" style={{ "--tile": p.tile } as CSSProperties}>
                   {tag && <span className="card__tag">{tag}</span>}
                   <ProductVisual product={p} />
-                  <span className="card__cta">{soldOut ? "View" : "Choose size"}</span>
                 </div>
                 <div className="card__info">
                   <h3 className="card__name">{p.title}</h3>
