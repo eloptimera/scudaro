@@ -88,7 +88,7 @@ export default function ProductDetail({ product }: { product: Product }) {
       </div>
 
       <div className="pdp__info">
-        <Link href="/#shop" className="pdp__crumbs">&larr; All products</Link>
+        <Link href="/products" className="pdp__crumbs">&larr; All products</Link>
         <h1 className="pdp__title">{product.title}</h1>
         {quoteAudioFor(product.handle) && <QuoteAudio src={quoteAudioFor(product.handle) as string} />}
         <AddToCart product={product} onColorImage={onColorImage} />

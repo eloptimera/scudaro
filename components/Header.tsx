@@ -14,7 +14,7 @@ export default function Header({ accountUrl }: { accountUrl: string | null }) {
       <div className="site-header__pill">
         <nav className="nav nav--left" aria-label="Main menu">
           <Link href="/" className={pathname === "/" ? "is-active" : undefined}>Home</Link>
-          <Link href="/#shop">Shop</Link>
+          <Link href="/products" className={pathname === "/products" ? "is-active" : undefined}>Shop</Link>
           <Link href="/#about">About</Link>
           <Link href="/#contact">Contact</Link>
         </nav>
