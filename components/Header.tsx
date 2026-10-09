@@ -11,23 +11,31 @@ export default function Header({ accountUrl }: { accountUrl: string | null }) {
 
   return (
     <header className="site-header">
-      <nav className="nav nav--left" aria-label="Main menu">
-        <Link href="/" className={pathname === "/" ? "is-active" : undefined}>Home</Link>
-        <Link href="/#shop">Shop</Link>
-        <Link href="/#about">About</Link>
-        <Link href="/#contact">Contact</Link>
-      </nav>
+      <div className="site-header__pill">
+        <nav className="nav nav--left" aria-label="Main menu">
+          <Link href="/" className={pathname === "/" ? "is-active" : undefined}>Home</Link>
+          <Link href="/#shop">Shop</Link>
+          <Link href="/#about">About</Link>
+          <Link href="/#contact">Contact</Link>
+        </nav>
 
-      <Link href="/" className="brand" aria-label="SCUDARO home">
-        <Image src="/logo-white.png" alt="SCUDARO" width={647} height={213} priority />
-      </Link>
+        <Link href="/" className="brand" aria-label="SCUDARO home">
+          <Image src="/logo-white.png" alt="SCUDARO" width={647} height={213} priority />
+        </Link>
 
-      <nav className="nav nav--right" aria-label="Account and cart">
-        {accountUrl && <a href={accountUrl}>Log in</a>}
-        <button className="nav__btn" onClick={open} aria-label={`Open cart, ${count} item${count === 1 ? "" : "s"}`}>
-          Cart <span className="cart-count">{count}</span>
-        </button>
-      </nav>
+        <nav className="nav nav--right" aria-label="Account and cart">
+          {accountUrl && (
+            <a href={accountUrl} className="nav__pill">Log in</a>
+          )}
+          <button
+            className="nav__btn nav__pill nav__pill--solid"
+            onClick={open}
+            aria-label={`Open cart, ${count} item${count === 1 ? "" : "s"}`}
+          >
+            Cart <span className="cart-count">{count}</span>
+          </button>
+        </nav>
+      </div>
     </header>
   );
 }
