@@ -60,7 +60,7 @@ const OPENF1 = "https://api.openf1.org/v1";
 
 async function openf1<T>(path: string): Promise<T[] | null> {
   try {
-    const res = await fetch(`${OPENF1}${path}`, { next: { revalidate: 120, tags: ["f1"] } });
+    const res = await fetch(`${OPENF1}${path}`, { signal: AbortSignal.timeout(4000), next: { revalidate: 120, tags: ["f1"] } });
     if (!res.ok) return null;
     const json = await res.json();
     return Array.isArray(json) ? (json as T[]) : null;
@@ -142,7 +142,7 @@ async function getWeekendSession(raceName: string, raceStart: string): Promise<L
 
 async function getRaces(path: string): Promise<RawRace[] | null> {
   try {
-    const res = await fetch(`${BASE}${path}`, { next: { revalidate: 600, tags: ["f1"] } });
+    const res = await fetch(`${BASE}${path}`, { signal: AbortSignal.timeout(4000), next: { revalidate: 600, tags: ["f1"] } });
     if (!res.ok) return null;
     const json = (await res.json()) as { MRData?: { RaceTable?: { Races?: RawRace[] } } };
     return json.MRData?.RaceTable?.Races ?? null;
