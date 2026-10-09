@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Shop from "@/components/Shop";
 import { getCollection } from "@/lib/shopify";
@@ -25,10 +24,7 @@ export default async function CollectionPage({ params }: Props) {
 
   return (
     <>
-      <div className="shop" style={{ paddingBottom: 0 }}>
-        <Link href="/" className="pdp__crumbs">&larr; All collections</Link>
-      </div>
-      <Shop products={products} title={collection.title} />
+      <Shop products={products} title={collection.title} crumb={{ href: "/", label: "All collections" }} />
     </>
   );
 }

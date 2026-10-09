@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Shop from "@/components/Shop";
 import { getProducts } from "@/lib/shopify";
 
@@ -13,10 +12,7 @@ export default async function AllProducts() {
 
   return (
     <>
-      <div className="shop" style={{ paddingBottom: 0 }}>
-        <Link href="/" className="pdp__crumbs">&larr; Home</Link>
-      </div>
-      <Shop products={products} title="All products" />
+      <Shop products={products} title="All products" crumb={{ href: "/", label: "Home" }} />
     </>
   );
 }
