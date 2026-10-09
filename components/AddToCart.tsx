@@ -13,19 +13,7 @@ const isColor = (name: string) => /colou?r/i.test(name);
 const hasValue = (v: Variant, name: string, value: string) => v.options.some((o) => o.name === name && o.value === value);
 const matches = (v: Variant, choice: Choice) => Object.entries(choice).every(([n, val]) => hasValue(v, n, val));
 
-export default function AddToCart({
-  product,
-  onColorImage,
-  preferColor,
-  onColor,
-}: {
-  product: Product;
-  onColorImage?: (img: Img) => void;
-  /** Start on this colour when it exists and is in stock (used by the builder to keep the colour between quotes). */
-  preferColor?: string;
-  /** Called with the chosen colour whenever it changes. */
-  onColor?: (color: string) => void;
-}) {
+export default function AddToCart({ product, onColorImage }: { product: Product; onColorImage?: (img: Img) => void }) {
   const { add, busy } = useCart();
   const single = product.variants.length === 1 && product.variants[0].title === "Default Title";
 
@@ -48,10 +36,8 @@ export default function AddToCart({
       // Only one possible value → nothing to decide. Colour → start on the first colour that is in stock.
       if (g.values.length === 1) initial[g.name] = g.values[0];
       else if (isColor(g.name)) {
-        const ok = (val: string) => product.variants.some((v) => v.availableForSale && hasValue(v, g.name, val));
-        const wanted = preferColor ? g.values.find((val) => val.toLowerCase() === preferColor.toLowerCase() && ok(val)) : undefined;
-        const first = wanted ?? g.values.find(ok);
-        if (first) initial[g.name] = first;
+        const inStock = g.values.find((val) => product.variants.some((v) => v.availableForSale && hasValue(v, g.name, val)));
+        if (inStock) initial[g.name] = inStock;
       }
     }
     return initial;
@@ -78,9 +64,6 @@ export default function AddToCart({
   const colorGroup = groups.find((g) => isColor(g.name));
   const colorName = colorGroup?.name;
   const colorValue = colorName ? choice[colorName] : undefined;
-  useEffect(() => {
-    if (colorValue) onColor?.(colorValue);
-  }, [colorValue, onColor]);
   useEffect(() => {
     if (!onColorImage || !colorName || !colorValue) return;
     const v = product.variants.find((x) => hasValue(x, colorName, colorValue) && x.image);
