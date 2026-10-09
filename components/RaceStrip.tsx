@@ -47,12 +47,12 @@ export default function RaceStrip({ next, last }: { next: NextRace | null; last:
         {last && (
           <div className="rb__right">
             <div className="rb__rhead">
-              <h3>Last result</h3>
-              <p>{last.name}</p>
+              <h3>{last.session === "Race" ? "Last result" : "Latest session"}</h3>
+              <p>{last.session === "Race" ? last.name : `${last.session} · ${last.name}`}</p>
             </div>
             {winner && (
               <p className="rb__winner">
-                <span>Winner</span> <strong>{winner.driver}</strong> <em>{winner.team}</em>
+                <span>{last.session === "Race" || last.session === "Sprint" ? "Winner" : "Fastest"}</span> <strong>{winner.driver}</strong> <em>{winner.team}</em>
               </p>
             )}
             <button
