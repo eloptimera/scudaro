@@ -17,6 +17,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 /** Race week board: next race with countdown + 3D circuit, and the last result. Always visible. */
 export default function RaceStrip({ next, last }: { next: NextRace | null; last: LastRace | null }) {
   const [now, setNow] = useState<number | null>(null); // null until mounted → no hydration mismatch
+  const [showAll, setShowAll] = useState(false); // phone only: the top 10 sit in a dropdown
 
   useEffect(() => {
     setNow(Date.now());
@@ -80,7 +81,17 @@ export default function RaceStrip({ next, last }: { next: NextRace | null; last:
                 <span>Winner</span> <strong>{winner.driver}</strong> <em>{winner.team}</em>
               </p>
             )}
-            <ol className="rb__table">
+            <button
+              type="button"
+              className="rb__drop"
+              onClick={() => setShowAll((v) => !v)}
+              aria-expanded={showAll}
+              aria-controls="rb-table"
+            >
+              <span>Top 10</span>
+              <span aria-hidden="true">{showAll ? "−" : "+"}</span>
+            </button>
+            <ol className={`rb__table${showAll ? "" : " is-collapsed"}`} id="rb-table">
               <li className="rb__row rb__row--head" aria-hidden="true">
                 <span>Pos</span><span>Driver</span><span className="rb__team">Team</span><span>Time</span>
               </li>
