@@ -343,6 +343,8 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
   .stage__info { flex-direction: column; align-items: flex-start; gap: 14px; padding: 0 16px 20px; }
   .stage__controls { width: 100%; justify-content: space-between; gap: 12px; }
   .stage { --item-w: min(62vw, calc(100svh * .34)); --item-top: 31%; }
+  /* On phones the shirt covers the middle, so the ghost word sits in the gap below it instead of behind it. */
+  .stage__ghost { top: 65%; font-size: clamp(90px, 26vw, 200px); }
   .stage__hint { display: none; }
 }
 @media (max-width: 560px) {
