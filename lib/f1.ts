@@ -60,11 +60,16 @@ const OPENF1 = "https://api.openf1.org/v1";
 
 async function openf1<T>(path: string): Promise<T[] | null> {
   try {
-    const res = await fetch(`${OPENF1}${path}`, { signal: AbortSignal.timeout(4000), next: { revalidate: 120, tags: ["f1"] } });
-    if (!res.ok) return null;
+    const res = await fetch(`${OPENF1}${path}`, { signal: AbortSignal.timeout(6000), next: { revalidate: 120, tags: ["f1"] } });
+    if (!res.ok) {
+      console.error(`OpenF1 ${path} -> HTTP ${res.status}`);
+      return null;
+    }
     const json = await res.json();
+    if (!Array.isArray(json)) console.error(`OpenF1 ${path} -> not an array`, JSON.stringify(json).slice(0, 200));
     return Array.isArray(json) ? (json as T[]) : null;
-  } catch {
+  } catch (err) {
+    console.error(`OpenF1 ${path} failed`, err);
     return null;
   }
 }
@@ -90,8 +95,10 @@ const fmtLap = (sec: number) => {
 async function getWeekendSession(raceName: string, raceStart: string): Promise<LastRace | null> {
   type OSession = { session_key: number; session_name: string; date_start: string; date_end: string };
   const race = new Date(raceStart).getTime();
-  const year = new Date(raceStart).getUTCFullYear();
-  const all = await openf1<OSession>(`/sessions?year=${year}`);
+  // Only this weekend's sessions (small, fast answer): started within 4 days before the race.
+  const from = new Date(race - 4 * 864e5).toISOString().slice(0, 10);
+  const to = new Date(race + 864e5).toISOString().slice(0, 10);
+  const all = await openf1<OSession>(`/sessions?date_start>=${from}&date_start<=${to}`);
   if (!all) return null;
   const nowMs = Date.now();
   const finished = all
