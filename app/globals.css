@@ -68,7 +68,7 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
   border: 0;
 }
 .brand img { height: 32px; width: auto; }
-/* Every page except the landing page: a white floating pill with rounded edges */
+/* White floating pill with rounded edges, on every page */
 .site-header--solid { mix-blend-mode: normal; padding-top: 14px; }
 .site-header--solid .site-header__pill {
   background: #fff;
@@ -77,10 +77,8 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .site-header--solid .nav a, .site-header--solid .nav__btn { color: #111; }
 .site-header--solid .nav a:not(.nav__pill) { opacity: .6; }
 .site-header--solid .nav a:hover, .site-header--solid .nav a.is-active { opacity: 1; }
-.site-header--solid .nav a.nav__pill { border-color: #111; }
-.site-header--solid .nav a.nav__pill:hover { background: #111; border-color: #111; color: #fff; }
-.site-header--solid .nav button.nav__pill { background: #111; border-color: #111; color: #fff; }
-.site-header--solid .nav button.nav__pill:hover { background: var(--red); border-color: var(--red); color: #fff; }
+.site-header--solid .nav a.nav__pill, .site-header--solid .nav button.nav__pill { background: #111; border-color: #111; color: #fff; opacity: 1; }
+.site-header--solid .nav a.nav__pill:hover, .site-header--solid .nav button.nav__pill:hover { background: var(--red); border-color: var(--red); color: #fff; }
 .site-header--solid .cart-count { background: #fff; color: #111; }
 .site-header--solid .nav button.nav__pill:hover .cart-count { color: var(--red); }
 .site-header--solid .lang--header .lang__btn { border-color: rgba(0, 0, 0, .25); color: #111; }

@@ -12,11 +12,9 @@ export default function Header({ accountUrl }: { accountUrl: string | null }) {
   const pathname = stripLocale(usePathname());
   const { count, open } = useCart();
   const { t } = useI18n();
-  // The landing page keeps the transparent header over the 3D stage; every other page gets a white pill.
-  const solid = pathname !== "/";
 
   return (
-    <header className={`site-header${solid ? " site-header--solid" : ""}`}>
+    <header className="site-header site-header--solid">
       <div className="site-header__pill">
         <nav className="nav nav--left" aria-label={t("nav.menu")}>
           <LocalLink href="/" className={pathname === "/" ? "is-active" : undefined}>{t("nav.home")}</LocalLink>
@@ -26,7 +24,7 @@ export default function Header({ accountUrl }: { accountUrl: string | null }) {
         </nav>
 
         <LocalLink href="/" className="brand" aria-label={t("nav.brandHome")}>
-          <Image src={solid ? "/logo-black.png" : "/logo-white.png"} alt="SCUDARO" width={647} height={213} priority />
+          <Image src="/logo-black.png" alt="SCUDARO" width={647} height={213} priority />
         </LocalLink>
 
         <nav className="nav nav--right" aria-label={t("nav.account")}>
