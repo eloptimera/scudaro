@@ -19,7 +19,7 @@ export default function Header({ accountUrl }: { accountUrl: string | null }) {
         <nav className="nav nav--left" aria-label={t("nav.menu")}>
           <LocalLink href="/" className={pathname === "/" ? "is-active" : undefined}>{t("nav.home")}</LocalLink>
           <LocalLink href="/products" className={pathname === "/products" ? "is-active" : undefined}>{t("nav.shop")}</LocalLink>
-          <LocalLink href="/#about">{t("nav.about")}</LocalLink>
+          <LocalLink href="/about">{t("nav.about")}</LocalLink>
           <LocalLink href="/#contact">{t("nav.contact")}</LocalLink>
         </nav>
 

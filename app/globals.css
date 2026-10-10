@@ -367,6 +367,13 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .prose code { font-size: .9em; color: var(--ink); }
 @media (max-width: 700px) { .policy { padding: 32px 16px 56px; } }
 .policy--center { text-align: center; }
+.info-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.prose .faq__cta { display: inline-block; margin: 0 0 8px; font-weight: 600; }
+.prose .note { margin-top: 24px; font-size: 13px; color: #777; }
+.table-scroll { overflow-x: auto; margin: 0 0 24px; }
+.table-scroll table { min-width: 560px; margin: 0; }
+.prose caption { padding: 0 0 8px; color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 19px; text-transform: uppercase; text-align: start; }
+.prose tbody th { color: var(--ink); font-weight: 600; white-space: nowrap; }
 .policy--center .prose form { display: flex; justify-content: center; margin-top: 24px; }
 
 /* Responsive */

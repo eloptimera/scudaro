@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { COMPANY } from "@/lib/config";
 import type { Locale } from "@/lib/i18n/config";
+import { info } from "@/lib/content/info";
 import { getT } from "@/lib/i18n/server";
 import { getPolicies } from "@/lib/shopify";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -9,6 +10,7 @@ import Newsletter from "./Newsletter";
 
 export default async function Footer({ locale }: { locale: Locale }) {
   const [policies, t] = await Promise.all([getPolicies(locale), getT(locale)]);
+  const nav = info(locale).nav;
   const company = [
     COMPANY.name,
     COMPANY.orgNumber && t("footer.org", { no: COMPANY.orgNumber }),
@@ -21,6 +23,10 @@ export default async function Footer({ locale }: { locale: Locale }) {
       <Newsletter />
 
       <nav className="footer-links" aria-label={t("footer.legal")}>
+        <LocalLink href="/faq">{nav.faq}</LocalLink>
+        <LocalLink href="/size-guide">{nav.size}</LocalLink>
+        <LocalLink href="/care">{nav.care}</LocalLink>
+        <LocalLink href="/about">{nav.about}</LocalLink>
         {policies.map((p) => (
           <LocalLink key={p.handle} href={`/policies/${p.handle}`}>{p.title}</LocalLink>
         ))}
