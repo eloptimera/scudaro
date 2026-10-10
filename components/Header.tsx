@@ -24,6 +24,7 @@ export default function Header({ accountUrl }: { accountUrl: string | null }) {
         </Link>
 
         <nav className="nav nav--right" aria-label="Account and cart">
+          <Link href="/build" className="nav__pill nav__pill--build">Build yours</Link>
           {accountUrl && (
             <a href={accountUrl} className="nav__pill">Log in</a>
           )}
