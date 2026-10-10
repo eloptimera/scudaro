@@ -33,14 +33,14 @@ export default async function Footer({ locale }: { locale: Locale }) {
         <LocalLink href="/cookies">{t("footer.cookies")}</LocalLink>
       </nav>
 
-      <LanguageSwitcher className="lang--footer" />
-
       {(company.length > 0 || COMPANY.email) && (
         <address className="footer-company">
           {company.length > 0 && <span>{company.join(" · ")}</span>}
           {COMPANY.email && <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>}
         </address>
       )}
+
+      <LanguageSwitcher className="lang--footer" />
 
       <p className="legal">{t("footer.rights")}</p>
     </footer>

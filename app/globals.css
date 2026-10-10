@@ -712,6 +712,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .lang--header { pointer-events: auto; }
 .lang--header .lang__btn { border-color: rgba(255, 255, 255, .35); color: #fff; }
 .lang--header .lang__btn:hover { border-color: #fff; }
+.lang--footer { margin-top: 56px; margin-bottom: 8px; }
 .lang--footer .lang__btn { color: var(--muted); }
 .lang--footer .lang__btn:hover { color: var(--ink); border-color: var(--muted); }
 .lang__code { display: none; text-transform: uppercase; }
