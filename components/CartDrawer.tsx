@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useRef, type MouseEvent } from "react";
-import Link from "next/link";
 import { useCart } from "./CartProvider";
+import { useI18n } from "./I18nProvider";
+import LocalLink from "./LocalLink";
 import { formatMoney } from "@/lib/format";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 
 export default function CartDrawer() {
   const { cart, isOpen, busy, error, close, setQuantity, remove } = useCart();
+  const { t, rich, locale } = useI18n();
+  const money = (m: { amount: number; currencyCode: string }) => formatMoney(m, locale);
   const ref = useRef<HTMLDialogElement>(null);
 
   // Keep the native <dialog> in sync with React state.
@@ -44,8 +47,8 @@ export default function CartDrawer() {
   return (
     <dialog ref={ref} className="drawer" aria-labelledby="drawer-title" onClick={onDialogClick} {...dismiss}>
       <div className="drawer__head">
-        <h2 id="drawer-title" className="drawer__title">Cart ({cart?.totalQuantity ?? 0})</h2>
-        <button className="drawer__close" onClick={close} aria-label="Close cart">&times;</button>
+        <h2 id="drawer-title" className="drawer__title">{t("cart.title", { count: cart?.totalQuantity ?? 0 })}</h2>
+        <button className="drawer__close" onClick={close} aria-label={t("cart.close")}>&times;</button>
       </div>
 
       {lines.length > 0 && cart && (() => {
@@ -55,8 +58,8 @@ export default function CartDrawer() {
           <div className="ship">
             <p className="ship__text">
               {left > 0
-                ? <>Add <strong>{formatMoney({ amount: left, currencyCode: cart.subtotal.currencyCode })}</strong> more for free shipping</>
-                : <strong>You&apos;ve unlocked free shipping</strong>}
+                ? rich("cart.shipMore", { amount: <strong key="a">{money({ amount: left, currencyCode: cart.subtotal.currencyCode })}</strong> })
+                : <strong>{t("cart.shipDone")}</strong>}
             </p>
             <div className="ship__bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)}>
               <span style={{ width: `${pct}%` }} />
@@ -67,7 +70,7 @@ export default function CartDrawer() {
 
       <div className="drawer__body">
         {lines.length === 0 ? (
-          <p className="drawer__empty">Your cart is empty.</p>
+          <p className="drawer__empty">{t("cart.empty")}</p>
         ) : (
           lines.map((l) => (
             <div className="line" key={l.id}>
@@ -79,18 +82,18 @@ export default function CartDrawer() {
               </div>
               <div>
                 <p className="line__title">
-                  <Link href={`/products/${l.handle}`} onClick={close}>{l.title}</Link>
+                  <LocalLink href={`/products/${l.handle}`} onClick={close}>{l.title}</LocalLink>
                 </p>
                 {l.variantTitle !== "Default Title" && <p className="line__variant">{l.variantTitle}</p>}
                 <div className="qty">
-                  <button onClick={() => setQuantity(l.id, l.quantity - 1)} disabled={busy} aria-label={`Decrease quantity of ${l.title}`}>&minus;</button>
+                  <button onClick={() => setQuantity(l.id, l.quantity - 1)} disabled={busy} aria-label={t("cart.dec", { title: l.title })}>&minus;</button>
                   <span aria-live="polite">{l.quantity}</span>
-                  <button onClick={() => setQuantity(l.id, l.quantity + 1)} disabled={busy || l.quantity >= 20} aria-label={`Increase quantity of ${l.title}`}>+</button>
+                  <button onClick={() => setQuantity(l.id, l.quantity + 1)} disabled={busy || l.quantity >= 20} aria-label={t("cart.inc", { title: l.title })}>+</button>
                 </div>
               </div>
               <div className="line__side">
-                <span>{formatMoney({ amount: l.price.amount * l.quantity, currencyCode: l.price.currencyCode })}</span>
-                <button className="line__remove" onClick={() => remove(l.id)} disabled={busy}>Remove</button>
+                <span>{money({ amount: l.price.amount * l.quantity, currencyCode: l.price.currencyCode })}</span>
+                <button className="line__remove" onClick={() => remove(l.id)} disabled={busy}>{t("cart.remove")}</button>
               </div>
             </div>
           ))
@@ -100,14 +103,14 @@ export default function CartDrawer() {
 
       {lines.length > 0 && cart && (
         <div className="drawer__foot">
-          <p className="drawer__sub"><span>Subtotal</span><span>{formatMoney(cart.subtotal)}</span></p>
+          <p className="drawer__sub"><span>{t("cart.subtotal")}</span><span>{money(cart.subtotal)}</span></p>
           <p className="drawer__note">
-            {live ? "Shipping and taxes are calculated at checkout." : "Demo mode – connect Shopify to enable checkout."}
+            {live ? t("cart.noteLive") : t("cart.noteDemo")}
           </p>
           {live ? (
-            <a className="btn btn--light btn--block" href={cart.checkoutUrl as string}>Checkout</a>
+            <a className="btn btn--light btn--block" href={cart.checkoutUrl as string}>{t("cart.checkout")}</a>
           ) : (
-            <button className="btn btn--light btn--block" disabled>Checkout</button>
+            <button className="btn btn--light btn--block" disabled>{t("cart.checkout")}</button>
           )}
         </div>
       )}

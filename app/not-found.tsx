@@ -1,11 +1,12 @@
-import Link from "next/link";
-
-export default function NotFound() {
+// Fallback for requests that never reach a language route (the language layout renders the normal 404).
+export default function GlobalNotFound() {
   return (
-    <section className="about">
-      <h2>Off the track.</h2>
-      <p>We couldn&apos;t find that page.</p>
-      <p><Link className="btn btn--light" href="/">Back to the start</Link></p>
-    </section>
+    <html lang="en">
+      <body style={{ background: "#0b0b0c", color: "#f4f4f2", fontFamily: "system-ui, sans-serif", display: "grid", placeItems: "center", minHeight: "100vh", margin: 0 }}>
+        <p>
+          Off the track. <a href="/" style={{ color: "inherit" }}>Back to the start</a>
+        </p>
+      </body>
+    </html>
   );
 }

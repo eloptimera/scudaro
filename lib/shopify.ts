@@ -1,6 +1,7 @@
 import "server-only";
 import { headers } from "next/headers";
 import { MOCK_COLLECTIONS, MOCK_PRODUCTS, mockCollectionProducts } from "./mock";
+import { DEFAULT_LOCALE, shopifyLanguage, type Locale } from "./i18n/config";
 import type { Cart, CartLine, Collection, Img, Money, Policy, Product, ProductKind, Variant } from "./types";
 
 /* ------------------------------------------------------------------ *
@@ -50,9 +51,35 @@ async function authHeaders(forCart: boolean): Promise<Record<string, string>> {
   return {}; // tokenless access: products + cart only, lower query-complexity limit (1,000)
 }
 
-type GqlOptions = { revalidate?: number; tags?: string[] };
+type GqlOptions = { revalidate?: number; tags?: string[]; locale?: Locale };
 
+/** Adds `@inContext(language: $language)` to the (first) operation of a query so Shopify returns translated text. */
+function inLanguage(query: string): string {
+  return query.replace(
+    /\b(query|mutation)\s+(\w+)\s*(\(([^)]*)\))?/,
+    (_m, kind: string, name: string, _p: string, vars?: string) =>
+      `${kind} ${name}(${vars ? `${vars}, ` : ""}$language: LanguageCode) @inContext(language: $language)`,
+  );
+}
+
+/**
+ * Runs a Storefront query. With a non-default `locale` it asks Shopify for that language first. If Shopify rejects the
+ * language (not published in the store, or unsupported) it silently falls back to the default language, so a missing
+ * translation never breaks a page.
+ */
 async function storefront<T>(query: string, variables: Record<string, unknown> = {}, opts: GqlOptions = {}): Promise<T> {
+  const { locale, ...rest } = opts;
+  if (locale && locale !== DEFAULT_LOCALE) {
+    try {
+      return await storefrontRaw<T>(inLanguage(query), { ...variables, language: shopifyLanguage(locale) }, rest);
+    } catch (err) {
+      console.error(`Storefront query in "${locale}" failed, using the default language`, err);
+    }
+  }
+  return storefrontRaw<T>(query, variables, rest);
+}
+
+async function storefrontRaw<T>(query: string, variables: Record<string, unknown>, opts: GqlOptions): Promise<T> {
   const res = await fetch(`https://${storeDomain}/api/${API_VERSION}/graphql.json`, {
     method: "POST",
     headers: {
@@ -125,7 +152,8 @@ type RawProduct = {
 const money = (m: RawMoney): Money => ({ amount: Number(m.amount), currencyCode: m.currencyCode });
 
 function kindOf(p: RawProduct): ProductKind {
-  const s = `${p.productType} ${p.title}`.toLowerCase();
+  // Title and product type may be translated; the handle and tags are language-independent, so include them.
+  const s = `${p.productType} ${p.title} ${p.handle} ${p.tags.join(" ")}`.toLowerCase();
   if (s.includes("hoodie")) return "hoodie";
   if (s.includes("tee") || s.includes("t-shirt") || s.includes("shirt")) return "tee";
   return "other";
@@ -172,7 +200,7 @@ function toProduct(p: RawProduct): Product {
   };
 }
 
-export async function getProducts(): Promise<Product[]> {
+export async function getProducts(locale: Locale = DEFAULT_LOCALE): Promise<Product[]> {
   if (!isShopifyEnabled) return MOCK_PRODUCTS;
   const data = await storefront<{ products: { nodes: RawProduct[] } }>(
     /* GraphQL */ `
@@ -182,7 +210,7 @@ export async function getProducts(): Promise<Product[]> {
       }
     `,
     {},
-    { revalidate: 300, tags: ["products"] },
+    { revalidate: 300, tags: ["products"], locale },
   );
   return data.products.nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct);
 }
@@ -194,7 +222,7 @@ type RawVariant = RawProduct["variants"]["nodes"][number];
  * Shopify says there are more, fetch the rest so the option picker is built from the COMPLETE list
  * (a truncated list shows missing size/colour combinations as unavailable).
  */
-async function loadAllVariants(p: RawProduct): Promise<RawProduct> {
+async function loadAllVariants(p: RawProduct, locale: Locale): Promise<RawProduct> {
   const nodes: RawVariant[] = [...p.variants.nodes];
   let { hasNextPage, endCursor } = p.variants.pageInfo ?? { hasNextPage: false, endCursor: null };
   let guard = 0;
@@ -223,7 +251,7 @@ async function loadAllVariants(p: RawProduct): Promise<RawProduct> {
         }
       `,
       { id: p.id, after: endCursor },
-      { revalidate: 300, tags: ["products"] },
+      { revalidate: 300, tags: ["products"], locale },
     );
     if (!page.node) break;
     nodes.push(...page.node.variants.nodes);
@@ -232,7 +260,7 @@ async function loadAllVariants(p: RawProduct): Promise<RawProduct> {
   return { ...p, variants: { nodes } };
 }
 
-export async function getProduct(handle: string): Promise<Product | null> {
+export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE): Promise<Product | null> {
   if (!isShopifyEnabled) return MOCK_PRODUCTS.find((p) => p.handle === handle) ?? null;
   const data = await storefront<{ product: RawProduct | null }>(
     /* GraphQL */ `
@@ -242,10 +270,10 @@ export async function getProduct(handle: string): Promise<Product | null> {
       }
     `,
     { handle },
-    { revalidate: 300, tags: ["products"] },
+    { revalidate: 300, tags: ["products"], locale },
   );
   if (!data.product || !data.product.variants.nodes.length) return null;
-  return toProduct(await loadAllVariants(data.product));
+  return toProduct(await loadAllVariants(data.product, locale));
 }
 
 /* ---------------------------- Collections ---------------------------- */
@@ -303,7 +331,7 @@ function toCollection(c: RawCollection): Collection {
 }
 
 /** All non-empty collections, newest first – these are the slides of the home carousel. */
-export async function getCollections(): Promise<Collection[]> {
+export async function getCollections(locale: Locale = DEFAULT_LOCALE): Promise<Collection[]> {
   if (!isShopifyEnabled) return MOCK_COLLECTIONS;
   const data = await storefront<{ collections: { nodes: RawCollection[] } }>(
     /* GraphQL */ `
@@ -313,7 +341,7 @@ export async function getCollections(): Promise<Collection[]> {
       }
     `,
     {},
-    { revalidate: 300, tags: ["collections"] },
+    { revalidate: 300, tags: ["collections"], locale },
   );
   return data.collections.nodes
     .filter((c) => !HIDDEN_COLLECTIONS.has(c.handle) && c.products.nodes.length > 0)
@@ -321,7 +349,7 @@ export async function getCollections(): Promise<Collection[]> {
 }
 
 /** One collection plus the products in it (for /collections/[handle]). */
-export async function getCollection(handle: string): Promise<{ collection: Collection; products: Product[] } | null> {
+export async function getCollection(handle: string, locale: Locale = DEFAULT_LOCALE): Promise<{ collection: Collection; products: Product[] } | null> {
   if (!isShopifyEnabled) {
     const collection = MOCK_COLLECTIONS.find((c) => c.handle === handle);
     return collection ? { collection, products: mockCollectionProducts(handle) } : null;
@@ -347,7 +375,7 @@ export async function getCollection(handle: string): Promise<{ collection: Colle
       }
     `,
     { handle },
-    { revalidate: 300, tags: ["collections", "products"] },
+    { revalidate: 300, tags: ["collections", "products"], locale },
   );
   const raw = data.collection;
   if (!raw) return null;
@@ -365,7 +393,7 @@ export async function getCollection(handle: string): Promise<{ collection: Colle
  * they are shown in the footer. Policies that are empty are left out. Never throws: if Shopify
  * is unreachable (or the token may not read policies) the site simply shows no policy links.
  */
-export async function getPolicies(): Promise<Policy[]> {
+export async function getPolicies(locale: Locale = DEFAULT_LOCALE): Promise<Policy[]> {
   if (!isShopifyEnabled) return [];
   try {
     type RawPolicy = { handle: string; title: string; body: string } | null;
@@ -384,7 +412,7 @@ export async function getPolicies(): Promise<Policy[]> {
         }
       `,
       {},
-      { revalidate: 300, tags: ["policies"] },
+      { revalidate: 300, tags: ["policies"], locale },
     );
     const { termsOfService, privacyPolicy, refundPolicy, shippingPolicy } = data.shop;
     return [termsOfService, privacyPolicy, refundPolicy, shippingPolicy].filter(
@@ -472,15 +500,16 @@ function unwrap(p: CartPayload): Cart {
   return toCart(p.cart);
 }
 
-export async function shopifyGetCart(cartId: string): Promise<Cart | null> {
+export async function shopifyGetCart(cartId: string, locale: Locale = DEFAULT_LOCALE): Promise<Cart | null> {
   const data = await storefront<{ cart: RawCart | null }>(
     /* GraphQL */ `${CART_FRAGMENT} query Cart($id: ID!) { cart(id: $id) { ...CartFields } }`,
     { id: cartId },
+    { locale },
   );
   return data.cart ? toCart(data.cart) : null;
 }
 
-export async function shopifyCreateCart(variantId: string, quantity: number): Promise<Cart> {
+export async function shopifyCreateCart(variantId: string, quantity: number, locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
   const data = await storefront<{ cartCreate: CartPayload }>(
     /* GraphQL */ `
       ${CART_FRAGMENT}
@@ -489,11 +518,12 @@ export async function shopifyCreateCart(variantId: string, quantity: number): Pr
       }
     `,
     { lines: [{ merchandiseId: variantId, quantity }] },
+    { locale },
   );
   return unwrap(data.cartCreate);
 }
 
-export async function shopifyAddLine(cartId: string, variantId: string, quantity: number): Promise<Cart> {
+export async function shopifyAddLine(cartId: string, variantId: string, quantity: number, locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
   const data = await storefront<{ cartLinesAdd: CartPayload }>(
     /* GraphQL */ `
       ${CART_FRAGMENT}
@@ -502,11 +532,12 @@ export async function shopifyAddLine(cartId: string, variantId: string, quantity
       }
     `,
     { cartId, lines: [{ merchandiseId: variantId, quantity }] },
+    { locale },
   );
   return unwrap(data.cartLinesAdd);
 }
 
-export async function shopifyUpdateLine(cartId: string, lineId: string, quantity: number): Promise<Cart> {
+export async function shopifyUpdateLine(cartId: string, lineId: string, quantity: number, locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
   const data = await storefront<{ cartLinesUpdate: CartPayload }>(
     /* GraphQL */ `
       ${CART_FRAGMENT}
@@ -515,11 +546,12 @@ export async function shopifyUpdateLine(cartId: string, lineId: string, quantity
       }
     `,
     { cartId, lines: [{ id: lineId, quantity }] },
+    { locale },
   );
   return unwrap(data.cartLinesUpdate);
 }
 
-export async function shopifyRemoveLine(cartId: string, lineId: string): Promise<Cart> {
+export async function shopifyRemoveLine(cartId: string, lineId: string, locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
   const data = await storefront<{ cartLinesRemove: CartPayload }>(
     /* GraphQL */ `
       ${CART_FRAGMENT}
@@ -528,6 +560,7 @@ export async function shopifyRemoveLine(cartId: string, lineId: string): Promise
       }
     `,
     { cartId, lineIds: [lineId] },
+    { locale },
   );
   return unwrap(data.cartLinesRemove);
 }

@@ -5,16 +5,27 @@ import type { Img, Product, Variant } from "@/lib/types";
 import { useCart } from "./CartProvider";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
+import { useI18n } from "./I18nProvider";
 
 type Group = { name: string; values: string[] };
 type Choice = Record<string, string>;
 
-const isColor = (name: string) => /colou?r/i.test(name);
+/** Option names may be translated by Shopify ("Farbe", "Couleur"…), so colour is recognised by name in many languages
+ *  or, failing that, as "the option that is not a size" (sizes are language-independent: XS, S, M, 42…). */
+const COLOR_NAME = /colou?r|farbe|couleur|colore|kleur|kolor|f[aä]rg|farve|väri|barva|farba|culoare|szín|cor\b|χρώμα|цвят|boja|värv|krāsa|spalva|dath|kulur|اللون|颜色|顏色/i;
+const SIZE_VALUE = /^(x{0,3}[sml]|[2-6]xl|xxs|one size|os|\d{1,3}(\.\d)?)$/i;
+const isSizeGroup = (g: { values: string[] }) => g.values.length > 0 && g.values.every((v) => SIZE_VALUE.test(v.trim()));
+function colorGroupName(groups: { name: string; values: string[] }[]): string | undefined {
+  const byName = groups.find((g) => COLOR_NAME.test(g.name) && !isSizeGroup(g));
+  if (byName) return byName.name;
+  return groups.length > 1 ? groups.find((g) => !isSizeGroup(g))?.name : undefined;
+}
 const hasValue = (v: Variant, name: string, value: string) => v.options.some((o) => o.name === name && o.value === value);
 const matches = (v: Variant, choice: Choice) => Object.entries(choice).every(([n, val]) => hasValue(v, n, val));
 
 export default function AddToCart({ product, onColorImage }: { product: Product; onColorImage?: (img: Img) => void }) {
   const { add, busy } = useCart();
+  const { t, locale } = useI18n();
   const single = product.variants.length === 1 && product.variants[0].title === "Default Title";
 
   const groups = useMemo<Group[]>(() => {
@@ -28,6 +39,9 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
     }
     return [...map].map(([name, values]) => ({ name, values }));
   }, [product.variants]);
+
+  const colorKey = colorGroupName(groups);
+  const isColor = (name: string) => name === colorKey;
 
   const [choice, setChoice] = useState<Choice>(() => {
     if (single) return {};
@@ -61,7 +75,7 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
     product.variants.some((v) => v.availableForSale && hasValue(v, name, value) && matches(v, { ...choice, [name]: value }));
 
   // Show the picture that belongs to the chosen colour.
-  const colorGroup = groups.find((g) => isColor(g.name));
+  const colorGroup = groups.find((g) => g.name === colorKey);
   const colorName = colorGroup?.name;
   const colorValue = colorName ? choice[colorName] : undefined;
   useEffect(() => {
@@ -81,26 +95,28 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
   const price = selected?.price ?? product.price;
   const compareAt = selected ? selected.compareAt : product.compareAt;
 
+  // English reads "Select a color"; other languages keep the option name exactly as Shopify spells it (German nouns are capitalised).
+  const optName = (n: string) => (locale === "en" ? n.toLowerCase() : n);
   const buttonLabel = soldOut
-    ? "Sold out"
+    ? t("pdp.soldout")
     : busy
-      ? "Adding…"
+      ? t("pdp.adding")
       : selected
-        ? "Add to cart"
+        ? t("pdp.add")
         : missing.length === 1
-          ? `Select a ${missing[0].name.toLowerCase()}`
-          : `Select ${missing.map((g) => g.name.toLowerCase()).join(" and ")}`;
+          ? t("pdp.selectOne", { option: optName(missing[0].name) })
+          : t("pdp.selectMany", { list: new Intl.ListFormat(locale, { type: "conjunction" }).format(missing.map((g) => optName(g.name))) });
 
   return (
     <>
       <p className="pdp__price">
-        {formatMoney(price)}
-        {compareAt && compareAt.amount > price.amount && <s>{formatMoney(compareAt)}</s>}
+        {formatMoney(price, locale)}
+        {compareAt && compareAt.amount > price.amount && <s>{formatMoney(compareAt, locale)}</s>}
       </p>
 
       {product.description && (
         <details className="pdp__details">
-          <summary>Description</summary>
+          <summary>{t("pdp.description")}</summary>
           <div className="pdp__details-body">{product.description}</div>
         </details>
       )}
@@ -143,7 +159,7 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
           {buttonLabel}
         </button>
       </div>
-      <p className="pdp__note">Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)} · 30-day returns</p>
+      <p className="pdp__note">{t("pdp.note", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}</p>
     </>
   );
 }

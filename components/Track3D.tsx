@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useI18n } from "./I18nProvider";
 
 /**
  * The circuit as a raised line you can spin with your finger or mouse (three.js).
@@ -8,6 +9,7 @@ import { useEffect, useRef } from "react";
  * (i.e. when the race panel is opened) and never slows down the first page load.
  */
 export default function Track3D({ points, label }: { points: [number, number][]; label: string }) {
+  const { t } = useI18n();
   const host = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -159,5 +161,5 @@ export default function Track3D({ points, label }: { points: [number, number][];
     };
   }, [points]);
 
-  return <div ref={host} className="track3d" role="img" aria-label={`3D model of ${label}. Drag to rotate.`} />;
+  return <div ref={host} className="track3d" role="img" aria-label={t("rb.track", { label })} />;
 }
