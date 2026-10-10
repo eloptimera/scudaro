@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Collection } from "@/lib/types";
 import CollectionVisual from "./CollectionVisual";
 import { formatMoney } from "@/lib/format";
+import { useI18n } from "./I18nProvider";
+import LocalLink from "./LocalLink";
 
 /* ---------- Scroll-driven 3D carousel ----------
    The page scrolls normally. The stage sticks while you scroll past it, and the scroll progress
@@ -35,6 +36,7 @@ function itemStyle(d: number, spacing: number) {
 
 export default function Stage({ collections }: { collections: Collection[] }) {
   const router = useRouter();
+  const { t, locale, path } = useI18n();
   const n = collections.length;
   const wrapRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -162,7 +164,7 @@ export default function Stage({ collections }: { collections: Collection[] }) {
       ref={wrapRef}
       className="stage-wrap"
       id="stage-wrap"
-      aria-label="Collections – scroll to browse"
+      aria-label={t("stage.aria")}
       style={{ "--n": n } as CSSProperties}
     >
       <div className="stage" ref={stageRef}>
@@ -177,9 +179,9 @@ export default function Stage({ collections }: { collections: Collection[] }) {
               }}
               className="stage__item"
               style={{ ...itemStyle(i, 340), "--tile": c.tile } as CSSProperties}
-              aria-label={`View ${c.title}`}
+              aria-label={t("stage.view", { title: c.title })}
               onClick={() =>
-                i === Math.round(targetRef.current) ? router.push(`/collections/${c.handle}`) : goToRef.current(i)
+                i === Math.round(targetRef.current) ? router.push(path(`/collections/${c.handle}`)) : goToRef.current(i)
               }
             >
               <CollectionVisual collection={c} priority={i < 3} />
@@ -190,22 +192,22 @@ export default function Stage({ collections }: { collections: Collection[] }) {
         <div className="stage__info">
           <div className="stage__text" aria-live="polite">
             <div className="stage__swap" key={shown}>
-              <p className="stage__eyebrow">Collections — {shown + 1} / {n}</p>
+              <p className="stage__eyebrow">{t("stage.eyebrow", { n: shown + 1, total: n })}</p>
               <h2 className="stage__title">{current.title}</h2>
               {current.description && <p className="stage__desc">{current.description}</p>}
             </div>
           </div>
           <div className="stage__controls">
-            <p className="stage__price">{current.price ? `From ${formatMoney(current.price)}` : ""}</p>
+            <p className="stage__price">{current.price ? t("stage.from", { price: formatMoney(current.price, locale) }) : ""}</p>
             <div className="stage__arrows">
-              <button className="arrow" onClick={() => step(-1)} aria-label="Previous collection">&larr;</button>
-              <button className="arrow" onClick={() => step(1)} aria-label="Next collection">&rarr;</button>
+              <button className="arrow" onClick={() => step(-1)} aria-label={t("stage.prev")}>&larr;</button>
+              <button className="arrow" onClick={() => step(1)} aria-label={t("stage.next")}>&rarr;</button>
             </div>
-            <Link className="btn btn--outline" href={`/collections/${current.handle}`}>Explore</Link>
+            <LocalLink className="btn btn--outline" href={`/collections/${current.handle}`}>{t("stage.explore")}</LocalLink>
           </div>
         </div>
 
-        <p className="stage__hint" ref={hintRef} aria-hidden="true">Scroll &darr;</p>
+        <p className="stage__hint" ref={hintRef} aria-hidden="true">{t("stage.scroll")} &darr;</p>
       </div>
     </section>
   );

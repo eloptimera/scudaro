@@ -1,27 +1,26 @@
 "use client";
 
 import { useId, useState, type CSSProperties } from "react";
-import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatMoney } from "@/lib/format";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
+import { useI18n } from "./I18nProvider";
+import LocalLink from "./LocalLink";
 import ProductVisual from "./ProductVisual";
-
-const LABELS: Record<string, string> = { tee: "T-shirts", hoodie: "Hoodies", other: "Other" };
-const KIND_NAME: Record<string, string> = { tee: "T-shirt", hoodie: "Hoodie", other: "Accessory" };
 
 type Sort = "featured" | "low" | "high";
 
 export default function Shop({
   products,
-  title = "New arrivals",
+  title,
   crumb,
 }: {
   products: Product[];
-  title?: string;
+  title: string;
   /** Back link shown above the title. */
   crumb?: { href: string; label: string };
 }) {
+  const { t, plural, locale } = useI18n();
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState<Sort>("featured");
   const sortId = useId();
@@ -38,21 +37,21 @@ export default function Shop({
     <section className="shop" id="shop" aria-labelledby="shop-title">
       <header className="shop__hero">
         {crumb && (
-          <Link href={crumb.href} className="shop__crumb">
-            <span aria-hidden="true">&larr;</span> {crumb.label}
-          </Link>
+          <LocalLink href={crumb.href} className="shop__crumb">
+            <span className="dir-arrow" aria-hidden="true">&larr;</span> {crumb.label}
+          </LocalLink>
         )}
-        <p className="shop__eyebrow">Scudaro · Race-day streetwear</p>
+        <p className="shop__eyebrow">{t("shop.eyebrow")}</p>
         <h1 id="shop-title">{title}</h1>
         <p className="shop__lead">
-          Made to order, printed per piece. Free shipping over {formatMoney(FREE_SHIPPING_THRESHOLD)}.
+          {t("shop.lead", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}
         </p>
       </header>
 
       {products.length > 0 && (
         <div className="shop__bar">
           {kinds.length > 1 ? (
-            <div className="filters" role="group" aria-label="Filter products">
+            <div className="filters" role="group" aria-label={t("shop.filter")}>
               {["all", ...kinds].map((k) => (
                 <button
                   key={k}
@@ -61,7 +60,7 @@ export default function Shop({
                   aria-pressed={filter === k}
                   onClick={() => setFilter(k)}
                 >
-                  {k === "all" ? "All" : LABELS[k]}
+                  {k === "all" ? t("shop.filterAll") : t(`shop.kind.${k}`)}
                   <span className="chip__n">{count(k)}</span>
                 </button>
               ))}
@@ -71,14 +70,14 @@ export default function Shop({
           )}
           <div className="shop__tools">
             <p className="shop__count" role="status" aria-live="polite">
-              {visible.length} {visible.length === 1 ? "product" : "products"}
+              {plural("shop.count", visible.length)}
             </p>
             <label className="sort" htmlFor={sortId}>
-              <span>Sort</span>
+              <span>{t("shop.sort")}</span>
               <select id={sortId} value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
-                <option value="featured">Featured</option>
-                <option value="low">Price: low to high</option>
-                <option value="high">Price: high to low</option>
+                <option value="featured">{t("shop.sort.featured")}</option>
+                <option value="low">{t("shop.sort.low")}</option>
+                <option value="high">{t("shop.sort.high")}</option>
               </select>
             </label>
           </div>
@@ -86,14 +85,14 @@ export default function Shop({
       )}
 
       {products.length === 0 ? (
-        <p style={{ color: "var(--muted)" }}>No products yet – check back soon.</p>
+        <p style={{ color: "var(--muted)" }}>{t("shop.empty")}</p>
       ) : (
         <div className="grid" key={`${filter}-${sort}`}>
           {visible.map((p, i) => {
             const soldOut = p.variants.every((v) => !v.availableForSale);
-            const tag = soldOut ? "Sold out" : p.tag;
+            const tag = soldOut ? t("card.soldout") : p.tag;
             return (
-              <Link
+              <LocalLink
                 key={p.id}
                 href={`/products/${p.handle}`}
                 className={`card${soldOut ? " is-soldout" : ""}`}
@@ -104,14 +103,14 @@ export default function Shop({
                   <ProductVisual product={p} priority={i < 4} />
                 </div>
                 <div className="card__info">
-                  <p className="card__kind">{KIND_NAME[p.kind] ?? ""}</p>
+                  <p className="card__kind">{t(`shop.name.${p.kind}`)}</p>
                   <h2 className="card__name">{p.title}</h2>
                   <p className="card__price">
-                    <span>{formatMoney(p.price)}</span>
-                    {p.compareAt && <s>{formatMoney(p.compareAt)}</s>}
+                    <span>{formatMoney(p.price, locale)}</span>
+                    {p.compareAt && <s>{formatMoney(p.compareAt, locale)}</s>}
                   </p>
                 </div>
-              </Link>
+              </LocalLink>
             );
           })}
         </div>

@@ -1,38 +1,43 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { stripLocale } from "@/lib/i18n/config";
 import { useCart } from "./CartProvider";
+import { useI18n } from "./I18nProvider";
+import LanguageSwitcher from "./LanguageSwitcher";
+import LocalLink from "./LocalLink";
 
 export default function Header({ accountUrl }: { accountUrl: string | null }) {
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const { count, open } = useCart();
+  const { t } = useI18n();
 
   return (
     <header className="site-header">
       <div className="site-header__pill">
-        <nav className="nav nav--left" aria-label="Main menu">
-          <Link href="/" className={pathname === "/" ? "is-active" : undefined}>Home</Link>
-          <Link href="/products" className={pathname === "/products" ? "is-active" : undefined}>Shop</Link>
-          <Link href="/#about">About</Link>
-          <Link href="/#contact">Contact</Link>
+        <nav className="nav nav--left" aria-label={t("nav.menu")}>
+          <LocalLink href="/" className={pathname === "/" ? "is-active" : undefined}>{t("nav.home")}</LocalLink>
+          <LocalLink href="/products" className={pathname === "/products" ? "is-active" : undefined}>{t("nav.shop")}</LocalLink>
+          <LocalLink href="/#about">{t("nav.about")}</LocalLink>
+          <LocalLink href="/#contact">{t("nav.contact")}</LocalLink>
         </nav>
 
-        <Link href="/" className="brand" aria-label="SCUDARO home">
+        <LocalLink href="/" className="brand" aria-label={t("nav.brandHome")}>
           <Image src="/logo-white.png" alt="SCUDARO" width={647} height={213} priority />
-        </Link>
+        </LocalLink>
 
-        <nav className="nav nav--right" aria-label="Account and cart">
+        <nav className="nav nav--right" aria-label={t("nav.account")}>
+          <LanguageSwitcher className="lang--header" />
           {accountUrl && (
-            <a href={accountUrl} className="nav__pill">Log in</a>
+            <a href={accountUrl} className="nav__pill">{t("nav.login")}</a>
           )}
           <button
             className="nav__btn nav__pill nav__pill--solid"
             onClick={open}
-            aria-label={`Open cart, ${count} item${count === 1 ? "" : "s"}`}
+            aria-label={t("nav.cartOpen", { count })}
           >
-            Cart <span className="cart-count">{count}</span>
+            {t("nav.cart")} <span className="cart-count">{count}</span>
           </button>
         </nav>
       </div>

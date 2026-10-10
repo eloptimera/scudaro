@@ -1,15 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import Link from "next/link";
 import type { Img, Product } from "@/lib/types";
 import AddToCart from "./AddToCart";
+import { useI18n } from "./I18nProvider";
+import LocalLink from "./LocalLink";
 import QuoteAudio from "./QuoteAudio";
 import { quoteAudioFor } from "@/lib/quoteAudio";
 import Garment from "./Garment";
 
 /** Product page: swipeable images on top (full width on phones), details and the add-to-cart bar below. */
 export default function ProductDetail({ product }: { product: Product }) {
+  const { t } = useI18n();
   // Product images plus any variant (colour) images that are not already in the list.
   const gallery = useMemo<Img[]>(() => {
     const seen = new Set<string>();
@@ -61,7 +63,7 @@ export default function ProductDetail({ product }: { product: Product }) {
   return (
     <article className="pdp">
       <div className="pdp__media" style={{ "--tile": product.tile } as CSSProperties}>
-        <div className="pdp__track" ref={trackRef} onScroll={onScroll} aria-label="Product images">
+        <div className="pdp__track" ref={trackRef} onScroll={onScroll} aria-label={t("pdp.images")}>
           {gallery.length === 0 ? (
             <div className="pdp__slide"><Garment product={product} /></div>
           ) : (
@@ -76,8 +78,8 @@ export default function ProductDetail({ product }: { product: Product }) {
 
         {many && (
           <>
-            <button className="pdp__arrow pdp__arrow--prev" aria-label="Previous image" onClick={() => goTo(Math.max(0, index - 1))}>&larr;</button>
-            <button className="pdp__arrow pdp__arrow--next" aria-label="Next image" onClick={() => goTo(Math.min(gallery.length - 1, index + 1))}>&rarr;</button>
+            <button className="pdp__arrow pdp__arrow--prev" aria-label={t("pdp.prevImage")} onClick={() => goTo(Math.max(0, index - 1))}>&larr;</button>
+            <button className="pdp__arrow pdp__arrow--next" aria-label={t("pdp.nextImage")} onClick={() => goTo(Math.min(gallery.length - 1, index + 1))}>&rarr;</button>
             <div className="pdp__dots" aria-hidden="true">
               {gallery.map((img, i) => (
                 <span key={img.url} className={i === index ? "is-active" : undefined} />
@@ -88,7 +90,7 @@ export default function ProductDetail({ product }: { product: Product }) {
       </div>
 
       <div className="pdp__info">
-        <Link href="/products" className="pdp__crumbs">&larr; All products</Link>
+        <LocalLink href="/products" className="pdp__crumbs"><span className="dir-arrow" aria-hidden="true">&larr;</span> {t("pdp.crumb")}</LocalLink>
         <h1 className="pdp__title">{product.title}</h1>
         {quoteAudioFor(product.handle) && <QuoteAudio src={quoteAudioFor(product.handle) as string} />}
         <AddToCart product={product} onColorImage={onColorImage} />

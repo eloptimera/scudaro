@@ -9,6 +9,8 @@ import {
   shopifyRemoveLine,
   shopifyUpdateLine,
 } from "./shopify";
+import type { Locale } from "./i18n/config";
+import { DEFAULT_LOCALE } from "./i18n/config";
 import type { Cart, CartLine } from "./types";
 
 /**
@@ -86,13 +88,13 @@ function buildDemoCart(map: DemoMap): Cart {
 /** In live mode the cookie must hold a Shopify cart id; ignore anything else (e.g. a leftover demo cart). */
 const liveCartId = (raw: string | undefined) => (raw?.startsWith("gid://shopify/Cart/") ? raw : undefined);
 
-export async function getCart(): Promise<Cart> {
+export async function getCart(locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
   const store = await cookies();
   const raw = store.get(COOKIE)?.value;
   if (!isShopifyEnabled) return buildDemoCart(readDemo(raw));
   const cartId = liveCartId(raw);
   if (!cartId) return EMPTY_CART;
-  const cart = await shopifyGetCart(cartId);
+  const cart = await shopifyGetCart(cartId, locale);
   if (!cart) {
     store.delete(COOKIE); // expired / completed cart
     return EMPTY_CART;
@@ -100,7 +102,7 @@ export async function getCart(): Promise<Cart> {
   return cart;
 }
 
-export async function addToCart(variantId: string, quantity: number): Promise<Cart> {
+export async function addToCart(variantId: string, quantity: number, locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
   const store = await cookies();
   const raw = store.get(COOKIE)?.value;
 
@@ -116,17 +118,17 @@ export async function addToCart(variantId: string, quantity: number): Promise<Ca
   const cartId = liveCartId(raw);
   if (cartId) {
     try {
-      return await shopifyAddLine(cartId, variantId, quantity);
+      return await shopifyAddLine(cartId, variantId, quantity, locale);
     } catch {
       // cart may have expired or been completed – start a fresh one below
     }
   }
-  const cart = await shopifyCreateCart(variantId, quantity);
+  const cart = await shopifyCreateCart(variantId, quantity, locale);
   store.set(COOKIE, cart.id as string, COOKIE_OPTS);
   return cart;
 }
 
-export async function updateLine(lineId: string, quantity: number): Promise<Cart> {
+export async function updateLine(lineId: string, quantity: number, locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
   const store = await cookies();
   const raw = store.get(COOKIE)?.value;
 
@@ -141,9 +143,9 @@ export async function updateLine(lineId: string, quantity: number): Promise<Cart
 
   const cartId = liveCartId(raw);
   if (!cartId) return EMPTY_CART;
-  return quantity <= 0 ? shopifyRemoveLine(cartId, lineId) : shopifyUpdateLine(cartId, lineId, quantity);
+  return quantity <= 0 ? shopifyRemoveLine(cartId, lineId, locale) : shopifyUpdateLine(cartId, lineId, quantity, locale);
 }
 
-export async function removeLine(lineId: string): Promise<Cart> {
-  return updateLine(lineId, 0);
+export async function removeLine(lineId: string, locale: Locale = DEFAULT_LOCALE): Promise<Cart> {
+  return updateLine(lineId, 0, locale);
 }

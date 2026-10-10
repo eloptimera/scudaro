@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Link from "next/link";
+import { useI18n } from "./I18nProvider";
+import LocalLink from "./LocalLink";
 
 export default function Newsletter() {
+  const { t } = useI18n();
   const [msg, setMsg] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
 
@@ -26,25 +28,25 @@ export default function Newsletter() {
       const json = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (res.ok && json.ok) {
         setState("done");
-        setMsg("Thanks! You're on the list.");
+        setMsg(t("news.ok"));
         form.reset();
       } else {
         setState("error");
-        setMsg(json.error ?? "Something went wrong. Please try again.");
+        setMsg(json.error ?? t("news.error"));
       }
     } catch {
       setState("error");
-      setMsg("Something went wrong. Please try again.");
+      setMsg(t("news.error"));
     }
   };
 
   return (
     <form className="newsletter" onSubmit={onSubmit}>
-      <label htmlFor="email">Get notified about the next drop</label>
+      <label htmlFor="email">{t("news.label")}</label>
       <div className="newsletter__row">
-        <input id="email" name="email" type="email" placeholder="you@email.com" autoComplete="email" required />
+        <input id="email" name="email" type="email" placeholder={t("news.placeholder")} autoComplete="email" required />
         <button className="btn btn--light" type="submit" disabled={state === "sending"}>
-          {state === "sending" ? "Sending…" : "Subscribe"}
+          {state === "sending" ? t("news.sending") : t("news.send")}
         </button>
       </div>
       {/* Honeypot for bots – hidden from people and assistive tech. */}
@@ -52,8 +54,8 @@ export default function Newsletter() {
       <label className="newsletter__consent">
         <input type="checkbox" name="consent" required />
         <span>
-          I agree to receive emails from Scudaro about new drops. I can unsubscribe at any time.{" "}
-          <Link href="/policies/privacy-policy">Privacy policy</Link>
+          {t("news.consent")}{" "}
+          <LocalLink href="/policies/privacy-policy">{t("news.privacy")}</LocalLink>
         </span>
       </label>
       <p className="newsletter__msg" role="status">{msg}</p>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { LastRace, NextRace } from "@/lib/f1";
+import { useI18n } from "./I18nProvider";
 import RaceHead from "./RaceHead";
 
 /** Where the driver's seat is inside the picture (percent of width / height). */
@@ -16,6 +17,7 @@ const ZOOM_END = 0.8; // the zoom is done at 80 % of the section; the rest is th
  * or paint per frame), work is done once per animation frame, and nothing runs while the section is off screen.
  */
 export default function CarZoom({ next, last }: { next: NextRace | null; last: LastRace | null }) {
+  const { t } = useI18n();
   const wrapRef = useRef<HTMLElement>(null);
   const carRef = useRef<HTMLDivElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
@@ -84,19 +86,19 @@ export default function CarZoom({ next, last }: { next: NextRace | null; last: L
   }, []);
 
   return (
-    <section ref={wrapRef} className="carzoom" aria-label="Into the cockpit" style={{ ["--cx" as string]: `${COCKPIT.x}%`, ["--cy" as string]: `${COCKPIT.y}%` }}>
+    <section ref={wrapRef} className="carzoom" aria-label={t("car.section")} style={{ ["--cx" as string]: `${COCKPIT.x}%`, ["--cy" as string]: `${COCKPIT.y}%` }}>
       <div className="carzoom__sticky">
         <div className="carzoom__car" ref={carRef}>
           {/* Plain <img>: it is scaled by transform, so next/image's resizing would only hurt sharpness. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/f1-car.webp" alt="Formula 1 car seen from above" width={1855} height={848} decoding="async" loading="lazy" draggable={false} />
+          <img src="/f1-car.webp" alt={t("car.alt")} width={1855} height={848} decoding="async" loading="lazy" draggable={false} />
         </div>
         <div className="carzoom__fade" ref={fadeRef} aria-hidden="true" />
         <div className="carzoom__timing" ref={timingRef} style={{ visibility: "hidden" }}>
           <RaceHead next={next} last={last} />
-          {(next || last) && <p className="carzoom__more">Timing &amp; results &darr;</p>}
+          {(next || last) && <p className="carzoom__more">{t("race.more")} &darr;</p>}
         </div>
-        <p className="carzoom__hint" ref={hintRef}>Scroll to enter the cockpit &darr;</p>
+        <p className="carzoom__hint" ref={hintRef}>{t("race.zoomHint")} &darr;</p>
       </div>
     </section>
   );
