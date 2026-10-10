@@ -5,7 +5,7 @@ import { useI18n } from "./I18nProvider";
 import LocalLink from "./LocalLink";
 
 export default function Newsletter() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [msg, setMsg] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
 
@@ -23,6 +23,7 @@ export default function Newsletter() {
           email: data.get("email"),
           consent: data.get("consent") === "on",
           website: data.get("website"),
+          locale,
         }),
       });
       const json = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
