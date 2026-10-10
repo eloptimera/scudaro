@@ -366,6 +366,8 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .prose th, .prose td { padding: 10px 12px; border: 1px solid var(--line); text-align: start; vertical-align: top; }
 .prose code { font-size: .9em; color: var(--ink); }
 @media (max-width: 700px) { .policy { padding: 32px 16px 56px; } }
+.policy--center { text-align: center; }
+.policy--center .prose form { display: flex; justify-content: center; margin-top: 24px; }
 
 /* Responsive */
 @media (max-width: 900px) {

@@ -43,7 +43,7 @@ export default async function NewsletterPage({ params, searchParams }: Props) {
   }[shown];
 
   return (
-    <article className="policy">
+    <article className="policy policy--center">
       <h1>{title}</h1>
       <div className="prose">
         <p>{text}</p>
