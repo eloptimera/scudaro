@@ -62,14 +62,14 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
   gap: 16px;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 12px 10px 32px;
+  padding: 6px 8px 6px 28px;
   border-radius: 999px;
   background: transparent;
   border: 0;
 }
-.brand img { height: 32px; width: auto; }
+.brand img { height: 26px; width: auto; }
 /* White floating pill with rounded edges, on every page */
-.site-header--solid { mix-blend-mode: normal; padding-top: 14px; }
+.site-header--solid { mix-blend-mode: normal; padding-top: 12px; }
 .site-header--solid .site-header__pill {
   background: #fff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .35), 0 0 0 1px rgba(0, 0, 0, .06);
@@ -92,7 +92,7 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .nav__btn { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; letter-spacing: inherit; text-transform: inherit; }
 .nav a.nav__pill, .nav button.nav__pill {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 11px 20px;
+  padding: 8px 18px;
   border-radius: 999px;
   border: 1.5px solid rgba(255, 255, 255, .55);
   color: #fff;
@@ -109,7 +109,7 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 }
 
 /* Stage: scroll-driven 3D carousel */
-:root { --header-h: 84px; }
+:root { --header-h: 70px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .stage-wrap {
@@ -684,7 +684,7 @@ body:has(dialog[open]) { overflow: hidden; }
 /* ---------- Languages / RTL ---------- */
 .lang { position: relative; display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .04em; }
 .lang__btn {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; max-width: 170px; padding: 0 14px;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 34px; max-width: 170px; padding: 0 12px;
   background: transparent; color: inherit; font: inherit; letter-spacing: inherit;
   border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
 }
