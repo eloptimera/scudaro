@@ -12,7 +12,7 @@ export type SizeTable = { title: string; head: string[]; rows: { label: string; 
 export type CareTable = { title: string; rows: [string, string][] };
 
 export type Info = {
-  nav: { faq: string; about: string; size: string; care: string };
+  nav: { about: string; size: string; care: string };
   faq: { title: string; description: string; items: Faq[] };
   about: { title: string; description: string; eyebrow: string; paragraphs: string[]; delivery: string; imageAlt: string; disclaimer: string; ctas: Cta[] };
   size: { title: string; description: string; intro: string; tables: SizeTable[]; note: string; cta: Cta };
@@ -22,7 +22,7 @@ export type Info = {
 export const CONTACT_EMAIL = "hello@scudaro.com";
 
 const en: Info = {
-  nav: { faq: "FAQ", about: "About", size: "Size guide", care: "Care instructions" },
+  nav: { about: "About", size: "Size guide", care: "Care instructions" },
   faq: {
     title: "FAQ",
     description: "Answers about delivery, returns, sizing, materials and care for Scudaro streetwear.",
@@ -142,7 +142,7 @@ const en: Info = {
 };
 
 const sv: Info = {
-  nav: { faq: "Vanliga frågor", about: "Om oss", size: "Storleksguide", care: "Tvättråd" },
+  nav: { about: "Om oss", size: "Storleksguide", care: "Tvättråd" },
   faq: {
     title: "Vanliga frågor",
     description: "Svar om leverans, retur, storlekar, material och skötsel för Scudaros streetwear.",

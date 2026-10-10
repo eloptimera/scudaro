@@ -4,6 +4,7 @@ import CarZoom from "@/components/CarZoom";
 import LocalLink from "@/components/LocalLink";
 import RaceStrip from "@/components/RaceStrip";
 import Stage from "@/components/Stage";
+import { info } from "@/lib/content/info";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
 import { getF1 } from "@/lib/f1";
@@ -28,6 +29,8 @@ export default async function Home({ params }: Props) {
   if (!isLocale(locale)) notFound();
   const [collections, f1, t] = await Promise.all([getCollections(locale), getF1(), getT(locale)]);
 
+  const faq = info(locale).faq;
+
   return (
     <>
       <h1 className="sr-only">{t("home.h1")}</h1>
@@ -49,10 +52,17 @@ export default async function Home({ params }: Props) {
         <p>{t("home.about.text")}</p>
       </section>
 
-      <section className="usp" aria-label={t("usp.aria")}>
-        <div><strong>{t("usp.limited.title")}</strong><span>{t("usp.limited.text")}</span></div>
-        <div><strong>{t("usp.fit.title")}</strong><span>{t("usp.fit.text")}</span></div>
-        <div><strong>{t("usp.returns.title")}</strong><span>{t("usp.returns.text")}</span></div>
+      <section className="faq" id="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">{faq.title}</h2>
+        {faq.items.map((i) => (
+          <details key={i.q}>
+            <summary>{i.q}</summary>
+            <div className="faq__a">
+              <p>{i.a}</p>
+              {i.cta && <LocalLink href={i.cta.href}>{i.cta.label} →</LocalLink>}
+            </div>
+          </details>
+        ))}
       </section>
     </>
   );
