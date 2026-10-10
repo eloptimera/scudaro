@@ -14,7 +14,7 @@ export type CareTable = { title: string; rows: [string, string][] };
 export type Info = {
   nav: { faq: string; about: string; size: string; care: string };
   faq: { title: string; description: string; items: Faq[] };
-  about: { title: string; description: string; paragraphs: string[]; disclaimer: string; ctas: Cta[] };
+  about: { title: string; description: string; eyebrow: string; paragraphs: string[]; delivery: string; imageAlt: string; disclaimer: string; ctas: Cta[] };
   size: { title: string; description: string; intro: string; tables: SizeTable[]; note: string; cta: Cta };
   care: { title: string; description: string; intro: string; tables: CareTable[]; cta: Cta };
 };
@@ -69,11 +69,13 @@ const en: Info = {
   about: {
     title: "About Scudaro",
     description: "Scudaro is Formula 1-inspired streetwear, founded by Alexander and Nikolaj.",
+    eyebrow: "Our story",
+    imageAlt: "A person walking down an evening street in a white Scudaro hoodie with the back print “We win and we lose together – 44”",
+    delivery: "Delivered to your door, usually in less than 7 days.",
     paragraphs: [
       "Scudaro is a streetwear brand founded by Alexander and Nikolaj, two friends united by a passion for Formula 1 and fashion.",
       "We were tired of the classic, heavily branded Formula 1 apparel: big logos that tell the world who you support, and little about who you are. So we took matters into our own hands.",
       "Scudaro is our answer: Formula 1-inspired streetwear designed for fans who care how they look, without the official branding.",
-      "Every piece is made on demand and delivered to your door, usually in less than 7 days.",
     ],
     disclaimer: "Scudaro is an independent brand and is not affiliated with, or endorsed by, Formula 1 or any team or driver.",
     ctas: [
@@ -187,11 +189,13 @@ const sv: Info = {
   about: {
     title: "Om Scudaro",
     description: "Scudaro är streetwear inspirerad av Formel 1, grundat av Alexander och Nikolaj.",
+    eyebrow: "Vår historia",
+    imageAlt: "En person som går längs en kvällsgata i en vit Scudaro-hoodie med ryggtrycket ”We win and we lose together – 44”",
+    delivery: "Levereras hem till dörren, oftast på under 7 dagar.",
     paragraphs: [
       "Scudaro är ett streetwearmärke grundat av Alexander och Nikolaj, två vänner som delar en passion för Formel 1 och mode.",
       "Vi var trötta på de klassiska, hårt brandade Formel 1-tröjorna: stora loggor som visar vem du hejar på, men säger lite om vem du är. Så vi tog saken i egna händer.",
       "Scudaro är vårt svar: Formel 1-inspirerad streetwear för fans som bryr sig om hur de ser ut, utan den officiella brandingen.",
-      "Varje plagg tillverkas på beställning och levereras hem till dig, oftast på under 7 dagar.",
     ],
     disclaimer: "Scudaro är ett oberoende märke och är inte anslutet till, eller godkänt av, Formula 1 eller något stall eller någon förare.",
     ctas: [

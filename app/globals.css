@@ -367,6 +367,20 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .prose code { font-size: .9em; color: var(--ink); }
 @media (max-width: 700px) { .policy { padding: 32px 16px 56px; } }
 .policy--center { text-align: center; }
+.story { display: grid; gap: 40px; max-width: 1120px; margin: 0 auto; padding: 48px 32px 80px; }
+.story__eyebrow { margin: 0 0 16px; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--red); }
+.story__title { margin: 0 0 28px; font-family: var(--display); font-weight: 800; font-size: clamp(40px, 6vw, 80px); line-height: .95; text-transform: uppercase; }
+.story__lead { margin: 0 0 20px; color: var(--ink); font-size: clamp(18px, 2vw, 22px); line-height: 1.5; }
+.story__body p { margin: 0 0 16px; color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 60ch; }
+.story__fact { display: flex; align-items: center; gap: 12px; margin: 28px 0 0; padding: 16px 0; border-block: 1px solid var(--line); color: var(--ink); font-weight: 600; }
+.story__fact::before { content: ""; flex: none; width: 10px; height: 10px; background: var(--red); }
+.story__note { margin: 28px 0 0; font-size: 13px; line-height: 1.6; color: #777; max-width: 60ch; }
+.story__photo { margin: 0; border: 1px solid var(--line); background: #111; }
+.story__photo img { display: block; width: 100%; height: auto; }
+@media (min-width: 900px) {
+  .story { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 72px; align-items: center; padding-block: 72px 96px; }
+}
+@media (max-width: 700px) { .story { padding: 32px 16px 56px; } }
 .info-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .prose .faq__cta { display: inline-block; margin: 0 0 8px; font-weight: 600; }
 .prose .note { margin-top: 24px; font-size: 13px; color: #777; }
@@ -754,3 +768,7 @@ html[lang="bg"], html[lang="el"] { --display: "Inter", system-ui, sans-serif; }
 .consent__actions--inline .consent__btn:hover { border-color: var(--ink); background: transparent; }
 .consent__actions--inline .consent__btn[aria-pressed="true"] { background: var(--ink); color: #111; border-color: var(--ink); }
 html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: none; }
+
+/* About page: one primary CTA, the rest secondary */
+.story .info-cta .btn:not(:first-child) { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.story .info-cta .btn:not(:first-child):hover { background: var(--ink); color: #111; }
