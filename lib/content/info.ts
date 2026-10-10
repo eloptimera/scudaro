@@ -38,7 +38,7 @@ const en: Info = {
       },
       {
         q: "What is your return policy?",
-        a: `You can return your order within 30 days. Contact us at ${CONTACT_EMAIL} and we will help you with the next steps. The full terms are in the return policy linked in the footer.`,
+        a: `You can return an unused item within 14 days of receiving it. Email ${CONTACT_EMAIL} first to let us know. Return shipping is paid by you; if we sent the wrong item or it arrived damaged, we cover it. The full terms are in the return policy linked in the footer.`,
       },
       {
         q: "How do the sizes fit?",
@@ -158,7 +158,7 @@ const sv: Info = {
       },
       {
         q: "Hur fungerar returer?",
-        a: `Du kan returnera din order inom 30 dagar. Kontakta oss på ${CONTACT_EMAIL} så hjälper vi dig med nästa steg. De fullständiga villkoren finns i returpolicyn som du når via sidfoten.`,
+        a: `Du kan returnera en oanvänd vara inom 14 dagar efter att du fått den. Mejla först ${CONTACT_EMAIL} och meddela oss. Du betalar returfrakten, men om vi skickat fel vara eller den kommit skadad står vi för kostnaden. De fullständiga villkoren finns i returpolicyn som du når via sidfoten.`,
       },
       {
         q: "Hur är passformen?",

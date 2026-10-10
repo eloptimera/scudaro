@@ -60,7 +60,7 @@
   "pdp.add": "Ajouter au panier",
   "pdp.selectOne": "Choisis : {option}",
   "pdp.selectMany": "Choisis : {list}",
-  "pdp.note": "Livraison offerte dès {amount} · Retours sous 30 jours",
+  "pdp.note": "Livraison offerte dès {amount} · Retours sous 14 jours",
   "related.title": "Ça pourrait aussi te plaire",
   "audio.play": "Lancer la citation",
   "audio.stop": "Arrêter la citation",

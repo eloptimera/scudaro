@@ -60,7 +60,7 @@
   "pdp.add": "Añadir a la cesta",
   "pdp.selectOne": "Selecciona {option}",
   "pdp.selectMany": "Selecciona {list}",
-  "pdp.note": "Envío gratis a partir de {amount} · Devoluciones en 30 días",
+  "pdp.note": "Envío gratis a partir de {amount} · Devoluciones en 14 días",
   "related.title": "También te puede gustar",
   "audio.play": "Reproducir la cita",
   "audio.stop": "Detener la cita",

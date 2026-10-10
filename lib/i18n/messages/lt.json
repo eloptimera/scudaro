@@ -59,7 +59,7 @@
   "pdp.add": "Į krepšelį",
   "pdp.selectOne": "Pasirink: {option}",
   "pdp.selectMany": "Pasirink: {list}",
-  "pdp.note": "Nemokamas pristatymas nuo {amount} · Grąžinimas per 30 dienų",
+  "pdp.note": "Nemokamas pristatymas nuo {amount} · Grąžinimas per 14 dienų",
   "related.title": "Gali patikti ir tai",
   "audio.play": "Paleisti citatą",
   "audio.stop": "Sustabdyti citatą",

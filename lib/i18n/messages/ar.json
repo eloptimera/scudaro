@@ -63,7 +63,7 @@
   "pdp.add": "أضف إلى السلة",
   "pdp.selectOne": "اختر {option}",
   "pdp.selectMany": "اختر {list}",
-  "pdp.note": "شحن مجاني للطلبات فوق {amount} · إرجاع خلال 30 يومًا",
+  "pdp.note": "شحن مجاني للطلبات فوق {amount} · إرجاع خلال 14 يومًا",
   "related.title": "قد يعجبك أيضًا",
   "audio.play": "تشغيل المقولة",
   "audio.stop": "إيقاف المقولة",

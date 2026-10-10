@@ -59,7 +59,7 @@
   "pdp.add": "Lisää ostoskoriin",
   "pdp.selectOne": "Valitse {option}",
   "pdp.selectMany": "Valitse {list}",
-  "pdp.note": "Ilmainen toimitus yli {amount} · 30 päivän palautusoikeus",
+  "pdp.note": "Ilmainen toimitus yli {amount} · 14 päivän palautusoikeus",
   "related.title": "Saatat pitää myös näistä",
   "audio.play": "Toista lainaus",
   "audio.stop": "Pysäytä lainaus",

@@ -59,7 +59,7 @@
   "pdp.add": "加入购物车",
   "pdp.selectOne": "请选择{option}",
   "pdp.selectMany": "请选择{list}",
-  "pdp.note": "满 {amount} 免运费 · 30 天退货",
+  "pdp.note": "满 {amount} 免运费 · 14 天退货",
   "related.title": "你可能还喜欢",
   "audio.play": "播放语录",
   "audio.stop": "停止播放",

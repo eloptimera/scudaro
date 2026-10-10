@@ -59,7 +59,7 @@
   "pdp.add": "Aggiungi al carrello",
   "pdp.selectOne": "Seleziona {option}",
   "pdp.selectMany": "Seleziona {list}",
-  "pdp.note": "Spedizione gratuita sopra {amount} · Resi entro 30 giorni",
+  "pdp.note": "Spedizione gratuita sopra {amount} · Resi entro 14 giorni",
   "related.title": "Potrebbe piacerti anche",
   "audio.play": "Riproduci la citazione",
   "audio.stop": "Ferma la citazione",

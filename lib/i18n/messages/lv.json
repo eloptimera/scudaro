@@ -59,7 +59,7 @@
   "pdp.add": "Pievienot grozam",
   "pdp.selectOne": "Izvēlies: {option}",
   "pdp.selectMany": "Izvēlies: {list}",
-  "pdp.note": "Bezmaksas piegāde virs {amount} · Atgriešana 30 dienu laikā",
+  "pdp.note": "Bezmaksas piegāde virs {amount} · Atgriešana 14 dienu laikā",
   "related.title": "Tev varētu patikt arī",
   "audio.play": "Atskaņot citātu",
   "audio.stop": "Apturēt citātu",
