@@ -102,7 +102,7 @@
   "notfound.text": "找不到该页面。",
   "notfound.back": "返回首页",
   "cookies.title": "Cookie",
-  "cookies.intro": "本网站仅使用商店正常运行所必需的 Cookie，不使用分析、广告或跟踪类 Cookie。",
+  "cookies.intro": "本网站使用商店正常运行所必需的 Cookie。经你同意，我们还会使用 Meta（Facebook）Pixel 进行营销。在你接受之前，不会保存任何与营销相关的 Cookie。我们不使用其他任何追踪 Cookie。",
   "cookies.set": "我们设置的 Cookie",
   "cookies.name": "名称",
   "cookies.purpose": "用途",
@@ -143,5 +143,15 @@
   "session.sprint qualifying": "冲刺排位赛",
   "session.sprint": "冲刺赛",
   "session.qualifying": "排位赛",
-  "session.race": "正赛"
+  "session.race": "正赛",
+  "consent.label": "Cookie 选择",
+  "consent.text": "我们使用 Meta Pixel（营销 Cookie）来衡量广告效果，并向你展示相关广告。在你做出选择之前，不会保存任何内容。",
+  "consent.accept": "接受",
+  "consent.reject": "拒绝",
+  "consent.more": "Cookie 政策",
+  "cookies.fbpPurpose": "Meta Pixel：识别你的浏览器，以便 Meta 衡量并改进我们的广告。仅在你接受营销 Cookie 后才会保存。",
+  "cookies.fbpLife": "3 个月",
+  "cookies.consentPurpose": "记住你的 Cookie 选择。",
+  "cookies.choiceTitle": "营销 Cookie",
+  "cookies.choiceText": "选择是否允许在本网站使用 Meta Pixel。你可以随时更改选择。"
 }

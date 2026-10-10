@@ -104,7 +104,7 @@
   "notfound.text": "Te strani nismo našli.",
   "notfound.back": "Nazaj na začetek",
   "cookies.title": "Piškotki",
-  "cookies.intro": "Ta spletna stran uporablja samo piškotke, ki so nujno potrebni za delovanje trgovine. Ne uporabljamo analitičnih, oglaševalskih ali sledilnih piškotkov.",
+  "cookies.intro": "Ta spletna stran uporablja piškotke, ki so nujno potrebni za delovanje trgovine. Z tvojim soglasjem uporabljamo tudi Meta (Facebook) Pixel za trženje. Noben marketinški piškotek se ne shrani, dokler ne sprejmeš. Drugih piškotkov za sledenje ne uporabljamo.",
   "cookies.set": "Piškotki, ki jih nastavljamo",
   "cookies.name": "Ime",
   "cookies.purpose": "Namen",
@@ -145,5 +145,15 @@
   "session.sprint qualifying": "Šprint kvalifikacije",
   "session.sprint": "Šprint",
   "session.qualifying": "Kvalifikacije",
-  "session.race": "Dirka"
+  "session.race": "Dirka",
+  "consent.label": "Izbira piškotkov",
+  "consent.text": "Uporabljamo Meta Pixel (marketinške piškotke) za merjenje naših oglasov in prikaz ustreznih oglasov. Nič se ne shrani, dokler ne izbereš.",
+  "consent.accept": "Sprejmi",
+  "consent.reject": "Zavrni",
+  "consent.more": "Politika piškotkov",
+  "cookies.fbpPurpose": "Meta Pixel: prepozna tvoj brskalnik, da lahko Meta meri in izboljšuje naše oglase. Shrani se samo, če sprejmeš marketinške piškotke.",
+  "cookies.fbpLife": "3 mesece",
+  "cookies.consentPurpose": "Si zapomni tvojo izbiro piškotkov.",
+  "cookies.choiceTitle": "Marketinški piškotki",
+  "cookies.choiceText": "Izberi, ali se Meta Pixel lahko uporablja na tej strani. Svojo izbiro lahko kadar koli spremeniš."
 }

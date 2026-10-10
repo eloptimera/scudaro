@@ -102,7 +102,7 @@
   "notfound.text": "Nem találjuk ezt az oldalt.",
   "notfound.back": "Vissza a főoldalra",
   "cookies.title": "Sütik",
-  "cookies.intro": "Ez a weboldal kizárólag a bolt működéséhez feltétlenül szükséges sütiket használ. Nem használunk analitikai, hirdetési vagy követő sütiket.",
+  "cookies.intro": "Ez a weboldal olyan sütiket használ, amelyek feltétlenül szükségesek a webshop működéséhez. A hozzájárulásoddal marketing célra a Meta (Facebook) Pixelt is használjuk. Amíg nem fogadod el, semmilyen marketing süti nem kerül mentésre. Más nyomkövető sütiket nem használunk.",
   "cookies.set": "Általunk beállított sütik",
   "cookies.name": "Név",
   "cookies.purpose": "Cél",
@@ -143,5 +143,15 @@
   "session.sprint qualifying": "Sprintkvalifikáció",
   "session.sprint": "Sprint",
   "session.qualifying": "Időmérő",
-  "session.race": "Futam"
+  "session.race": "Futam",
+  "consent.label": "Süti-választás",
+  "consent.text": "A Meta Pixelt (marketing sütik) használjuk a hirdetéseink méréséhez és releváns hirdetések megjelenítéséhez. Addig nem mentünk semmit, amíg nem döntesz.",
+  "consent.accept": "Elfogadom",
+  "consent.reject": "Elutasítom",
+  "consent.more": "Süti-szabályzat",
+  "cookies.fbpPurpose": "Meta Pixel: felismeri a böngésződet, hogy a Meta mérni és javítani tudja a hirdetéseinket. Csak akkor kerül mentésre, ha elfogadod a marketing sütiket.",
+  "cookies.fbpLife": "3 hónap",
+  "cookies.consentPurpose": "Megjegyzi a süti-választásodat.",
+  "cookies.choiceTitle": "Marketing sütik",
+  "cookies.choiceText": "Válaszd ki, hogy használható-e a Meta Pixel ezen az oldalon. A döntésedet bármikor megváltoztathatod."
 }

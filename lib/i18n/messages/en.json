@@ -102,7 +102,7 @@
   "notfound.text": "We couldn't find that page.",
   "notfound.back": "Back to the start",
   "cookies.title": "Cookies",
-  "cookies.intro": "This website only uses cookies that are strictly necessary for the shop to work. We do not use analytics, advertising or tracking cookies.",
+  "cookies.intro": "This website uses cookies that are strictly necessary for the shop to work. With your consent we also use the Meta (Facebook) Pixel for marketing. Nothing marketing-related is set until you accept. We do not use any other tracking cookies.",
   "cookies.set": "Cookies we set",
   "cookies.name": "Name",
   "cookies.purpose": "Purpose",
@@ -143,5 +143,15 @@
   "session.sprint qualifying": "Sprint qualifying",
   "session.sprint": "Sprint",
   "session.qualifying": "Qualifying",
-  "session.race": "Race"
+  "session.race": "Race",
+  "consent.label": "Cookie choice",
+  "consent.text": "We use the Meta Pixel (marketing cookies) to measure our ads and show you relevant ones. Nothing is set until you choose.",
+  "consent.accept": "Accept",
+  "consent.reject": "Reject",
+  "consent.more": "Cookie policy",
+  "cookies.fbpPurpose": "Meta Pixel: recognises your browser so Meta can measure and improve our ads. Only set if you accept marketing cookies.",
+  "cookies.fbpLife": "3 months",
+  "cookies.consentPurpose": "Remembers your cookie choice.",
+  "cookies.choiceTitle": "Marketing cookies",
+  "cookies.choiceText": "Choose whether the Meta Pixel may be used on this site. You can change your choice at any time."
 }

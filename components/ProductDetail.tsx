@@ -8,6 +8,7 @@ import LocalLink from "./LocalLink";
 import QuoteAudio from "./QuoteAudio";
 import { quoteAudioFor } from "@/lib/quoteAudio";
 import Garment from "./Garment";
+import { numericId, track } from "@/lib/pixel";
 
 /** Product page: swipeable images on top (full width on phones), details and the add-to-cart bar below. */
 export default function ProductDetail({ product }: { product: Product }) {
@@ -30,6 +31,18 @@ export default function ProductDetail({ product }: { product: Product }) {
     const url = product.variants.find((v) => v.availableForSale && v.image)?.image?.url;
     return Math.max(0, gallery.findIndex((g) => g.url === url));
   }, [product, gallery]);
+
+  useEffect(() => {
+    track("ViewContent", {
+      content_ids: [numericId(product.id)],
+      content_type: "product",
+      content_name: product.title,
+      value: product.price.amount,
+      currency: product.price.currencyCode,
+    });
+    // Once per product page view: the product object is re-created when the cart changes, the id is not.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product.id]);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(startIndex);

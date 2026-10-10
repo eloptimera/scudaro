@@ -103,7 +103,7 @@
   "notfound.text": "No hemos encontrado esa página.",
   "notfound.back": "Volver al inicio",
   "cookies.title": "Cookies",
-  "cookies.intro": "Este sitio web solo utiliza las cookies estrictamente necesarias para que la tienda funcione. No usamos cookies analíticas, publicitarias ni de seguimiento.",
+  "cookies.intro": "Este sitio web usa cookies estrictamente necesarias para que la tienda funcione. Con tu consentimiento, también usamos el píxel de Meta (Facebook) para marketing. No se guarda ninguna cookie de marketing hasta que aceptes. No usamos ninguna otra cookie de seguimiento.",
   "cookies.set": "Cookies que utilizamos",
   "cookies.name": "Nombre",
   "cookies.purpose": "Finalidad",
@@ -144,5 +144,15 @@
   "session.sprint qualifying": "Clasificación Sprint",
   "session.sprint": "Sprint",
   "session.qualifying": "Clasificación",
-  "session.race": "Carrera"
+  "session.race": "Carrera",
+  "consent.label": "Elección de cookies",
+  "consent.text": "Usamos el píxel de Meta (cookies de marketing) para medir nuestros anuncios y mostrarte los más relevantes. No se guarda nada hasta que elijas.",
+  "consent.accept": "Aceptar",
+  "consent.reject": "Rechazar",
+  "consent.more": "Política de cookies",
+  "cookies.fbpPurpose": "Píxel de Meta: reconoce tu navegador para que Meta pueda medir y mejorar nuestros anuncios. Solo se guarda si aceptas las cookies de marketing.",
+  "cookies.fbpLife": "3 meses",
+  "cookies.consentPurpose": "Recuerda tu elección sobre las cookies.",
+  "cookies.choiceTitle": "Cookies de marketing",
+  "cookies.choiceText": "Elige si se puede usar el píxel de Meta en este sitio. Puedes cambiar tu elección en cualquier momento."
 }

@@ -102,7 +102,7 @@
   "notfound.text": "We konden die pagina niet vinden.",
   "notfound.back": "Terug naar het begin",
   "cookies.title": "Cookies",
-  "cookies.intro": "Deze website gebruikt alleen cookies die strikt noodzakelijk zijn voor de werking van de shop. We gebruiken geen analytische, advertentie- of trackingcookies.",
+  "cookies.intro": "Deze website gebruikt cookies die strikt noodzakelijk zijn voor de werking van de winkel. Met jouw toestemming gebruiken we ook de Meta (Facebook) Pixel voor marketing. Er wordt niets met marketing te maken geplaatst totdat je accepteert. We gebruiken geen andere trackingcookies.",
   "cookies.set": "Cookies die we plaatsen",
   "cookies.name": "Naam",
   "cookies.purpose": "Doel",
@@ -143,5 +143,15 @@
   "session.sprint qualifying": "Sprintkwalificatie",
   "session.sprint": "Sprint",
   "session.qualifying": "Kwalificatie",
-  "session.race": "Race"
+  "session.race": "Race",
+  "consent.label": "Cookiekeuze",
+  "consent.text": "We gebruiken de Meta Pixel (marketingcookies) om onze advertenties te meten en je relevante advertenties te tonen. Er wordt niets geplaatst voordat je kiest.",
+  "consent.accept": "Accepteren",
+  "consent.reject": "Weigeren",
+  "consent.more": "Cookiebeleid",
+  "cookies.fbpPurpose": "Meta Pixel: herkent je browser zodat Meta onze advertenties kan meten en verbeteren. Wordt alleen geplaatst als je marketingcookies accepteert.",
+  "cookies.fbpLife": "3 maanden",
+  "cookies.consentPurpose": "Onthoudt je cookiekeuze.",
+  "cookies.choiceTitle": "Marketingcookies",
+  "cookies.choiceText": "Kies of de Meta Pixel op deze site gebruikt mag worden. Je kunt je keuze op elk moment wijzigen."
 }

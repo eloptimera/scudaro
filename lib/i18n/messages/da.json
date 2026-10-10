@@ -102,7 +102,7 @@
   "notfound.text": "Vi kunne ikke finde den side.",
   "notfound.back": "Tilbage til start",
   "cookies.title": "Cookies",
-  "cookies.intro": "Denne hjemmeside bruger kun cookies, der er strengt nødvendige for, at shoppen fungerer. Vi bruger ikke analyse-, reklame- eller sporingscookies.",
+  "cookies.intro": "Denne hjemmeside bruger cookies, som er strengt nødvendige for, at butikken fungerer. Med dit samtykke bruger vi også Meta (Facebook) Pixel til markedsføring. Intet markedsføringsrelateret gemmes, før du accepterer. Vi bruger ingen andre sporingscookies.",
   "cookies.set": "Cookies vi sætter",
   "cookies.name": "Navn",
   "cookies.purpose": "Formål",
@@ -143,5 +143,15 @@
   "session.sprint qualifying": "Sprintkvalifikation",
   "session.sprint": "Sprint",
   "session.qualifying": "Kvalifikation",
-  "session.race": "Løb"
+  "session.race": "Løb",
+  "consent.label": "Cookievalg",
+  "consent.text": "Vi bruger Meta Pixel (marketingcookies) til at måle vores annoncer og vise dig relevante annoncer. Intet gemmes, før du har valgt.",
+  "consent.accept": "Acceptér",
+  "consent.reject": "Afvis",
+  "consent.more": "Cookiepolitik",
+  "cookies.fbpPurpose": "Meta Pixel: genkender din browser, så Meta kan måle og forbedre vores annoncer. Gemmes kun, hvis du accepterer marketingcookies.",
+  "cookies.fbpLife": "3 måneder",
+  "cookies.consentPurpose": "Husker dit cookievalg.",
+  "cookies.choiceTitle": "Marketingcookies",
+  "cookies.choiceText": "Vælg, om Meta Pixel må bruges på denne hjemmeside. Du kan ændre dit valg når som helst."
 }

@@ -104,7 +104,7 @@
   "notfound.text": "Ma stajniex insibu din il-paġna.",
   "notfound.back": "Lura għall-bidu",
   "cookies.title": "Cookies",
-  "cookies.intro": "Dan is-sit juża biss cookies li huma strettament meħtieġa biex il-ħanut jaħdem. Ma nużawx cookies tal-analitika, tar-reklamar jew tat-traċċar.",
+  "cookies.intro": "Dan is-sit juża cookies li huma assolutament neċessarji biex il-ħanut jaħdem. Bil-kunsens tiegħek, nużaw ukoll il-pixel ta’ Meta (Facebook) għall-marketing. L-ebda cookie tal-marketing ma jinħażen sakemm ma taċċettax. Ma nużaw l-ebda cookies oħra ta’ traċċar.",
   "cookies.set": "Cookies li nistabbilixxu",
   "cookies.name": "Isem",
   "cookies.purpose": "Għan",
@@ -145,5 +145,15 @@
   "session.sprint qualifying": "Kwalifikazzjoni Sprint",
   "session.sprint": "Sprint",
   "session.qualifying": "Kwalifikazzjoni",
-  "session.race": "Tellieqa"
+  "session.race": "Tellieqa",
+  "consent.label": "Għażla tal-cookies",
+  "consent.text": "Nużaw il-pixel ta’ Meta (cookies tal-marketing) biex inkejlu r-reklami tagħna u nuruk reklami rilevanti. Xejn ma jinħażen sakemm tagħżel.",
+  "consent.accept": "Aċċetta",
+  "consent.reject": "Irrifjuta",
+  "consent.more": "Politika tal-cookies",
+  "cookies.fbpPurpose": "Pixel ta’ Meta: jagħraf il-browser tiegħek biex Meta tkun tista’ tkejjel u ttejjeb ir-reklami tagħna. Jinħażen biss jekk taċċetta l-cookies tal-marketing.",
+  "cookies.fbpLife": "3 xhur",
+  "cookies.consentPurpose": "Jiftakar l-għażla tiegħek tal-cookies.",
+  "cookies.choiceTitle": "Cookies tal-marketing",
+  "cookies.choiceText": "Agħżel jekk il-pixel ta’ Meta jistax jintuża f’dan is-sit. Tista’ tbiddel l-għażla tiegħek fi kwalunkwe ħin."
 }

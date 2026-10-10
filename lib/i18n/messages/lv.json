@@ -102,7 +102,7 @@
   "notfound.text": "Mēs nevarējām atrast šo lapu.",
   "notfound.back": "Atpakaļ uz sākumu",
   "cookies.title": "Sīkdatnes",
-  "cookies.intro": "Šī vietne izmanto tikai tās sīkdatnes, kas ir absolūti nepieciešamas veikala darbībai. Mēs neizmantojam analītikas, reklāmas vai izsekošanas sīkdatnes.",
+  "cookies.intro": "Šī vietne izmanto sīkdatnes, kas ir absolūti nepieciešamas veikala darbībai. Ar tavu piekrišanu mēs mārketingam izmantojam arī Meta (Facebook) pikseli. Mārketinga sīkdatnes netiek saglabātas, kamēr nepiekrīti. Citas izsekošanas sīkdatnes mēs neizmantojam.",
   "cookies.set": "Sīkdatnes, ko mēs iestatām",
   "cookies.name": "Nosaukums",
   "cookies.purpose": "Mērķis",
@@ -144,5 +144,15 @@
   "session.sprint": "Sprints",
   "session.qualifying": "Kvalifikācija",
   "session.race": "Sacīkstes",
-  "shop.count.zero": "{n} produktu"
+  "shop.count.zero": "{n} produktu",
+  "consent.label": "Sīkdatņu izvēle",
+  "consent.text": "Mēs izmantojam Meta pikseli (mārketinga sīkdatnes), lai mērītu savas reklāmas un rādītu tev atbilstošas. Nekas netiek saglabāts, kamēr neizvēlies.",
+  "consent.accept": "Piekrist",
+  "consent.reject": "Noraidīt",
+  "consent.more": "Sīkdatņu politika",
+  "cookies.fbpPurpose": "Meta piksels: atpazīst tavu pārlūku, lai Meta varētu mērīt un uzlabot mūsu reklāmas. Tiek saglabāts tikai tad, ja piekrīti mārketinga sīkdatnēm.",
+  "cookies.fbpLife": "3 mēneši",
+  "cookies.consentPurpose": "Atceras tavu sīkdatņu izvēli.",
+  "cookies.choiceTitle": "Mārketinga sīkdatnes",
+  "cookies.choiceText": "Izvēlies, vai šajā vietnē drīkst izmantot Meta pikseli. Savu izvēli vari mainīt jebkurā laikā."
 }

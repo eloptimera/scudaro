@@ -103,7 +103,7 @@
   "notfound.text": "Nu am găsit pagina aceasta.",
   "notfound.back": "Înapoi la început",
   "cookies.title": "Cookie-uri",
-  "cookies.intro": "Acest site folosește doar cookie-uri strict necesare funcționării magazinului. Nu folosim cookie-uri de analiză, publicitate sau urmărire.",
+  "cookies.intro": "Acest site folosește cookie-uri strict necesare pentru funcționarea magazinului. Cu acordul tău, folosim și pixelul Meta (Facebook) pentru marketing. Niciun cookie de marketing nu este salvat până nu accepți. Nu folosim alte cookie-uri de urmărire.",
   "cookies.set": "Cookie-urile pe care le setăm",
   "cookies.name": "Nume",
   "cookies.purpose": "Scop",
@@ -144,5 +144,15 @@
   "session.sprint qualifying": "Calificări Sprint",
   "session.sprint": "Sprint",
   "session.qualifying": "Calificări",
-  "session.race": "Cursă"
+  "session.race": "Cursă",
+  "consent.label": "Alegerea cookie-urilor",
+  "consent.text": "Folosim pixelul Meta (cookie-uri de marketing) pentru a măsura reclamele noastre și a-ți arăta reclame relevante. Nu se salvează nimic până nu alegi.",
+  "consent.accept": "Acceptă",
+  "consent.reject": "Refuză",
+  "consent.more": "Politica de cookie-uri",
+  "cookies.fbpPurpose": "Pixelul Meta: îți recunoaște browserul pentru ca Meta să poată măsura și îmbunătăți reclamele noastre. Se salvează doar dacă accepți cookie-urile de marketing.",
+  "cookies.fbpLife": "3 luni",
+  "cookies.consentPurpose": "Reține alegerea ta privind cookie-urile.",
+  "cookies.choiceTitle": "Cookie-uri de marketing",
+  "cookies.choiceText": "Alege dacă pixelul Meta poate fi folosit pe acest site. Îți poți schimba alegerea oricând."
 }

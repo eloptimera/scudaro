@@ -104,7 +104,7 @@
   "notfound.text": "Túto stránku sme nenašli.",
   "notfound.back": "Späť na začiatok",
   "cookies.title": "Cookies",
-  "cookies.intro": "Táto webová stránka používa iba cookies, ktoré sú nevyhnutné na fungovanie obchodu. Nepoužívame analytické, reklamné ani sledovacie cookies.",
+  "cookies.intro": "Táto webová stránka používa cookies, ktoré sú nevyhnutné na fungovanie obchodu. S tvojím súhlasom používame aj pixel Meta (Facebook) na marketing. Kým nesúhlasíš, žiadne marketingové cookies sa neukladajú. Iné sledovacie cookies nepoužívame.",
   "cookies.set": "Cookies, ktoré nastavujeme",
   "cookies.name": "Názov",
   "cookies.purpose": "Účel",
@@ -145,5 +145,15 @@
   "session.sprint qualifying": "Šprintová kvalifikácia",
   "session.sprint": "Šprint",
   "session.qualifying": "Kvalifikácia",
-  "session.race": "Preteky"
+  "session.race": "Preteky",
+  "consent.label": "Voľba cookies",
+  "consent.text": "Používame pixel Meta (marketingové cookies) na meranie našej reklamy a zobrazovanie relevantných reklám. Kým nevyberieš, nič sa neukladá.",
+  "consent.accept": "Prijať",
+  "consent.reject": "Odmietnuť",
+  "consent.more": "Zásady cookies",
+  "cookies.fbpPurpose": "Pixel Meta: rozpozná tvoj prehliadač, aby Meta mohla merať a zlepšovať našu reklamu. Ukladá sa iba vtedy, ak prijmeš marketingové cookies.",
+  "cookies.fbpLife": "3 mesiace",
+  "cookies.consentPurpose": "Pamätá si tvoju voľbu cookies.",
+  "cookies.choiceTitle": "Marketingové cookies",
+  "cookies.choiceText": "Vyber, či sa na tejto stránke smie použiť pixel Meta. Svoju voľbu môžeš kedykoľvek zmeniť."
 }

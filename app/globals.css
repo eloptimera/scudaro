@@ -723,3 +723,24 @@ html[lang="ar"] .stage__title, html[lang="ar"] .pdp__title, html[lang="ar"] .sho
 html[lang="zh"] .stage__title, html[lang="zh"] .pdp__title, html[lang="zh"] .shop__title, html[lang="zh"] .policy h1 { font-style: normal; line-height: 1.15; }
 /* Barlow Condensed has no Cyrillic or Greek glyphs: fall back to Inter 800 there */
 html[lang="bg"], html[lang="el"] { --display: "Inter", system-ui, sans-serif; }
+
+/* ---------- Cookie consent ---------- */
+.consent {
+  position: fixed; z-index: 70; inset-inline: 16px; bottom: 16px; max-width: 760px; margin-inline: auto;
+  display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap; justify-content: space-between;
+  padding: 16px 20px; border-radius: 18px;
+  background: #fff; color: #111; box-shadow: 0 18px 50px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 0, 0, .06);
+  font-size: 13px; line-height: 1.5;
+}
+.consent p { margin: 0; flex: 1 1 320px; }
+.consent a { text-decoration: underline; text-underline-offset: 2px; }
+.consent__actions { display: flex; gap: 10px; flex: none; }
+.consent__btn {
+  min-height: 44px; padding: 0 22px; border-radius: 999px; border: 1.5px solid #111;
+  background: transparent; color: #111; font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+}
+.consent__btn:hover { background: #111; color: #fff; }
+.consent__actions--inline .consent__btn { border-color: var(--line); color: var(--ink); }
+.consent__actions--inline .consent__btn:hover { border-color: var(--ink); background: transparent; }
+.consent__actions--inline .consent__btn[aria-pressed="true"] { background: var(--ink); color: #111; border-color: var(--ink); }
+html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: none; }

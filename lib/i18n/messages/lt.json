@@ -102,7 +102,7 @@
   "notfound.text": "Šio puslapio nepavyko rasti.",
   "notfound.back": "Atgal į pradžią",
   "cookies.title": "Slapukai",
-  "cookies.intro": "Ši svetainė naudoja tik tuos slapukus, kurie būtini parduotuvei veikti. Nenaudojame analitikos, reklamos ar sekimo slapukų.",
+  "cookies.intro": "Šioje svetainėje naudojami slapukai, kurie yra būtini parduotuvės veikimui. Gavę tavo sutikimą, rinkodarai naudojame ir „Meta“ („Facebook“) pikselį. Jokie rinkodaros slapukai nesaugomi, kol nesutiksi. Kitų sekimo slapukų nenaudojame.",
   "cookies.set": "Mūsų nustatomi slapukai",
   "cookies.name": "Pavadinimas",
   "cookies.purpose": "Paskirtis",
@@ -145,5 +145,15 @@
   "session.qualifying": "Kvalifikacija",
   "session.race": "Lenktynės",
   "shop.count.few": "{n} produktai",
-  "shop.count.many": "{n} produkto"
+  "shop.count.many": "{n} produkto",
+  "consent.label": "Slapukų pasirinkimas",
+  "consent.text": "Naudojame „Meta“ pikselį (rinkodaros slapukus), kad išmatuotume savo reklamą ir rodytume tau aktualias reklamas. Nieko nesaugome, kol nepasirinksi.",
+  "consent.accept": "Sutinku",
+  "consent.reject": "Atsisakau",
+  "consent.more": "Slapukų politika",
+  "cookies.fbpPurpose": "„Meta“ pikselis: atpažįsta tavo naršyklę, kad „Meta“ galėtų matuoti ir tobulinti mūsų reklamą. Saugomas tik tada, jei sutinki su rinkodaros slapukais.",
+  "cookies.fbpLife": "3 mėnesiai",
+  "cookies.consentPurpose": "Prisimena tavo slapukų pasirinkimą.",
+  "cookies.choiceTitle": "Rinkodaros slapukai",
+  "cookies.choiceText": "Pasirink, ar šioje svetainėje galima naudoti „Meta“ pikselį. Savo pasirinkimą gali bet kada pakeisti."
 }

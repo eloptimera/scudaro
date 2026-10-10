@@ -104,7 +104,7 @@
   "notfound.text": "Nie mogliśmy znaleźć tej strony.",
   "notfound.back": "Wróć na start",
   "cookies.title": "Pliki cookie",
-  "cookies.intro": "Ta strona używa wyłącznie plików cookie niezbędnych do działania sklepu. Nie używamy analitycznych, reklamowych ani śledzących plików cookie.",
+  "cookies.intro": "Ta strona używa plików cookie, które są niezbędne do działania sklepu. Za Twoją zgodą korzystamy też z piksela Meta (Facebook) do celów marketingowych. Żadne pliki marketingowe nie są zapisywane, dopóki ich nie zaakceptujesz. Nie używamy innych plików śledzących.",
   "cookies.set": "Ustawiane przez nas pliki cookie",
   "cookies.name": "Nazwa",
   "cookies.purpose": "Cel",
@@ -145,5 +145,15 @@
   "session.sprint qualifying": "Kwalifikacje sprinterskie",
   "session.sprint": "Sprint",
   "session.qualifying": "Kwalifikacje",
-  "session.race": "Wyścig"
+  "session.race": "Wyścig",
+  "consent.label": "Wybór plików cookie",
+  "consent.text": "Używamy piksela Meta (pliki cookie marketingowe), aby mierzyć skuteczność naszych reklam i pokazywać Ci te trafniejsze. Nic nie zostanie zapisane, dopóki nie dokonasz wyboru.",
+  "consent.accept": "Akceptuj",
+  "consent.reject": "Odrzuć",
+  "consent.more": "Polityka cookies",
+  "cookies.fbpPurpose": "Piksel Meta: rozpoznaje Twoją przeglądarkę, aby Meta mogła mierzyć i ulepszać nasze reklamy. Zapisywany tylko po zaakceptowaniu marketingowych plików cookie.",
+  "cookies.fbpLife": "3 miesiące",
+  "cookies.consentPurpose": "Zapamiętuje Twój wybór dotyczący plików cookie.",
+  "cookies.choiceTitle": "Marketingowe pliki cookie",
+  "cookies.choiceText": "Wybierz, czy piksel Meta może być używany na tej stronie. Swój wybór możesz zmienić w dowolnym momencie."
 }

@@ -102,7 +102,7 @@
   "notfound.text": "Non abbiamo trovato questa pagina.",
   "notfound.back": "Torna all'inizio",
   "cookies.title": "Cookie",
-  "cookies.intro": "Questo sito utilizza solo i cookie strettamente necessari al funzionamento del negozio. Non usiamo cookie analitici, pubblicitari o di tracciamento.",
+  "cookies.intro": "Questo sito usa cookie strettamente necessari al funzionamento del negozio. Con il tuo consenso usiamo anche il pixel di Meta (Facebook) per il marketing. Nessun cookie di marketing viene salvato finché non accetti. Non usiamo altri cookie di tracciamento.",
   "cookies.set": "Cookie che impostiamo",
   "cookies.name": "Nome",
   "cookies.purpose": "Finalità",
@@ -144,5 +144,15 @@
   "session.sprint": "Sprint",
   "session.qualifying": "Qualifiche",
   "session.race": "Gara",
-  "shop.count.many": "{n} di prodotti"
+  "shop.count.many": "{n} di prodotti",
+  "consent.label": "Scelta dei cookie",
+  "consent.text": "Usiamo il pixel di Meta (cookie di marketing) per misurare le nostre pubblicità e mostrarti quelle più pertinenti. Non viene salvato nulla finché non scegli.",
+  "consent.accept": "Accetta",
+  "consent.reject": "Rifiuta",
+  "consent.more": "Cookie policy",
+  "cookies.fbpPurpose": "Pixel di Meta: riconosce il tuo browser per permettere a Meta di misurare e migliorare le nostre pubblicità. Viene salvato solo se accetti i cookie di marketing.",
+  "cookies.fbpLife": "3 mesi",
+  "cookies.consentPurpose": "Ricorda la tua scelta sui cookie.",
+  "cookies.choiceTitle": "Cookie di marketing",
+  "cookies.choiceText": "Scegli se il pixel di Meta può essere usato su questo sito. Puoi cambiare la tua scelta in qualsiasi momento."
 }

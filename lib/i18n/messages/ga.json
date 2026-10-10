@@ -102,7 +102,7 @@
   "notfound.text": "Níor aimsíomar an leathanach sin.",
   "notfound.back": "Ar ais go dtí an tús",
   "cookies.title": "Fianáin",
-  "cookies.intro": "Ní úsáideann an suíomh seo ach fianáin atá fíor-riachtanach chun an siopa a oibriú. Ní úsáidimid fianáin anailísíochta, fógraíochta ná rianaithe.",
+  "cookies.intro": "Úsáideann an suíomh seo fianáin atá riachtanach go docht chun go n-oibreoidh an siopa. Le do thoiliú, úsáidimid Meta (Facebook) Pixel le haghaidh margaíochta freisin. Ní shábháiltear aon fhianán margaíochta go nglacfaidh tú leo. Ní úsáidimid aon fhianáin rianaithe eile.",
   "cookies.set": "Fianáin a shocraímid",
   "cookies.name": "Ainm",
   "cookies.purpose": "Cuspóir",
@@ -146,5 +146,15 @@
   "session.race": "Rás",
   "shop.count.two": "{n} tháirge",
   "shop.count.few": "{n} táirge",
-  "shop.count.many": "{n} dtáirge"
+  "shop.count.many": "{n} dtáirge",
+  "consent.label": "Rogha fianán cheaptha",
+  "consent.text": "Úsáidimid Meta Pixel (fianáin mhargaíochta) chun ár bhfógraí a thomhas agus fógraí ábhartha a thaispeáint duit. Ní shábhálfar aon rud go dtí go roghnóidh tú.",
+  "consent.accept": "Glac leis",
+  "consent.reject": "Diúltaigh",
+  "consent.more": "Polasaí fianán",
+  "cookies.fbpPurpose": "Meta Pixel: aithníonn sé do bhrabhsálaí ionas gur féidir le Meta ár bhfógraí a thomhas agus a fheabhsú. Ní shábháiltear é ach amháin má ghlacann tú le fianáin mhargaíochta.",
+  "cookies.fbpLife": "3 mhí",
+  "cookies.consentPurpose": "Cuimhníonn sé do rogha fianán.",
+  "cookies.choiceTitle": "Fianáin mhargaíochta",
+  "cookies.choiceText": "Roghnaigh an bhfuil cead Meta Pixel a úsáid ar an suíomh seo. Is féidir leat do rogha a athrú am ar bith."
 }

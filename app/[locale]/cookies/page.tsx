@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import CookieChoice from "@/components/CookieChoice";
 import LocalLink from "@/components/LocalLink";
 import { isLocale } from "@/lib/i18n/config";
 import { alternatesFor } from "@/lib/i18n/seo";
@@ -15,8 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * Keep this page in step with what the site really does. If analytics or advertising pixels are
- * added later, this page needs updating and a consent banner is required.
+ * Keep this page in step with what the site really does (Meta Pixel only after consent; see MetaPixel.tsx).
  */
 export default async function CookiesPage({ params }: Props) {
   const { locale } = await params;
@@ -42,12 +42,26 @@ export default async function CookiesPage({ params }: Props) {
               <td>{t("cookies.cartLife")}</td>
             </tr>
             <tr>
+              <td><code>scudaro_consent</code></td>
+              <td>{t("cookies.consentPurpose")}</td>
+              <td>{t("cookies.langLife")}</td>
+            </tr>
+            <tr>
+              <td><code>_fbp</code>, <code>_fbc</code></td>
+              <td>{t("cookies.fbpPurpose")}</td>
+              <td>{t("cookies.fbpLife")}</td>
+            </tr>
+            <tr>
               <td><code>NEXT_LOCALE</code></td>
               <td>{t("cookies.langPurpose")}</td>
               <td>{t("cookies.langLife")}</td>
             </tr>
           </tbody>
         </table>
+
+        <h2>{t("cookies.choiceTitle")}</h2>
+        <p>{t("cookies.choiceText")}</p>
+        <CookieChoice />
 
         <h2>{t("cookies.checkout")}</h2>
         <p>{t("cookies.checkoutText")}</p>

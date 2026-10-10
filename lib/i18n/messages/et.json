@@ -102,7 +102,7 @@
   "notfound.text": "Seda lehte me ei leidnud.",
   "notfound.back": "Tagasi algusesse",
   "cookies.title": "Küpsised",
-  "cookies.intro": "See veebileht kasutab ainult küpsiseid, mis on poe toimimiseks hädavajalikud. Me ei kasuta analüütika-, reklaami- ega jälgimisküpsiseid.",
+  "cookies.intro": "See veebisait kasutab küpsiseid, mis on poe toimimiseks hädavajalikud. Sinu nõusolekul kasutame turunduseks ka Meta (Facebooki) pikslit. Turundusega seotud küpsiseid ei salvestata enne, kui oled nõustunud. Muid jälgimisküpsiseid me ei kasuta.",
   "cookies.set": "Küpsised, mida me seadistame",
   "cookies.name": "Nimi",
   "cookies.purpose": "Eesmärk",
@@ -143,5 +143,15 @@
   "session.sprint qualifying": "Sprindi kvalifikatsioon",
   "session.sprint": "Sprint",
   "session.qualifying": "Kvalifikatsioon",
-  "session.race": "Võistlus"
+  "session.race": "Võistlus",
+  "consent.label": "Küpsiste valik",
+  "consent.text": "Kasutame Meta pikslit (turundusküpsised), et mõõta oma reklaame ja näidata sulle asjakohaseid. Midagi ei salvestata enne, kui oled valiku teinud.",
+  "consent.accept": "Nõustun",
+  "consent.reject": "Keeldun",
+  "consent.more": "Küpsiste põhimõtted",
+  "cookies.fbpPurpose": "Meta piksel: tunneb ära sinu brauseri, et Meta saaks meie reklaame mõõta ja parandada. Salvestatakse ainult siis, kui nõustud turundusküpsistega.",
+  "cookies.fbpLife": "3 kuud",
+  "cookies.consentPurpose": "Jätab meelde sinu küpsiste valiku.",
+  "cookies.choiceTitle": "Turundusküpsised",
+  "cookies.choiceText": "Vali, kas Meta pikslit tohib sellel saidil kasutada. Oma valikut saad igal ajal muuta."
 }

@@ -102,7 +102,7 @@
   "notfound.text": "Emme löytäneet etsimääsi sivua.",
   "notfound.back": "Takaisin alkuun",
   "cookies.title": "Evästeet",
-  "cookies.intro": "Tämä verkkosivusto käyttää vain evästeitä, jotka ovat kaupan toiminnan kannalta välttämättömiä. Emme käytä analytiikka-, mainonta- tai seurantaevästeitä.",
+  "cookies.intro": "Tämä sivusto käyttää evästeitä, jotka ovat ehdottoman välttämättömiä kaupan toiminnalle. Suostumuksellasi käytämme myös Meta (Facebook) Pixeliä markkinointiin. Mitään markkinointiin liittyvää ei tallenneta ennen kuin hyväksyt. Emme käytä muita seurantaevästeitä.",
   "cookies.set": "Asettamamme evästeet",
   "cookies.name": "Nimi",
   "cookies.purpose": "Tarkoitus",
@@ -143,5 +143,15 @@
   "session.sprint qualifying": "Sprinttikarsinta",
   "session.sprint": "Sprintti",
   "session.qualifying": "Aika-ajo",
-  "session.race": "Kilpailu"
+  "session.race": "Kilpailu",
+  "consent.label": "Evästevalinta",
+  "consent.text": "Käytämme Meta Pixeliä (markkinointievästeitä) mainostemme mittaamiseen ja sinulle sopivien mainosten näyttämiseen. Mitään ei tallenneta ennen kuin teet valinnan.",
+  "consent.accept": "Hyväksy",
+  "consent.reject": "Hylkää",
+  "consent.more": "Evästekäytäntö",
+  "cookies.fbpPurpose": "Meta Pixel: tunnistaa selaimesi, jotta Meta voi mitata ja parantaa mainoksiamme. Tallennetaan vain, jos hyväksyt markkinointievästeet.",
+  "cookies.fbpLife": "3 kuukautta",
+  "cookies.consentPurpose": "Muistaa evästevalintasi.",
+  "cookies.choiceTitle": "Markkinointievästeet",
+  "cookies.choiceText": "Valitse, saako Meta Pixeliä käyttää tällä sivustolla. Voit muuttaa valintaasi milloin tahansa."
 }

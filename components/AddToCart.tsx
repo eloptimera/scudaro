@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import type { Img, Product, Variant } from "@/lib/types";
+import { numericId, track } from "@/lib/pixel";
 import { useCart } from "./CartProvider";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
@@ -151,7 +152,19 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
           className="btn btn--light btn--block"
           disabled={soldOut || busy}
           onClick={() => {
-            if (selected) return add(selected.id);
+            if (selected) {
+              return add(selected.id).then((ok) => {
+                if (ok) {
+                  track("AddToCart", {
+                    content_ids: [numericId(product.id)],
+                    content_type: "product",
+                    content_name: product.title,
+                    value: selected.price.amount,
+                    currency: selected.price.currencyCode,
+                  });
+                }
+              });
+            }
             const first = groups.findIndex((g) => !choice[g.name]);
             if (first >= 0) document.getElementById(`opt-wrap-${first}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
           }}

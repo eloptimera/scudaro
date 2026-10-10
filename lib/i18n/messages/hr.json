@@ -103,7 +103,7 @@
   "notfound.text": "Nismo pronašli tu stranicu.",
   "notfound.back": "Natrag na početak",
   "cookies.title": "Kolačići",
-  "cookies.intro": "Ova web-stranica koristi samo kolačiće koji su nužni za rad trgovine. Ne koristimo analitičke, oglašivačke ni kolačiće za praćenje.",
+  "cookies.intro": "Ova web-stranica koristi kolačiće koji su nužni za rad trgovine. Uz tvoj pristanak koristimo i Meta (Facebook) Pixel za marketing. Nijedan marketinški kolačić ne sprema se dok ne prihvatiš. Ne koristimo nikakve druge kolačiće za praćenje.",
   "cookies.set": "Kolačići koje postavljamo",
   "cookies.name": "Naziv",
   "cookies.purpose": "Svrha",
@@ -144,5 +144,15 @@
   "session.sprint qualifying": "Sprint kvalifikacije",
   "session.sprint": "Sprint",
   "session.qualifying": "Kvalifikacije",
-  "session.race": "Utrka"
+  "session.race": "Utrka",
+  "consent.label": "Odabir kolačića",
+  "consent.text": "Koristimo Meta Pixel (marketinške kolačiće) za mjerenje naših oglasa i prikazivanje relevantnih oglasa. Ništa se ne sprema dok ne odabereš.",
+  "consent.accept": "Prihvati",
+  "consent.reject": "Odbij",
+  "consent.more": "Pravila o kolačićima",
+  "cookies.fbpPurpose": "Meta Pixel: prepoznaje tvoj preglednik kako bi Meta mogla mjeriti i poboljšavati naše oglase. Sprema se samo ako prihvatiš marketinške kolačiće.",
+  "cookies.fbpLife": "3 mjeseca",
+  "cookies.consentPurpose": "Pamti tvoj odabir kolačića.",
+  "cookies.choiceTitle": "Marketinški kolačići",
+  "cookies.choiceText": "Odaberi smije li se Meta Pixel koristiti na ovoj stranici. Svoj odabir možeš promijeniti u bilo kojem trenutku."
 }

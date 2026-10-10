@@ -12,9 +12,11 @@ import "@fontsource/inter/800.css";
 import "../globals.css";
 import CartDrawer from "@/components/CartDrawer";
 import CartProvider from "@/components/CartProvider";
+import ConsentBanner from "@/components/ConsentBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import I18nProvider from "@/components/I18nProvider";
+import MetaPixel from "@/components/MetaPixel";
 import { dirOf, isLocale } from "@/lib/i18n/config";
 import { siteUrl } from "@/lib/i18n/seo";
 import { getMessages } from "@/lib/i18n/server";
@@ -50,8 +52,10 @@ export default async function RootLayout({ children, params }: Props) {
             <main>{children}</main>
             <Footer locale={locale} />
             <CartDrawer />
+            <ConsentBanner />
           </CartProvider>
         </I18nProvider>
+        <MetaPixel />
         <Analytics />
       </body>
     </html>
