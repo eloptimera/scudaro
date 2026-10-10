@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Builder from "@/components/Builder";
-import { groupQuotes } from "@/lib/builder";
+import { buildableQuotes } from "@/lib/builder";
 import { getProducts } from "@/lib/shopify";
 
 export const metadata: Metadata = {
@@ -11,5 +11,5 @@ export const dynamic = "force-dynamic";
 
 export default async function BuildPage() {
   const products = await getProducts().catch(() => []);
-  return <Builder quotes={groupQuotes(products)} />;
+  return <Builder quotes={buildableQuotes(products)} />;
 }
