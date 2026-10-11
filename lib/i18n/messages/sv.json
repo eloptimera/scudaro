@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Ogiltig länk",
   "newsletter.invalid": "Länken är ogiltig eller har gått ut.",
   "nav.track": "Spåra order",
-  "pdp.sizeGuide": "Storleksguide"
+  "pdp.sizeGuide": "Storleksguide",
+  "pdp.perk.ship": "Fri frakt över {amount}",
+  "pdp.perk.return": "14 dagars retur",
+  "pdp.perk.delivery": "Levereras oftast på under 7 dagar"
 }

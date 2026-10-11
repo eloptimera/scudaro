@@ -164,5 +164,8 @@
   "newsletter.invalid.title": "Netinkama nuoroda",
   "newsletter.invalid": "Ši nuoroda netinkama arba nebegalioja.",
   "nav.track": "Sekti užsakymą",
-  "pdp.sizeGuide": "Dydžių lentelė"
+  "pdp.sizeGuide": "Dydžių lentelė",
+  "pdp.perk.ship": "Nemokamas pristatymas nuo {amount}",
+  "pdp.perk.return": "Grąžinimas per 14 dienų",
+  "pdp.perk.delivery": "Paprastai pristatoma per mažiau nei 7 dienas"
 }

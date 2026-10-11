@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "链接无效",
   "newsletter.invalid": "此链接无效或已过期。",
   "nav.track": "追踪订单",
-  "pdp.sizeGuide": "尺码指南"
+  "pdp.sizeGuide": "尺码指南",
+  "pdp.perk.ship": "满 {amount} 免运费",
+  "pdp.perk.return": "14 天退货",
+  "pdp.perk.delivery": "通常 7 天内送达"
 }

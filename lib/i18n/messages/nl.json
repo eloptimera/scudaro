@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Ongeldige link",
   "newsletter.invalid": "Deze link is ongeldig of verlopen.",
   "nav.track": "Bestelling volgen",
-  "pdp.sizeGuide": "Maattabel"
+  "pdp.sizeGuide": "Maattabel",
+  "pdp.perk.ship": "Gratis verzending vanaf {amount}",
+  "pdp.perk.return": "14 dagen retour",
+  "pdp.perk.delivery": "Meestal bezorgd in minder dan 7 dagen"
 }

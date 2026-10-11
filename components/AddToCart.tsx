@@ -178,7 +178,20 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
           {buttonLabel}
         </button>
       </div>
-      <p className="pdp__note">{t("pdp.note", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}</p>
+      <ul className="pdp__perks">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7M7 19.5a1.5 1.5 0 1 0 0-.01M17 19.5a1.5 1.5 0 1 0 0-.01" /></svg>
+          <span>{t("pdp.perk.ship", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4" /></svg>
+          <span>{t("pdp.perk.return")}</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2" /></svg>
+          <span>{t("pdp.perk.delivery")}</span>
+        </li>
+      </ul>
     </>
   );
 }

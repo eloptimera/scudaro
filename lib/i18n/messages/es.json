@@ -163,5 +163,8 @@
   "newsletter.invalid.title": "Enlace no válido",
   "newsletter.invalid": "Este enlace no es válido o ha caducado.",
   "nav.track": "Seguir pedido",
-  "pdp.sizeGuide": "Guía de tallas"
+  "pdp.sizeGuide": "Guía de tallas",
+  "pdp.perk.ship": "Envío gratis a partir de {amount}",
+  "pdp.perk.return": "Devoluciones en 14 días",
+  "pdp.perk.delivery": "Normalmente entregado en menos de 7 días"
 }

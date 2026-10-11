@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Μη έγκυρος σύνδεσμος",
   "newsletter.invalid": "Αυτός ο σύνδεσμος δεν είναι έγκυρος ή έχει λήξει.",
   "nav.track": "Παρακολούθηση παραγγελίας",
-  "pdp.sizeGuide": "Οδηγός μεγεθών"
+  "pdp.sizeGuide": "Οδηγός μεγεθών",
+  "pdp.perk.ship": "Δωρεάν αποστολή άνω των {amount}",
+  "pdp.perk.return": "Επιστροφές 14 ημερών",
+  "pdp.perk.delivery": "Συνήθως παράδοση σε λιγότερο από 7 ημέρες"
 }

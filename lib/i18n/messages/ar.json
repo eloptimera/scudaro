@@ -166,5 +166,8 @@
   "newsletter.invalid.title": "رابط غير صالح",
   "newsletter.invalid": "هذا الرابط غير صالح أو منتهي الصلاحية.",
   "nav.track": "تتبع الطلب",
-  "pdp.sizeGuide": "دليل المقاسات"
+  "pdp.sizeGuide": "دليل المقاسات",
+  "pdp.perk.ship": "شحن مجاني للطلبات فوق {amount}",
+  "pdp.perk.return": "إرجاع خلال 14 يومًا",
+  "pdp.perk.delivery": "عادةً يصل خلال أقل من 7 أيام"
 }

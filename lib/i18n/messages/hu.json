@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Érvénytelen link",
   "newsletter.invalid": "Ez a link érvénytelen vagy lejárt.",
   "nav.track": "Rendelés követése",
-  "pdp.sizeGuide": "Mérettáblázat"
+  "pdp.sizeGuide": "Mérettáblázat",
+  "pdp.perk.ship": "Ingyenes szállítás {amount} felett",
+  "pdp.perk.return": "14 napos visszaküldés",
+  "pdp.perk.delivery": "Általában 7 napon belül megérkezik"
 }

@@ -165,5 +165,8 @@
   "newsletter.invalid.title": "Nasc neamhbhailí",
   "newsletter.invalid": "Níl an nasc seo bailí nó tá sé imithe in éag.",
   "nav.track": "Rianaigh ordú",
-  "pdp.sizeGuide": "Treoir mhéide"
+  "pdp.sizeGuide": "Treoir mhéide",
+  "pdp.perk.ship": "Seachadadh saor in aisce thar {amount}",
+  "pdp.perk.return": "Aischur 14 lá",
+  "pdp.perk.delivery": "Seachadta de ghnáth i níos lú ná 7 lá"
 }

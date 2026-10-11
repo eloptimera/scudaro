@@ -164,5 +164,8 @@
   "newsletter.invalid.title": "Link mhux validu",
   "newsletter.invalid": "Dan il-link mhuwiex validu jew skada.",
   "nav.track": "Segwi l-ordni",
-  "pdp.sizeGuide": "Gwida tad-daqsijiet"
+  "pdp.sizeGuide": "Gwida tad-daqsijiet",
+  "pdp.perk.ship": "Kunsinna b'xejn fuq {amount}",
+  "pdp.perk.return": "Treġġigħ lura fi 14 jum",
+  "pdp.perk.delivery": "Normalment jaslu f'inqas minn 7 ijiem"
 }

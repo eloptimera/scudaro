@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Ugyldigt link",
   "newsletter.invalid": "Linket er ugyldigt eller udløbet.",
   "nav.track": "Spor ordre",
-  "pdp.sizeGuide": "Størrelsesguide"
+  "pdp.sizeGuide": "Størrelsesguide",
+  "pdp.perk.ship": "Gratis fragt over {amount}",
+  "pdp.perk.return": "14 dages returret",
+  "pdp.perk.delivery": "Leveres typisk på under 7 dage"
 }

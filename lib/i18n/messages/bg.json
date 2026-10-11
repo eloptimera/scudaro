@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Невалидна връзка",
   "newsletter.invalid": "Тази връзка е невалидна или е изтекла.",
   "nav.track": "Проследи поръчка",
-  "pdp.sizeGuide": "Таблица с размери"
+  "pdp.sizeGuide": "Таблица с размери",
+  "pdp.perk.ship": "Безплатна доставка над {amount}",
+  "pdp.perk.return": "14 дни за връщане",
+  "pdp.perk.delivery": "Обикновено доставка до 7 дни"
 }

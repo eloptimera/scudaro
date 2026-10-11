@@ -163,5 +163,8 @@
   "newsletter.invalid.title": "Nederīga saite",
   "newsletter.invalid": "Šī saite nav derīga vai ir beigusies.",
   "nav.track": "Izsekot pasūtījumu",
-  "pdp.sizeGuide": "Izmēru tabula"
+  "pdp.sizeGuide": "Izmēru tabula",
+  "pdp.perk.ship": "Bezmaksas piegāde virs {amount}",
+  "pdp.perk.return": "Atgriešana 14 dienu laikā",
+  "pdp.perk.delivery": "Parasti piegāde mazāk nekā 7 dienās"
 }

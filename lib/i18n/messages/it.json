@@ -163,5 +163,8 @@
   "newsletter.invalid.title": "Link non valido",
   "newsletter.invalid": "Questo link non è valido o è scaduto.",
   "nav.track": "Traccia ordine",
-  "pdp.sizeGuide": "Guida alle taglie"
+  "pdp.sizeGuide": "Guida alle taglie",
+  "pdp.perk.ship": "Spedizione gratuita sopra {amount}",
+  "pdp.perk.return": "Resi entro 14 giorni",
+  "pdp.perk.delivery": "Di solito consegnato in meno di 7 giorni"
 }

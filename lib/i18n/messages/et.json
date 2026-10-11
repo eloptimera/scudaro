@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Kehtetu link",
   "newsletter.invalid": "See link on kehtetu või aegunud.",
   "nav.track": "Jälgi tellimust",
-  "pdp.sizeGuide": "Suuruste tabel"
+  "pdp.sizeGuide": "Suuruste tabel",
+  "pdp.perk.ship": "Tasuta kohaletoimetamine alates {amount}",
+  "pdp.perk.return": "14 päeva tagastusõigus",
+  "pdp.perk.delivery": "Tavaliselt kohal alla 7 päevaga"
 }

@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Ungültiger Link",
   "newsletter.invalid": "Dieser Link ist ungültig oder abgelaufen.",
   "nav.track": "Bestellung verfolgen",
-  "pdp.sizeGuide": "Größentabelle"
+  "pdp.sizeGuide": "Größentabelle",
+  "pdp.perk.ship": "Gratis Versand ab {amount}",
+  "pdp.perk.return": "14 Tage Rückgabe",
+  "pdp.perk.delivery": "Lieferung meist in unter 7 Tagen"
 }

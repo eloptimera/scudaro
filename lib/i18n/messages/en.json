@@ -162,5 +162,8 @@
   "newsletter.invalid.title": "Link not valid",
   "newsletter.invalid": "This link is not valid or has expired.",
   "nav.track": "Track order",
-  "pdp.sizeGuide": "Size guide"
+  "pdp.sizeGuide": "Size guide",
+  "pdp.perk.ship": "Free shipping over {amount}",
+  "pdp.perk.return": "14-day returns",
+  "pdp.perk.delivery": "Usually delivered in under 7 days"
 }

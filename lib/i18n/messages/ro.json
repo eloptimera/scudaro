@@ -163,5 +163,8 @@
   "newsletter.invalid.title": "Link invalid",
   "newsletter.invalid": "Acest link nu este valid sau a expirat.",
   "nav.track": "Urmărește comanda",
-  "pdp.sizeGuide": "Ghid de mărimi"
+  "pdp.sizeGuide": "Ghid de mărimi",
+  "pdp.perk.ship": "Livrare gratuită peste {amount}",
+  "pdp.perk.return": "Retur în 14 de zile",
+  "pdp.perk.delivery": "De obicei livrat în mai puțin de 7 zile"
 }

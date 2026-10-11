@@ -163,5 +163,8 @@
   "newsletter.invalid.title": "Neispravna poveznica",
   "newsletter.invalid": "Ova poveznica nije ispravna ili je istekla.",
   "nav.track": "Prati narudžbu",
-  "pdp.sizeGuide": "Tablica veličina"
+  "pdp.sizeGuide": "Tablica veličina",
+  "pdp.perk.ship": "Besplatna dostava iznad {amount}",
+  "pdp.perk.return": "14 dana za povrat",
+  "pdp.perk.delivery": "Obično isporuka za manje od 7 dana"
 }

@@ -164,5 +164,8 @@
   "newsletter.invalid.title": "Neplatný odkaz",
   "newsletter.invalid": "Tento odkaz je neplatný nebo vypršel.",
   "nav.track": "Sledovat objednávku",
-  "pdp.sizeGuide": "Tabulka velikostí"
+  "pdp.sizeGuide": "Tabulka velikostí",
+  "pdp.perk.ship": "Doprava zdarma nad {amount}",
+  "pdp.perk.return": "14 dní na vrácení",
+  "pdp.perk.delivery": "Obvykle doručení do 7 dnů"
 }

@@ -164,5 +164,8 @@
   "newsletter.invalid.title": "Neveljavna povezava",
   "newsletter.invalid": "Ta povezava ni veljavna ali je potekla.",
   "nav.track": "Sledi naročilu",
-  "pdp.sizeGuide": "Tabela velikosti"
+  "pdp.sizeGuide": "Tabela velikosti",
+  "pdp.perk.ship": "Brezplačna dostava nad {amount}",
+  "pdp.perk.return": "14 dni za vračilo",
+  "pdp.perk.delivery": "Običajno dostavljeno v manj kot 7 dneh"
 }
