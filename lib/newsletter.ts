@@ -21,13 +21,13 @@ export function supabase() {
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string);
 
 /** Sends one email through Resend. Throws on failure so callers can roll back. */
-export async function sendMail(opts: { to: string; subject: string; html: string; text: string }) {
+export async function sendMail(opts: { to: string; subject: string; html: string; text: string; replyTo?: string }) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error("RESEND_API_KEY is not set");
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: FROM, to: [opts.to], subject: opts.subject, html: opts.html, text: opts.text, ...(REPLY_TO ? { reply_to: REPLY_TO } : {}) }),
+    body: JSON.stringify({ from: FROM, to: [opts.to], subject: opts.subject, html: opts.html, text: opts.text, ...((opts.replyTo ?? REPLY_TO) ? { reply_to: opts.replyTo ?? REPLY_TO } : {}) }),
     cache: "no-store",
   });
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
@@ -51,4 +51,46 @@ export async function confirmationEmail(locale: Locale, origin: string, token: s
 </td></tr></table></body></html>`;
   const text = `${t("email.confirm.text")}\n\n${link}\n\n${t("email.confirm.ignore")}\n\n${t("email.footer")}`;
   return { subject, html, text };
+}
+
+/**
+ * Starts a double opt-in subscription (stores the lead with proof of consent, emails the confirmation link).
+ * Returns false when it could not be started. An address that is already on the list counts as success,
+ * so the list cannot be probed and no second email is sent.
+ */
+export async function startSubscription(opts: { email: string; locale: Locale; origin: string; source: string; consentText: string }): Promise<boolean> {
+  const db = supabase();
+  if (!db) return false;
+  const token = newToken();
+  try {
+    const res = await fetch(db.url, {
+      method: "POST",
+      headers: { ...db.headers, Prefer: "return=minimal" },
+      body: JSON.stringify({
+        email: opts.email,
+        source: opts.source,
+        token,
+        locale: opts.locale,
+        consent_text: opts.consentText,
+        consent_at: new Date().toISOString(),
+      }),
+      cache: "no-store",
+    });
+    if (res.status === 409) return true;
+    if (!res.ok) {
+      console.error("newsletter insert failed", res.status, await res.text());
+      return false;
+    }
+    try {
+      await sendMail({ to: opts.email, ...(await confirmationEmail(opts.locale, opts.origin, token)) });
+      return true;
+    } catch (err) {
+      console.error("newsletter confirmation email failed", err);
+      await fetch(`${db.url}?token=eq.${token}`, { method: "DELETE", headers: db.headers, cache: "no-store" }).catch(() => {});
+      return false;
+    }
+  } catch (err) {
+    console.error("newsletter error", err);
+    return false;
+  }
 }

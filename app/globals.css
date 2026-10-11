@@ -835,3 +835,40 @@ html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: n
   .nav a.nav__pill, .nav button.nav__pill { padding: 8px 11px; font-size: 11px; letter-spacing: .06em; }
   .brand img { height: 22px; }
 }
+
+/* ---------- Contact page ---------- */
+.contactpage { display: grid; gap: 32px; max-width: 1120px; margin: 0 auto; padding: 24px 32px 96px; }
+.contactpage__intro .trackpage__intro { margin-bottom: 0; }
+.contactpage__intro .trackpage__help { margin-top: 20px; }
+@media (min-width: 900px) {
+  .contactpage { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 72px; align-items: start; padding-block: 56px 112px; }
+  .contactpage__intro { position: sticky; top: 96px; }
+}
+@media (max-width: 700px) { .contactpage { padding: 16px 16px 64px; } }
+.contact__form { display: grid; gap: 18px; }
+.contact__row { display: grid; gap: 18px; }
+@media (min-width: 600px) { .contact__row { grid-template-columns: 1fr 1fr; } }
+.track__field textarea { min-height: 168px; padding: 14px 16px; background: #131315; border: 1px solid var(--line); color: var(--ink); font: inherit; font-size: 16px; line-height: 1.5; resize: vertical; }
+.track__field textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.contact__form .btn { justify-self: start; min-height: 48px; }
+.contact__consent { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); background: var(--bg-2); font-size: 13px; line-height: 1.5; color: var(--ink); cursor: pointer; }
+.contact__consent:hover { border-color: #555; }
+.contact__consent:has(input:checked) { border-color: var(--ink); }
+.contact__consent input {
+  flex: none; appearance: none; -webkit-appearance: none;
+  width: 22px; height: 22px; margin: 0; padding: 0;
+  border: 2px solid #8a8a8a; border-radius: 3px; background: transparent;
+  display: grid; place-content: center; cursor: pointer;
+}
+.contact__consent input::after {
+  content: ""; width: 11px; height: 6px; margin-top: -2px;
+  border-left: 3px solid #0e0e10; border-bottom: 3px solid #0e0e10;
+  transform: rotate(-45deg) scale(0); transition: transform .12s;
+}
+.contact__consent input:checked { background: var(--ink); border-color: var(--ink); }
+.contact__consent input:checked::after { transform: rotate(-45deg) scale(1); }
+.contact__consent input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.contact__notice { margin: -6px 0 0; font-size: 12px; color: #8a8a8a; }
+.contact__notice a { text-decoration: underline; }
+.contact__out { min-height: 1.5em; }
+.contact__done { margin: 0; padding: 14px 16px; border: 1px solid var(--ink); color: var(--ink); line-height: 1.5; }

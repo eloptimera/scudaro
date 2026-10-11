@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...entries(base, "/", all),
     ...entries(base, "/products", all),
     // Hand-written pages exist in English and Swedish only; other languages canonicalise to English.
-    ...["/about", "/faq", "/size-guide", "/care"].flatMap((p) => entries(base, p, INFO_LOCALES)),
+    ...["/about", "/faq", "/size-guide", "/care", "/contact"].flatMap((p) => entries(base, p, INFO_LOCALES)),
   ];
   try {
     const [products, collections] = await Promise.all([getProducts(), getCollections()]);

@@ -18,6 +18,7 @@ export type Info = {
   size: { title: string; description: string; intro: string; tables: SizeTable[]; note: string; cta: Cta };
   care: { title: string; description: string; intro: string; tables: CareTable[]; cta: Cta };
   track: TrackText;
+  contact: ContactText;
 };
 
 export type TrackText = {
@@ -28,6 +29,15 @@ export type TrackText = {
   status: { processing: string; shipped: string; delivered: string; cancelled: string };
   statusText: { processing: string; shipped: string; delivered: string; cancelled: string };
   help: string;
+};
+
+export type ContactText = {
+  title: string; description: string; eyebrow: string; intro: string;
+  nameLabel: string; emailLabel: string; subjectLabel: string; messageLabel: string;
+  button: string; sending: string;
+  success: string; successNews: string; newsFailed: string;
+  invalid: string; rate: string; error: string;
+  notice: string; direct: string;
 };
 
 export const CONTACT_EMAIL = "hello@scudaro.com";
@@ -79,6 +89,7 @@ const en: Info = {
       {
         q: "How do I contact you?",
         a: `Email us at ${CONTACT_EMAIL}. We read every message.`,
+        cta: { href: "/contact", label: "Contact us" },
       },
     ],
   },
@@ -184,6 +195,26 @@ const en: Info = {
     },
     help: `Need help? Email ${CONTACT_EMAIL}.`,
   },
+  contact: {
+    title: "Contact us",
+    description: "Questions about an order, sizing or anything else? Send Scudaro a message and we will reply by email.",
+    eyebrow: "Support",
+    intro: "Questions about an order, sizing or anything else? Send us a message and we will reply by email. If it is about an order, include your order number.",
+    nameLabel: "Name",
+    emailLabel: "Email address",
+    subjectLabel: "Subject",
+    messageLabel: "Message",
+    button: "Send message",
+    sending: "Sending…",
+    success: "Thanks, your message is sent. We will reply by email as soon as we can.",
+    successNews: "Thanks, your message is sent. Check your inbox and confirm your subscription to get the newsletter.",
+    newsFailed: "Your message is sent, but we could not start the newsletter sign-up. Please try again from the footer.",
+    invalid: "Please fill in every field and use a valid email address.",
+    rate: "Too many messages in a short time. Please try again in a few minutes.",
+    error: `Something went wrong. Please try again, or email us at ${CONTACT_EMAIL}.`,
+    notice: "We only use your details to answer your message.",
+    direct: `Prefer email? Write to ${CONTACT_EMAIL}.`,
+  },
 };
 
 const sv: Info = {
@@ -233,6 +264,7 @@ const sv: Info = {
       {
         q: "Hur kontaktar jag er?",
         a: `Mejla oss på ${CONTACT_EMAIL}. Vi läser alla meddelanden.`,
+        cta: { href: "/contact", label: "Kontakta oss" },
       },
     ],
   },
@@ -337,6 +369,26 @@ const sv: Info = {
       cancelled: "Den här ordern har avbrutits.",
     },
     help: `Behöver du hjälp? Mejla ${CONTACT_EMAIL}.`,
+  },
+  contact: {
+    title: "Kontakta oss",
+    description: "Frågor om en order, storlekar eller något annat? Skicka ett meddelande till Scudaro så svarar vi via e-post.",
+    eyebrow: "Support",
+    intro: "Frågor om en order, storlekar eller något annat? Skicka ett meddelande så svarar vi via e-post. Gäller det en order, ange ditt ordernummer.",
+    nameLabel: "Namn",
+    emailLabel: "E-postadress",
+    subjectLabel: "Ämne",
+    messageLabel: "Meddelande",
+    button: "Skicka meddelande",
+    sending: "Skickar…",
+    success: "Tack, ditt meddelande är skickat. Vi svarar via e-post så snart vi kan.",
+    successNews: "Tack, ditt meddelande är skickat. Kolla din inkorg och bekräfta din prenumeration för att få nyhetsbrevet.",
+    newsFailed: "Ditt meddelande är skickat, men vi kunde inte starta nyhetsbrevsanmälan. Försök igen via sidfoten.",
+    invalid: "Fyll i alla fält och ange en giltig e-postadress.",
+    rate: "För många meddelanden på kort tid. Försök igen om några minuter.",
+    error: `Något gick fel. Försök igen, eller mejla oss på ${CONTACT_EMAIL}.`,
+    notice: "Vi använder dina uppgifter endast för att svara på ditt meddelande.",
+    direct: `Föredrar du e-post? Skriv till ${CONTACT_EMAIL}.`,
   },
 };
 

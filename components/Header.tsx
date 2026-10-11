@@ -20,7 +20,7 @@ export default function Header() {
           <LocalLink href="/" className={pathname === "/" ? "is-active" : undefined}>{t("nav.home")}</LocalLink>
           <LocalLink href="/products" className={pathname === "/products" ? "is-active" : undefined}>{t("nav.shop")}</LocalLink>
           <LocalLink href="/about">{t("nav.about")}</LocalLink>
-          <LocalLink href="/#contact">{t("nav.contact")}</LocalLink>
+          <LocalLink href="/contact">{t("nav.contact")}</LocalLink>
         </nav>
 
         <LocalLink href="/" className="brand" aria-label={t("nav.brandHome")}>

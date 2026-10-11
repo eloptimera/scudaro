@@ -23,6 +23,7 @@ export default async function Footer({ locale }: { locale: Locale }) {
       <Newsletter />
 
       <nav className="footer-links" aria-label={t("footer.legal")}>
+        <LocalLink href="/contact">{t("nav.contact")}</LocalLink>
         <LocalLink href="/track-order">{nav.track}</LocalLink>
         <LocalLink href="/size-guide">{nav.size}</LocalLink>
         <LocalLink href="/care">{nav.care}</LocalLink>
