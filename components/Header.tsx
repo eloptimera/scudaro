@@ -8,7 +8,7 @@ import { useI18n } from "./I18nProvider";
 import LanguageSwitcher from "./LanguageSwitcher";
 import LocalLink from "./LocalLink";
 
-export default function Header({ accountUrl }: { accountUrl: string | null }) {
+export default function Header() {
   const pathname = stripLocale(usePathname());
   const { count, open } = useCart();
   const { t } = useI18n();
@@ -29,9 +29,14 @@ export default function Header({ accountUrl }: { accountUrl: string | null }) {
 
         <nav className="nav nav--right" aria-label={t("nav.account")}>
           <LanguageSwitcher className="lang--header" />
-          {accountUrl && (
-            <a href={accountUrl} className="nav__pill">{t("nav.login")}</a>
-          )}
+          <LocalLink href="/track-order" className="nav__pill nav__track" aria-label={t("nav.track")}>
+            <svg className="nav__track-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M3 7l9-4 9 4-9 4-9-4z" />
+              <path d="M3 7v10l9 4 9-4V7" />
+              <path d="M12 11v10" />
+            </svg>
+            <span className="nav__track-text">{t("nav.track")}</span>
+          </LocalLink>
           <button
             className="nav__btn nav__pill nav__pill--solid"
             onClick={open}

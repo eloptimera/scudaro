@@ -12,17 +12,28 @@ export type SizeTable = { title: string; head: string[]; rows: { label: string; 
 export type CareTable = { title: string; rows: [string, string][] };
 
 export type Info = {
-  nav: { about: string; size: string; care: string };
+  nav: { about: string; size: string; care: string; track: string };
   faq: { title: string; description: string; items: Faq[] };
   about: { title: string; description: string; eyebrow: string; paragraphs: string[]; delivery: string; imageAlt: string; disclaimer: string; ctas: Cta[] };
   size: { title: string; description: string; intro: string; tables: SizeTable[]; note: string; cta: Cta };
   care: { title: string; description: string; intro: string; tables: CareTable[]; cta: Cta };
+  track: TrackText;
+};
+
+export type TrackText = {
+  title: string; description: string; intro: string;
+  eyebrow: string; steps: [string, string, string, string]; orderLabel: string; orderHint: string; emailLabel: string; button: string; loading: string;
+  notFound: string; invalid: string; unavailable: string; rate: string;
+  orderTitle: string; statusLabel: string; trackLabel: string; carrierLabel: string; numberLabel: string;
+  status: { processing: string; shipped: string; delivered: string; cancelled: string };
+  statusText: { processing: string; shipped: string; delivered: string; cancelled: string };
+  help: string;
 };
 
 export const CONTACT_EMAIL = "hello@scudaro.com";
 
 const en: Info = {
-  nav: { about: "About", size: "Size guide", care: "Care instructions" },
+  nav: { about: "About", size: "Size guide", care: "Care instructions", track: "Track order" },
   faq: {
     title: "FAQ",
     description: "Answers about delivery, returns, sizing, materials and care for Scudaro streetwear.",
@@ -31,6 +42,11 @@ const en: Info = {
         q: "How long does delivery take?",
         a: "Delivery usually takes less than 7 days, wherever in the world you are. Timing can vary because of external factors such as carrier delays, customs or public holidays.",
         cta: { href: "/products", label: "Shop the collection" },
+      },
+      {
+        q: "Where is my order?",
+        a: "Enter your order number and email on the tracking page to see its status and a tracking link once it has shipped.",
+        cta: { href: "/track-order", label: "Track your order" },
       },
       {
         q: "Are the pieces made to order?",
@@ -139,10 +155,39 @@ const en: Info = {
     ],
     cta: { href: "/size-guide", label: "Open the size guide" },
   },
+  track: {
+    title: "Track your order",
+    description: "Enter your order number and email to see where your Scudaro order is.",
+    intro: "Enter the order number from your confirmation email and the email address you ordered with.",
+    orderLabel: "Order number",
+    eyebrow: "Delivery",
+    steps: ["Order received", "Being produced", "On its way", "Delivered"],
+    orderHint: "You'll find it in your confirmation email, e.g. #1001",
+    emailLabel: "Email address",
+    button: "Track order",
+    loading: "Looking up your order…",
+    notFound: "We couldn't find an order that matches those details. Check the order number and the email address you used at checkout.",
+    invalid: "Enter a valid order number and email address.",
+    unavailable: "Order tracking is temporarily unavailable. Please try again later or email us.",
+    rate: "Too many attempts. Please wait a minute and try again.",
+    orderTitle: "Order",
+    statusLabel: "Status",
+    trackLabel: "Track shipment",
+    carrierLabel: "Carrier",
+    numberLabel: "Tracking number",
+    status: { processing: "Being produced", shipped: "On its way", delivered: "Delivered", cancelled: "Cancelled" },
+    statusText: {
+      processing: "Your order has been received and your pieces are being made. You will get an email with tracking once it ships.",
+      shipped: "Your order has shipped. Use the tracking link below to follow it.",
+      delivered: "Your order has been delivered.",
+      cancelled: "This order has been cancelled.",
+    },
+    help: `Need help? Email ${CONTACT_EMAIL}.`,
+  },
 };
 
 const sv: Info = {
-  nav: { about: "Om oss", size: "Storleksguide", care: "Tvättråd" },
+  nav: { about: "Om oss", size: "Storleksguide", care: "Tvättråd", track: "Spåra order" },
   faq: {
     title: "Vanliga frågor",
     description: "Svar om leverans, retur, storlekar, material och skötsel för Scudaros streetwear.",
@@ -151,6 +196,11 @@ const sv: Info = {
         q: "Hur lång är leveranstiden?",
         a: "Leveransen tar oftast under 7 dagar, oavsett var i världen du bor. Tiden kan variera på grund av externa faktorer som förseningar hos transportören, tull eller helgdagar.",
         cta: { href: "/products", label: "Se kollektionen" },
+      },
+      {
+        q: "Var är min order?",
+        a: "Ange ordernummer och e-postadress på spårningssidan för att se status och en spårningslänk när ordern har skickats.",
+        cta: { href: "/track-order", label: "Spåra din order" },
       },
       {
         q: "Tillverkas plaggen på beställning?",
@@ -258,6 +308,35 @@ const sv: Info = {
       },
     ],
     cta: { href: "/size-guide", label: "Öppna storleksguiden" },
+  },
+  track: {
+    title: "Spåra din order",
+    description: "Ange ordernummer och e-postadress för att se var din Scudaro-order är.",
+    intro: "Ange ordernumret från din orderbekräftelse och e-postadressen du beställde med.",
+    orderLabel: "Ordernummer",
+    eyebrow: "Leverans",
+    steps: ["Order mottagen", "Tillverkas", "På väg", "Levererad"],
+    orderHint: "Du hittar det i orderbekräftelsen, t.ex. #1001",
+    emailLabel: "E-postadress",
+    button: "Spåra order",
+    loading: "Söker efter din order…",
+    notFound: "Vi hittade ingen order som matchar uppgifterna. Kontrollera ordernumret och e-postadressen du använde i kassan.",
+    invalid: "Ange ett giltigt ordernummer och en giltig e-postadress.",
+    unavailable: "Orderspårningen är tillfälligt otillgänglig. Försök igen senare eller mejla oss.",
+    rate: "För många försök. Vänta en minut och försök igen.",
+    orderTitle: "Order",
+    statusLabel: "Status",
+    trackLabel: "Spåra paketet",
+    carrierLabel: "Transportör",
+    numberLabel: "Spårningsnummer",
+    status: { processing: "Tillverkas", shipped: "På väg", delivered: "Levererad", cancelled: "Avbruten" },
+    statusText: {
+      processing: "Din order är mottagen och dina plagg tillverkas. Du får ett mejl med spårning när den skickas.",
+      shipped: "Din order har skickats. Följ den med spårningslänken nedan.",
+      delivered: "Din order har levererats.",
+      cancelled: "Den här ordern har avbrutits.",
+    },
+    help: `Behöver du hjälp? Mejla ${CONTACT_EMAIL}.`,
   },
 };
 

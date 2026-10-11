@@ -7,7 +7,6 @@
   "nav.contact": "Kuntatt",
   "nav.menu": "Menu ewlieni",
   "nav.account": "Kont u karrettun",
-  "nav.login": "Idħol",
   "nav.cart": "Karrettun",
   "nav.cartOpen": "Iftaħ il-karrettun, {count}",
   "nav.brandHome": "Paġna ewlenija ta' SCUDARO",
@@ -163,5 +162,6 @@
   "newsletter.unsub.button": "Ikkanċella l-abbonament",
   "newsletter.unsub.done": "Ikkanċellajt l-abbonament. Mhux se tirċievi aktar emails mingħandna.",
   "newsletter.invalid.title": "Link mhux validu",
-  "newsletter.invalid": "Dan il-link mhuwiex validu jew skada."
+  "newsletter.invalid": "Dan il-link mhuwiex validu jew skada.",
+  "nav.track": "Segwi l-ordni"
 }

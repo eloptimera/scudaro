@@ -7,7 +7,6 @@
   "nav.contact": "Teagmháil",
   "nav.menu": "Príomh-roghchlár",
   "nav.account": "Cuntas agus ciseán",
-  "nav.login": "Logáil isteach",
   "nav.cart": "Ciseán",
   "nav.cartOpen": "Oscail an ciseán, {count}",
   "nav.brandHome": "Baile SCUDARO",
@@ -164,5 +163,6 @@
   "newsletter.unsub.button": "Díchláraigh",
   "newsletter.unsub.done": "Tá tú díchláraithe. Ní gheobhaidh tú tuilleadh ríomhphost uainn.",
   "newsletter.invalid.title": "Nasc neamhbhailí",
-  "newsletter.invalid": "Níl an nasc seo bailí nó tá sé imithe in éag."
+  "newsletter.invalid": "Níl an nasc seo bailí nó tá sé imithe in éag.",
+  "nav.track": "Rianaigh ordú"
 }

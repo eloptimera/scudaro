@@ -7,7 +7,6 @@
   "nav.contact": "Kontakt",
   "nav.menu": "Huvudmeny",
   "nav.account": "Konto och varukorg",
-  "nav.login": "Logga in",
   "nav.cart": "Varukorg",
   "nav.cartOpen": "Öppna varukorgen, {count}",
   "nav.brandHome": "SCUDARO startsida",
@@ -161,5 +160,6 @@
   "newsletter.unsub.button": "Avsluta prenumeration",
   "newsletter.unsub.done": "Du är avregistrerad. Du får inga fler mejl från oss.",
   "newsletter.invalid.title": "Ogiltig länk",
-  "newsletter.invalid": "Länken är ogiltig eller har gått ut."
+  "newsletter.invalid": "Länken är ogiltig eller har gått ut.",
+  "nav.track": "Spåra order"
 }

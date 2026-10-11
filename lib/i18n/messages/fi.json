@@ -7,7 +7,6 @@
   "nav.contact": "Yhteystiedot",
   "nav.menu": "Päävalikko",
   "nav.account": "Tili ja ostoskori",
-  "nav.login": "Kirjaudu sisään",
   "nav.cart": "Ostoskori",
   "nav.cartOpen": "Avaa ostoskori, {count}",
   "nav.brandHome": "SCUDARO etusivu",
@@ -161,5 +160,6 @@
   "newsletter.unsub.button": "Peruuta tilaus",
   "newsletter.unsub.done": "Tilaus on peruttu. Et saa meiltä enää sähköposteja.",
   "newsletter.invalid.title": "Virheellinen linkki",
-  "newsletter.invalid": "Tämä linkki ei ole voimassa tai se on vanhentunut."
+  "newsletter.invalid": "Tämä linkki ei ole voimassa tai se on vanhentunut.",
+  "nav.track": "Seuraa tilausta"
 }

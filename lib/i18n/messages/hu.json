@@ -7,7 +7,6 @@
   "nav.contact": "Kapcsolat",
   "nav.menu": "Főmenü",
   "nav.account": "Fiók és kosár",
-  "nav.login": "Belépés",
   "nav.cart": "Kosár",
   "nav.cartOpen": "Kosár megnyitása, {count}",
   "nav.brandHome": "SCUDARO főoldal",
@@ -161,5 +160,6 @@
   "newsletter.unsub.button": "Leiratkozás",
   "newsletter.unsub.done": "Leiratkoztál. Több e-mailt nem kapsz tőlünk.",
   "newsletter.invalid.title": "Érvénytelen link",
-  "newsletter.invalid": "Ez a link érvénytelen vagy lejárt."
+  "newsletter.invalid": "Ez a link érvénytelen vagy lejárt.",
+  "nav.track": "Rendelés követése"
 }

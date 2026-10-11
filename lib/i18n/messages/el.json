@@ -7,7 +7,6 @@
   "nav.contact": "Επικοινωνία",
   "nav.menu": "Κύριο μενού",
   "nav.account": "Λογαριασμός και καλάθι",
-  "nav.login": "Σύνδεση",
   "nav.cart": "Καλάθι",
   "nav.cartOpen": "Άνοιγμα καλαθιού, {count}",
   "nav.brandHome": "Αρχική SCUDARO",
@@ -161,5 +160,6 @@
   "newsletter.unsub.button": "Διαγραφή συνδρομής",
   "newsletter.unsub.done": "Η συνδρομή σου διαγράφηκε. Δεν θα λάβεις άλλα emails από εμάς.",
   "newsletter.invalid.title": "Μη έγκυρος σύνδεσμος",
-  "newsletter.invalid": "Αυτός ο σύνδεσμος δεν είναι έγκυρος ή έχει λήξει."
+  "newsletter.invalid": "Αυτός ο σύνδεσμος δεν είναι έγκυρος ή έχει λήξει.",
+  "nav.track": "Παρακολούθηση παραγγελίας"
 }

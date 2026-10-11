@@ -20,7 +20,6 @@ import MetaPixel from "@/components/MetaPixel";
 import { dirOf, isLocale } from "@/lib/i18n/config";
 import { siteUrl } from "@/lib/i18n/seo";
 import { getMessages } from "@/lib/i18n/server";
-import { isShopifyEnabled, storeDomain } from "@/lib/shopify";
 
 type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
 
@@ -41,14 +40,13 @@ export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const messages = await getMessages(locale);
-  const accountUrl = isShopifyEnabled ? `https://${storeDomain}/account` : null;
 
   return (
     <html lang={locale} dir={dirOf(locale)}>
       <body>
         <I18nProvider locale={locale} messages={messages}>
           <CartProvider>
-            <Header accountUrl={accountUrl} />
+            <Header />
             <main>{children}</main>
             <Footer locale={locale} />
             <CartDrawer />
