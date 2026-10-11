@@ -7,7 +7,6 @@
   "nav.contact": "Contact",
   "nav.menu": "Meniu principal",
   "nav.account": "Cont și coș",
-  "nav.login": "Autentificare",
   "nav.cart": "Coș",
   "nav.cartOpen": "Deschide coșul, {count}",
   "nav.brandHome": "Pagina principală SCUDARO",
@@ -162,5 +161,6 @@
   "newsletter.unsub.button": "Dezabonare",
   "newsletter.unsub.done": "Te-ai dezabonat. Nu vei mai primi e-mailuri de la noi.",
   "newsletter.invalid.title": "Link invalid",
-  "newsletter.invalid": "Acest link nu este valid sau a expirat."
+  "newsletter.invalid": "Acest link nu este valid sau a expirat.",
+  "nav.track": "Urmărește comanda"
 }

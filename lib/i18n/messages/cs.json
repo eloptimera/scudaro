@@ -7,7 +7,6 @@
   "nav.contact": "Kontakt",
   "nav.menu": "Hlavní menu",
   "nav.account": "Účet a košík",
-  "nav.login": "Přihlásit se",
   "nav.cart": "Košík",
   "nav.cartOpen": "Otevřít košík, {count}",
   "nav.brandHome": "SCUDARO – domů",
@@ -163,5 +162,6 @@
   "newsletter.unsub.button": "Odhlásit odběr",
   "newsletter.unsub.done": "Jsi odhlášen(a). Už od nás nedostaneš žádné e-maily.",
   "newsletter.invalid.title": "Neplatný odkaz",
-  "newsletter.invalid": "Tento odkaz je neplatný nebo vypršel."
+  "newsletter.invalid": "Tento odkaz je neplatný nebo vypršel.",
+  "nav.track": "Sledovat objednávku"
 }

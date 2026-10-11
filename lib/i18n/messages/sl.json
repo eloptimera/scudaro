@@ -7,7 +7,6 @@
   "nav.contact": "Kontakt",
   "nav.menu": "Glavni meni",
   "nav.account": "Račun in košarica",
-  "nav.login": "Prijava",
   "nav.cart": "Košarica",
   "nav.cartOpen": "Odpri košarico, {count}",
   "nav.brandHome": "Domača stran SCUDARO",
@@ -163,5 +162,6 @@
   "newsletter.unsub.button": "Odjava",
   "newsletter.unsub.done": "Odjavljen/a si. Od nas ne boš več prejemal/a e-sporočil.",
   "newsletter.invalid.title": "Neveljavna povezava",
-  "newsletter.invalid": "Ta povezava ni veljavna ali je potekla."
+  "newsletter.invalid": "Ta povezava ni veljavna ali je potekla.",
+  "nav.track": "Sledi naročilu"
 }

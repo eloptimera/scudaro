@@ -7,7 +7,6 @@
   "nav.contact": "Contatti",
   "nav.menu": "Menu principale",
   "nav.account": "Account e carrello",
-  "nav.login": "Accedi",
   "nav.cart": "Carrello",
   "nav.cartOpen": "Apri il carrello, {count}",
   "nav.brandHome": "Home SCUDARO",
@@ -162,5 +161,6 @@
   "newsletter.unsub.button": "Annulla iscrizione",
   "newsletter.unsub.done": "Hai annullato l’iscrizione. Non riceverai altre e-mail da noi.",
   "newsletter.invalid.title": "Link non valido",
-  "newsletter.invalid": "Questo link non è valido o è scaduto."
+  "newsletter.invalid": "Questo link non è valido o è scaduto.",
+  "nav.track": "Traccia ordine"
 }

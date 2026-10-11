@@ -7,7 +7,6 @@
   "nav.contact": "Kontaktai",
   "nav.menu": "Pagrindinis meniu",
   "nav.account": "Paskyra ir krepšelis",
-  "nav.login": "Prisijungti",
   "nav.cart": "Krepšelis",
   "nav.cartOpen": "Atidaryti krepšelį, {count}",
   "nav.brandHome": "SCUDARO pradžia",
@@ -163,5 +162,6 @@
   "newsletter.unsub.button": "Atsisakyti prenumeratos",
   "newsletter.unsub.done": "Prenumeratos atsisakei. Daugiau laiškų iš mūsų negausi.",
   "newsletter.invalid.title": "Netinkama nuoroda",
-  "newsletter.invalid": "Ši nuoroda netinkama arba nebegalioja."
+  "newsletter.invalid": "Ši nuoroda netinkama arba nebegalioja.",
+  "nav.track": "Sekti užsakymą"
 }

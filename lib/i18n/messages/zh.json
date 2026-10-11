@@ -7,7 +7,6 @@
   "nav.contact": "联系我们",
   "nav.menu": "主菜单",
   "nav.account": "账户与购物车",
-  "nav.login": "登录",
   "nav.cart": "购物车",
   "nav.cartOpen": "打开购物车，{count}",
   "nav.brandHome": "SCUDARO 首页",
@@ -161,5 +160,6 @@
   "newsletter.unsub.button": "取消订阅",
   "newsletter.unsub.done": "你已取消订阅，之后不会再收到我们的邮件。",
   "newsletter.invalid.title": "链接无效",
-  "newsletter.invalid": "此链接无效或已过期。"
+  "newsletter.invalid": "此链接无效或已过期。",
+  "nav.track": "追踪订单"
 }

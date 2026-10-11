@@ -22,7 +22,7 @@ export type Info = {
 
 export type TrackText = {
   title: string; description: string; intro: string;
-  orderLabel: string; orderHint: string; emailLabel: string; button: string; loading: string;
+  eyebrow: string; steps: [string, string, string, string]; orderLabel: string; orderHint: string; emailLabel: string; button: string; loading: string;
   notFound: string; invalid: string; unavailable: string; rate: string;
   orderTitle: string; statusLabel: string; trackLabel: string; carrierLabel: string; numberLabel: string;
   status: { processing: string; shipped: string; delivered: string; cancelled: string };
@@ -160,7 +160,9 @@ const en: Info = {
     description: "Enter your order number and email to see where your Scudaro order is.",
     intro: "Enter the order number from your confirmation email and the email address you ordered with.",
     orderLabel: "Order number",
-    orderHint: "For example #1001",
+    eyebrow: "Delivery",
+    steps: ["Order received", "Being produced", "On its way", "Delivered"],
+    orderHint: "You'll find it in your confirmation email, e.g. #1001",
     emailLabel: "Email address",
     button: "Track order",
     loading: "Looking up your order…",
@@ -312,7 +314,9 @@ const sv: Info = {
     description: "Ange ordernummer och e-postadress för att se var din Scudaro-order är.",
     intro: "Ange ordernumret från din orderbekräftelse och e-postadressen du beställde med.",
     orderLabel: "Ordernummer",
-    orderHint: "Till exempel #1001",
+    eyebrow: "Leverans",
+    steps: ["Order mottagen", "Tillverkas", "På väg", "Levererad"],
+    orderHint: "Du hittar det i orderbekräftelsen, t.ex. #1001",
     emailLabel: "E-postadress",
     button: "Spåra order",
     loading: "Söker efter din order…",

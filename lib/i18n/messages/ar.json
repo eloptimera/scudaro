@@ -7,7 +7,6 @@
   "nav.contact": "تواصل معنا",
   "nav.menu": "القائمة الرئيسية",
   "nav.account": "الحساب والسلة",
-  "nav.login": "تسجيل الدخول",
   "nav.cart": "السلة",
   "nav.cartOpen": "فتح السلة، {count}",
   "nav.brandHome": "الصفحة الرئيسية لـ SCUDARO",
@@ -165,5 +164,6 @@
   "newsletter.unsub.button": "إلغاء الاشتراك",
   "newsletter.unsub.done": "تم إلغاء اشتراكك. لن تصلك رسائل أخرى منا.",
   "newsletter.invalid.title": "رابط غير صالح",
-  "newsletter.invalid": "هذا الرابط غير صالح أو منتهي الصلاحية."
+  "newsletter.invalid": "هذا الرابط غير صالح أو منتهي الصلاحية.",
+  "nav.track": "تتبع الطلب"
 }

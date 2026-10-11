@@ -7,7 +7,6 @@
   "nav.contact": "Kontakt",
   "nav.menu": "Hauptmenü",
   "nav.account": "Konto und Warenkorb",
-  "nav.login": "Anmelden",
   "nav.cart": "Warenkorb",
   "nav.cartOpen": "Warenkorb öffnen, {count}",
   "nav.brandHome": "SCUDARO Startseite",
@@ -161,5 +160,6 @@
   "newsletter.unsub.button": "Abmelden",
   "newsletter.unsub.done": "Du bist abgemeldet. Du erhältst keine weiteren E-Mails von uns.",
   "newsletter.invalid.title": "Ungültiger Link",
-  "newsletter.invalid": "Dieser Link ist ungültig oder abgelaufen."
+  "newsletter.invalid": "Dieser Link ist ungültig oder abgelaufen.",
+  "nav.track": "Bestellung verfolgen"
 }

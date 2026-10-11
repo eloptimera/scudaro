@@ -38,7 +38,8 @@ export default function TrackOrder({ text }: { text: TrackText }) {
       <form className="track__form" onSubmit={onSubmit} noValidate>
         <div className="track__field">
           <label htmlFor="track-order">{text.orderLabel}</label>
-          <input id="track-order" name="order" type="text" inputMode="text" autoComplete="off" placeholder={text.orderHint} required />
+          <input id="track-order" name="order" type="text" inputMode="text" autoComplete="off" placeholder="#1001" aria-describedby="track-order-hint" required />
+          <small id="track-order-hint" className="track__hint">{text.orderHint}</small>
         </div>
         <div className="track__field">
           <label htmlFor="track-email">{text.emailLabel}</label>
@@ -52,26 +53,48 @@ export default function TrackOrder({ text }: { text: TrackText }) {
       <div className="track__out" aria-live="polite">
         {view.kind === "error" && <p className="track__error" role="alert">{view.message}</p>}
 
-        {view.kind === "result" && (
-          <section className="track__card" aria-label={text.orderTitle}>
-            <p className="track__order">{text.orderTitle} {view.result.order}</p>
-            <p className="track__status">
-              <span className="track__label">{text.statusLabel}</span>
-              <strong>{text.status[view.result.status]}</strong>
-            </p>
-            <p className="track__text">{text.statusText[view.result.status]}</p>
-            {view.result.shipments.map((s) => (
-              <div className="track__ship" key={s.number}>
-                {s.carrier && <p><span className="track__label">{text.carrierLabel}</span> {s.carrier}</p>}
-                <p><span className="track__label">{text.numberLabel}</span> {s.number}</p>
-                {s.url && (
-                  <a className="btn btn--light" href={s.url} target="_blank" rel="noopener noreferrer">{text.trackLabel}</a>
-                )}
-              </div>
-            ))}
-          </section>
-        )}
+        {view.kind === "result" && <Result text={text} result={view.result} />}
       </div>
     </>
+  );
+}
+
+const STEP_INDEX = { processing: 1, shipped: 2, delivered: 3, cancelled: -1 } as const;
+
+function Result({ text, result }: { text: TrackText; result: TrackResult }) {
+  const current = STEP_INDEX[result.status];
+  return (
+    <section className="track__card" aria-label={text.orderTitle}>
+      <p className="track__order">{text.orderTitle} {result.order}</p>
+
+      {result.status === "cancelled" ? (
+        <p className="track__status"><strong>{text.status.cancelled}</strong></p>
+      ) : (
+        <ol className="track__steps">
+          {text.steps.map((label, i) => (
+            <li
+              key={label}
+              className={i < current ? "is-done" : i === current ? "is-current" : undefined}
+              aria-current={i === current ? "step" : undefined}
+            >
+              <span className="track__dot" aria-hidden="true">{i < current ? "\u2713" : i + 1}</span>
+              <span className="track__step">{label}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      <p className="track__text">{text.statusText[result.status]}</p>
+
+      {result.shipments.map((s) => (
+        <div className="track__ship" key={s.number}>
+          {s.carrier && <p><span className="track__label">{text.carrierLabel}</span> {s.carrier}</p>}
+          <p><span className="track__label">{text.numberLabel}</span> {s.number}</p>
+          {s.url && (
+            <a className="btn btn--light" href={s.url} target="_blank" rel="noopener noreferrer">{text.trackLabel}</a>
+          )}
+        </div>
+      ))}
+    </section>
   );
 }
