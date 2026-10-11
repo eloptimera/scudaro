@@ -31,7 +31,11 @@ async function adminToken(): Promise<string> {
     }),
     cache: "no-store",
   });
-  if (!res.ok) throw new Error(`Admin token request failed (${res.status})`);
+  if (!res.ok) {
+    // Shopify's error body names the cause (e.g. app not installed, wrong secret). It never contains our secret.
+    const detail = (await res.text().catch(() => "")).slice(0, 300);
+    throw new Error(`Admin token request failed (${res.status}): ${detail}`);
+  }
   const json = (await res.json()) as { access_token?: string; expires_in?: number };
   if (!json.access_token) throw new Error("Admin token response had no access_token");
   cached = { token: json.access_token, exp: Date.now() + (json.expires_in ?? 3600) * 1000 };
