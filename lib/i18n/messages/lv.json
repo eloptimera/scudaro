@@ -29,7 +29,7 @@
   "stage.scroll": "Ritini",
   "shop.all": "Visi produkti",
   "shop.eyebrow": "Scudaro · Sacīkšu dienas ielu apģērbs",
-  "shop.lead": "Izgatavots pēc pasūtījuma, katrs gabals apdrukāts atsevišķi. Bezmaksas piegāde virs {amount}.",
+  "shop.lead": "Ierobežotas tirāžas, bez atkārtotiem izlaidumiem. Bezmaksas piegāde virs {amount}.",
   "shop.filter": "Filtrēt produktus",
   "shop.filterAll": "Visi",
   "shop.kind.tee": "T-krekli",
@@ -162,5 +162,6 @@
   "newsletter.unsub.done": "Tu esi atteicies no abonementa. No mums vairs nesaņemsi e-pastus.",
   "newsletter.invalid.title": "Nederīga saite",
   "newsletter.invalid": "Šī saite nav derīga vai ir beigusies.",
-  "nav.track": "Izsekot pasūtījumu"
+  "nav.track": "Izsekot pasūtījumu",
+  "pdp.sizeGuide": "Izmēru tabula"
 }

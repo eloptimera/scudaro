@@ -29,7 +29,7 @@
   "stage.scroll": "Scroll",
   "shop.all": "Alle producten",
   "shop.eyebrow": "Scudaro · Streetwear voor raceday",
-  "shop.lead": "Op bestelling gemaakt, per stuk geprint. Gratis verzending vanaf {amount}.",
+  "shop.lead": "Beperkte oplages, geen herdrukken. Gratis verzending vanaf {amount}.",
   "shop.filter": "Filter producten",
   "shop.filterAll": "Alles",
   "shop.kind.tee": "T-shirts",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "Je bent uitgeschreven. Je ontvangt geen e-mails meer van ons.",
   "newsletter.invalid.title": "Ongeldige link",
   "newsletter.invalid": "Deze link is ongeldig of verlopen.",
-  "nav.track": "Bestelling volgen"
+  "nav.track": "Bestelling volgen",
+  "pdp.sizeGuide": "Maattabel"
 }

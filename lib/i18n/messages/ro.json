@@ -29,7 +29,7 @@
   "stage.scroll": "Derulează",
   "shop.all": "Toate produsele",
   "shop.eyebrow": "Scudaro · Streetwear pentru ziua cursei",
-  "shop.lead": "Făcut la comandă, imprimat bucată cu bucată. Livrare gratuită peste {amount}.",
+  "shop.lead": "Serii limitate, fără reeditări. Livrare gratuită peste {amount}.",
   "shop.filter": "Filtrează produsele",
   "shop.filterAll": "Toate",
   "shop.kind.tee": "Tricouri",
@@ -162,5 +162,6 @@
   "newsletter.unsub.done": "Te-ai dezabonat. Nu vei mai primi e-mailuri de la noi.",
   "newsletter.invalid.title": "Link invalid",
   "newsletter.invalid": "Acest link nu este valid sau a expirat.",
-  "nav.track": "Urmărește comanda"
+  "nav.track": "Urmărește comanda",
+  "pdp.sizeGuide": "Ghid de mărimi"
 }

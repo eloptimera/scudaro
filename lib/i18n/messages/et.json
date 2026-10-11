@@ -29,7 +29,7 @@
   "stage.scroll": "Keri",
   "shop.all": "Kõik tooted",
   "shop.eyebrow": "Scudaro · Võistluspäeva streetwear",
-  "shop.lead": "Tellimusel valmistatud, iga toode trükitakse eraldi. Tasuta kohaletoimetamine alates {amount}.",
+  "shop.lead": "Piiratud tiraaž, kordustrükke ei tule. Tasuta kohaletoimetamine alates {amount}.",
   "shop.filter": "Filtreeri tooteid",
   "shop.filterAll": "Kõik",
   "shop.kind.tee": "T-särgid",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "Oled tellimusest loobunud. Rohkem e-kirju sa meilt ei saa.",
   "newsletter.invalid.title": "Kehtetu link",
   "newsletter.invalid": "See link on kehtetu või aegunud.",
-  "nav.track": "Jälgi tellimust"
+  "nav.track": "Jälgi tellimust",
+  "pdp.sizeGuide": "Suuruste tabel"
 }

@@ -29,7 +29,7 @@
   "stage.scroll": "滚动",
   "shop.all": "全部商品",
   "shop.eyebrow": "Scudaro · 比赛日街头服饰",
-  "shop.lead": "按订单生产，逐件印制。满 {amount} 免运费。",
+  "shop.lead": "限量发售，绝不返单。满 {amount} 免运费。",
   "shop.filter": "筛选商品",
   "shop.filterAll": "全部",
   "shop.kind.tee": "T 恤",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "你已取消订阅，之后不会再收到我们的邮件。",
   "newsletter.invalid.title": "链接无效",
   "newsletter.invalid": "此链接无效或已过期。",
-  "nav.track": "追踪订单"
+  "nav.track": "追踪订单",
+  "pdp.sizeGuide": "尺码指南"
 }

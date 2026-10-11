@@ -29,7 +29,7 @@
   "stage.scroll": "Deslizar",
   "shop.all": "Todos os produtos",
   "shop.eyebrow": "Scudaro · Streetwear para dia de corrida",
-  "shop.lead": "Feito por encomenda, impresso peça a peça. Portes grátis acima de {amount}.",
+  "shop.lead": "Edições limitadas, sem reedições. Portes grátis acima de {amount}.",
   "shop.filter": "Filtrar produtos",
   "shop.filterAll": "Todos",
   "shop.kind.tee": "T-shirts",
@@ -162,5 +162,6 @@
   "newsletter.unsub.done": "Cancelaste a subscrição. Não vais receber mais e-mails nossos.",
   "newsletter.invalid.title": "Link inválido",
   "newsletter.invalid": "Este link não é válido ou expirou.",
-  "nav.track": "Rastrear encomenda"
+  "nav.track": "Rastrear encomenda",
+  "pdp.sizeGuide": "Guia de tamanhos"
 }

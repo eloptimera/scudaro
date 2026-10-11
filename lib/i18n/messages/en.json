@@ -29,7 +29,7 @@
   "stage.scroll": "Scroll",
   "shop.all": "All products",
   "shop.eyebrow": "Scudaro · Race-day streetwear",
-  "shop.lead": "Made to order, printed per piece. Free shipping over {amount}.",
+  "shop.lead": "Limited runs, no reprints. Free shipping over {amount}.",
   "shop.filter": "Filter products",
   "shop.filterAll": "All",
   "shop.kind.tee": "T-shirts",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "You're unsubscribed. You won't get any more emails from us.",
   "newsletter.invalid.title": "Link not valid",
   "newsletter.invalid": "This link is not valid or has expired.",
-  "nav.track": "Track order"
+  "nav.track": "Track order",
+  "pdp.sizeGuide": "Size guide"
 }

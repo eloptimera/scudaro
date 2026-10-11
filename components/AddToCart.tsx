@@ -7,6 +7,7 @@ import { useCart } from "./CartProvider";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
 import { useI18n } from "./I18nProvider";
+import LocalLink from "./LocalLink";
 
 type Group = { name: string; values: string[] };
 type Choice = Record<string, string>;
@@ -144,6 +145,11 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
                 </button>
               ))}
             </div>
+            {isSizeGroup(g) && g.values.length > 1 && (
+              <LocalLink href="/size-guide" className="pdp__sizeguide" target="_blank">
+                {t("pdp.sizeGuide")}
+              </LocalLink>
+            )}
           </div>
         ))}
 

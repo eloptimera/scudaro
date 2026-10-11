@@ -29,7 +29,7 @@
   "stage.scroll": "Desliza",
   "shop.all": "Todos los productos",
   "shop.eyebrow": "Scudaro · Streetwear para el día de carrera",
-  "shop.lead": "Hecho bajo pedido, estampado pieza a pieza. Envío gratis a partir de {amount}.",
+  "shop.lead": "Tiradas limitadas, sin reposiciones. Envío gratis a partir de {amount}.",
   "shop.filter": "Filtrar productos",
   "shop.filterAll": "Todos",
   "shop.kind.tee": "Camisetas",
@@ -162,5 +162,6 @@
   "newsletter.unsub.done": "Te has dado de baja. No recibirás más correos nuestros.",
   "newsletter.invalid.title": "Enlace no válido",
   "newsletter.invalid": "Este enlace no es válido o ha caducado.",
-  "nav.track": "Seguir pedido"
+  "nav.track": "Seguir pedido",
+  "pdp.sizeGuide": "Guía de tallas"
 }

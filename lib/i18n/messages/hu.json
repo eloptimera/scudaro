@@ -29,7 +29,7 @@
   "stage.scroll": "Görgess",
   "shop.all": "Összes termék",
   "shop.eyebrow": "Scudaro · Versenynapi streetwear",
-  "shop.lead": "Rendelésre készül, darabonként nyomtatva. Ingyenes szállítás {amount} felett.",
+  "shop.lead": "Limitált széria, nincs újragyártás. Ingyenes szállítás {amount} felett.",
   "shop.filter": "Termékek szűrése",
   "shop.filterAll": "Mind",
   "shop.kind.tee": "Pólók",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "Leiratkoztál. Több e-mailt nem kapsz tőlünk.",
   "newsletter.invalid.title": "Érvénytelen link",
   "newsletter.invalid": "Ez a link érvénytelen vagy lejárt.",
-  "nav.track": "Rendelés követése"
+  "nav.track": "Rendelés követése",
+  "pdp.sizeGuide": "Mérettáblázat"
 }

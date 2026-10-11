@@ -29,7 +29,7 @@
   "stage.scroll": "Slinkti",
   "shop.all": "Visi produktai",
   "shop.eyebrow": "Scudaro · Lenktynių dienos gatvės stilius",
-  "shop.lead": "Gaminama pagal užsakymą, kiekvienas gaminys spausdinamas atskirai. Nemokamas pristatymas nuo {amount}.",
+  "shop.lead": "Riboti tiražai, jokių pakartotinių leidimų. Nemokamas pristatymas nuo {amount}.",
   "shop.filter": "Filtruoti produktus",
   "shop.filterAll": "Visi",
   "shop.kind.tee": "Marškinėliai",
@@ -163,5 +163,6 @@
   "newsletter.unsub.done": "Prenumeratos atsisakei. Daugiau laiškų iš mūsų negausi.",
   "newsletter.invalid.title": "Netinkama nuoroda",
   "newsletter.invalid": "Ši nuoroda netinkama arba nebegalioja.",
-  "nav.track": "Sekti užsakymą"
+  "nav.track": "Sekti užsakymą",
+  "pdp.sizeGuide": "Dydžių lentelė"
 }

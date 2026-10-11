@@ -29,7 +29,7 @@
   "stage.scroll": "Vieritä",
   "shop.all": "Kaikki tuotteet",
   "shop.eyebrow": "Scudaro · Kisapäivän streetwear",
-  "shop.lead": "Valmistetaan tilauksesta, jokainen kappale painetaan erikseen. Ilmainen toimitus yli {amount}.",
+  "shop.lead": "Rajoitetut erät, ei uusintapainoksia. Ilmainen toimitus yli {amount}.",
   "shop.filter": "Suodata tuotteita",
   "shop.filterAll": "Kaikki",
   "shop.kind.tee": "T-paidat",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "Tilaus on peruttu. Et saa meiltä enää sähköposteja.",
   "newsletter.invalid.title": "Virheellinen linkki",
   "newsletter.invalid": "Tämä linkki ei ole voimassa tai se on vanhentunut.",
-  "nav.track": "Seuraa tilausta"
+  "nav.track": "Seuraa tilausta",
+  "pdp.sizeGuide": "Kokotaulukko"
 }

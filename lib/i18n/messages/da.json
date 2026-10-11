@@ -29,7 +29,7 @@
   "stage.scroll": "Scroll",
   "shop.all": "Alle produkter",
   "shop.eyebrow": "Scudaro · Streetwear til løbsdagen",
-  "shop.lead": "Lavet på bestilling, trykt til hvert stykke. Gratis fragt over {amount}.",
+  "shop.lead": "Begrænsede serier, ingen genoptryk. Gratis fragt over {amount}.",
   "shop.filter": "Filtrer produkter",
   "shop.filterAll": "Alle",
   "shop.kind.tee": "T-shirts",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "Du er afmeldt. Du får ikke flere e-mails fra os.",
   "newsletter.invalid.title": "Ugyldigt link",
   "newsletter.invalid": "Linket er ugyldigt eller udløbet.",
-  "nav.track": "Spor ordre"
+  "nav.track": "Spor ordre",
+  "pdp.sizeGuide": "Størrelsesguide"
 }

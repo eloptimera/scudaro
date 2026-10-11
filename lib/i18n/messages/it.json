@@ -29,7 +29,7 @@
   "stage.scroll": "Scorri",
   "shop.all": "Tutti i prodotti",
   "shop.eyebrow": "Scudaro · Streetwear da giorno di gara",
-  "shop.lead": "Realizzato su ordinazione, stampato pezzo per pezzo. Spedizione gratuita sopra {amount}.",
+  "shop.lead": "Edizioni limitate, nessuna ristampa. Spedizione gratuita sopra {amount}.",
   "shop.filter": "Filtra i prodotti",
   "shop.filterAll": "Tutti",
   "shop.kind.tee": "T-shirt",
@@ -162,5 +162,6 @@
   "newsletter.unsub.done": "Hai annullato l’iscrizione. Non riceverai altre e-mail da noi.",
   "newsletter.invalid.title": "Link non valido",
   "newsletter.invalid": "Questo link non è valido o è scaduto.",
-  "nav.track": "Traccia ordine"
+  "nav.track": "Traccia ordine",
+  "pdp.sizeGuide": "Guida alle taglie"
 }

@@ -29,7 +29,7 @@
   "stage.scroll": "Défiler",
   "shop.all": "Tous les produits",
   "shop.eyebrow": "Scudaro · Streetwear du jour de course",
-  "shop.lead": "Fabriqué à la commande, imprimé pièce par pièce. Livraison offerte dès {amount}.",
+  "shop.lead": "Séries limitées, aucun réassort. Livraison offerte dès {amount}.",
   "shop.filter": "Filtrer les produits",
   "shop.filterAll": "Tout",
   "shop.kind.tee": "T-shirts",
@@ -162,5 +162,6 @@
   "newsletter.unsub.done": "Tu es désabonné(e). Tu ne recevras plus d’e-mails de notre part.",
   "newsletter.invalid.title": "Lien non valide",
   "newsletter.invalid": "Ce lien n’est pas valide ou a expiré.",
-  "nav.track": "Suivre ma commande"
+  "nav.track": "Suivre ma commande",
+  "pdp.sizeGuide": "Guide des tailles"
 }

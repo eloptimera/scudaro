@@ -49,8 +49,8 @@ const en: Info = {
         cta: { href: "/track-order", label: "Track your order" },
       },
       {
-        q: "Are the pieces made to order?",
-        a: "Yes. Every Scudaro piece is produced on demand after you place your order, so nothing sits unsold in a warehouse and there are no minimums.",
+        q: "Are the pieces limited?",
+        a: "Yes. Every Scudaro collection is released in limited runs and we do not reprint. When a design is gone, it is gone.",
       },
       {
         q: "What is your return policy?",
@@ -161,7 +161,7 @@ const en: Info = {
     intro: "Enter the order number from your confirmation email and the email address you ordered with.",
     orderLabel: "Order number",
     eyebrow: "Delivery",
-    steps: ["Order received", "Being produced", "On its way", "Delivered"],
+    steps: ["Order received", "Being prepared", "On its way", "Delivered"],
     orderHint: "You'll find it in your confirmation email, e.g. #1001",
     emailLabel: "Email address",
     button: "Track order",
@@ -175,9 +175,9 @@ const en: Info = {
     trackLabel: "Track shipment",
     carrierLabel: "Carrier",
     numberLabel: "Tracking number",
-    status: { processing: "Being produced", shipped: "On its way", delivered: "Delivered", cancelled: "Cancelled" },
+    status: { processing: "Being prepared", shipped: "On its way", delivered: "Delivered", cancelled: "Cancelled" },
     statusText: {
-      processing: "Your order has been received and your pieces are being made. You will get an email with tracking once it ships.",
+      processing: "Your order has been received and your pieces are being prepared. You will get an email with tracking once it ships.",
       shipped: "Your order has shipped. Use the tracking link below to follow it.",
       delivered: "Your order has been delivered.",
       cancelled: "This order has been cancelled.",
@@ -203,8 +203,8 @@ const sv: Info = {
         cta: { href: "/track-order", label: "Spåra din order" },
       },
       {
-        q: "Tillverkas plaggen på beställning?",
-        a: "Ja. Varje Scudaro-plagg tillverkas på beställning efter att du lagt din order. Därför står inget osålt på ett lager, och det finns inga minimikrav.",
+        q: "Är plaggen limiterade?",
+        a: "Ja. Varje Scudaro-kollektion släpps i begränsade upplagor och vi trycker inte om. När en design är slut är den slut.",
       },
       {
         q: "Hur fungerar returer?",
@@ -315,7 +315,7 @@ const sv: Info = {
     intro: "Ange ordernumret från din orderbekräftelse och e-postadressen du beställde med.",
     orderLabel: "Ordernummer",
     eyebrow: "Leverans",
-    steps: ["Order mottagen", "Tillverkas", "På väg", "Levererad"],
+    steps: ["Order mottagen", "Förbereds", "På väg", "Levererad"],
     orderHint: "Du hittar det i orderbekräftelsen, t.ex. #1001",
     emailLabel: "E-postadress",
     button: "Spåra order",
@@ -329,9 +329,9 @@ const sv: Info = {
     trackLabel: "Spåra paketet",
     carrierLabel: "Transportör",
     numberLabel: "Spårningsnummer",
-    status: { processing: "Tillverkas", shipped: "På väg", delivered: "Levererad", cancelled: "Avbruten" },
+    status: { processing: "Förbereds", shipped: "På väg", delivered: "Levererad", cancelled: "Avbruten" },
     statusText: {
-      processing: "Din order är mottagen och dina plagg tillverkas. Du får ett mejl med spårning när den skickas.",
+      processing: "Din order är mottagen och dina plagg förbereds. Du får ett mejl med spårning när den skickas.",
       shipped: "Din order har skickats. Följ den med spårningslänken nedan.",
       delivered: "Din order har levererats.",
       cancelled: "Den här ordern har avbrutits.",

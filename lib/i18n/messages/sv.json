@@ -29,7 +29,7 @@
   "stage.scroll": "Scrolla",
   "shop.all": "Alla produkter",
   "shop.eyebrow": "Scudaro · Streetwear för racedagen",
-  "shop.lead": "Tillverkas på beställning, tryckt per plagg. Fri frakt över {amount}.",
+  "shop.lead": "Begränsade upplagor, inga nytryck. Fri frakt över {amount}.",
   "shop.filter": "Filtrera produkter",
   "shop.filterAll": "Alla",
   "shop.kind.tee": "T-shirts",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "Du är avregistrerad. Du får inga fler mejl från oss.",
   "newsletter.invalid.title": "Ogiltig länk",
   "newsletter.invalid": "Länken är ogiltig eller har gått ut.",
-  "nav.track": "Spåra order"
+  "nav.track": "Spåra order",
+  "pdp.sizeGuide": "Storleksguide"
 }

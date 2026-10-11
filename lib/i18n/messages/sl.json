@@ -29,7 +29,7 @@
   "stage.scroll": "Drsi",
   "shop.all": "Vsi izdelki",
   "shop.eyebrow": "Scudaro · Ulična moda za dan dirke",
-  "shop.lead": "Izdelano po naročilu, potisnjeno za vsak kos posebej. Brezplačna dostava nad {amount}.",
+  "shop.lead": "Omejene serije, brez ponatisov. Brezplačna dostava nad {amount}.",
   "shop.filter": "Filtriraj izdelke",
   "shop.filterAll": "Vse",
   "shop.kind.tee": "Majice",
@@ -163,5 +163,6 @@
   "newsletter.unsub.done": "Odjavljen/a si. Od nas ne boš več prejemal/a e-sporočil.",
   "newsletter.invalid.title": "Neveljavna povezava",
   "newsletter.invalid": "Ta povezava ni veljavna ali je potekla.",
-  "nav.track": "Sledi naročilu"
+  "nav.track": "Sledi naročilu",
+  "pdp.sizeGuide": "Tabela velikosti"
 }

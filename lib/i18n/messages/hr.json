@@ -29,7 +29,7 @@
   "stage.scroll": "Skrolaj",
   "shop.all": "Svi proizvodi",
   "shop.eyebrow": "Scudaro · Streetwear za dan utrke",
-  "shop.lead": "Izrada po narudžbi, tisak za svaki komad. Besplatna dostava iznad {amount}.",
+  "shop.lead": "Limitirane serije, bez ponovnog tiska. Besplatna dostava iznad {amount}.",
   "shop.filter": "Filtriraj proizvode",
   "shop.filterAll": "Sve",
   "shop.kind.tee": "Majice",
@@ -162,5 +162,6 @@
   "newsletter.unsub.done": "Odjavljen/a si. Više nećeš primati naše e-poruke.",
   "newsletter.invalid.title": "Neispravna poveznica",
   "newsletter.invalid": "Ova poveznica nije ispravna ili je istekla.",
-  "nav.track": "Prati narudžbu"
+  "nav.track": "Prati narudžbu",
+  "pdp.sizeGuide": "Tablica veličina"
 }

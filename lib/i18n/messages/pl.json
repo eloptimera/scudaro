@@ -29,7 +29,7 @@
   "stage.scroll": "Przewiń",
   "shop.all": "Wszystkie produkty",
   "shop.eyebrow": "Scudaro · Streetwear na dzień wyścigu",
-  "shop.lead": "Szyte na zamówienie, drukowane sztuka po sztuce. Darmowa dostawa od {amount}.",
+  "shop.lead": "Limitowane serie, bez dodruków. Darmowa dostawa od {amount}.",
   "shop.filter": "Filtruj produkty",
   "shop.filterAll": "Wszystko",
   "shop.kind.tee": "T-shirty",
@@ -163,5 +163,6 @@
   "newsletter.unsub.done": "Wypisano Cię. Nie będziesz już dostawać od nas e-maili.",
   "newsletter.invalid.title": "Nieprawidłowy link",
   "newsletter.invalid": "Ten link jest nieprawidłowy lub wygasł.",
-  "nav.track": "Śledź zamówienie"
+  "nav.track": "Śledź zamówienie",
+  "pdp.sizeGuide": "Tabela rozmiarów"
 }

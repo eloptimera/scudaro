@@ -29,7 +29,7 @@
   "stage.scroll": "Scrollen",
   "shop.all": "Alle Produkte",
   "shop.eyebrow": "Scudaro · Race-Day-Streetwear",
-  "shop.lead": "Auf Bestellung gefertigt, jedes Teil einzeln bedruckt. Gratis Versand ab {amount}.",
+  "shop.lead": "Limitierte Auflagen, keine Neuauflagen. Gratis Versand ab {amount}.",
   "shop.filter": "Produkte filtern",
   "shop.filterAll": "Alle",
   "shop.kind.tee": "T-Shirts",
@@ -161,5 +161,6 @@
   "newsletter.unsub.done": "Du bist abgemeldet. Du erhältst keine weiteren E-Mails von uns.",
   "newsletter.invalid.title": "Ungültiger Link",
   "newsletter.invalid": "Dieser Link ist ungültig oder abgelaufen.",
-  "nav.track": "Bestellung verfolgen"
+  "nav.track": "Bestellung verfolgen",
+  "pdp.sizeGuide": "Größentabelle"
 }

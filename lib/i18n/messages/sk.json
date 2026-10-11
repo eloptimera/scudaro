@@ -29,7 +29,7 @@
   "stage.scroll": "Posúvaj",
   "shop.all": "Všetky produkty",
   "shop.eyebrow": "Scudaro · Streetwear na deň pretekov",
-  "shop.lead": "Šité na objednávku, tlačené kus po kuse. Doprava zadarmo nad {amount}.",
+  "shop.lead": "Limitované série, žiadne dotlače. Doprava zadarmo nad {amount}.",
   "shop.filter": "Filtrovať produkty",
   "shop.filterAll": "Všetko",
   "shop.kind.tee": "Tričká",
@@ -163,5 +163,6 @@
   "newsletter.unsub.done": "Si odhlásený(á). Už od nás nedostaneš žiadne e-maily.",
   "newsletter.invalid.title": "Neplatný odkaz",
   "newsletter.invalid": "Tento odkaz je neplatný alebo vypršal.",
-  "nav.track": "Sledovať objednávku"
+  "nav.track": "Sledovať objednávku",
+  "pdp.sizeGuide": "Tabuľka veľkostí"
 }

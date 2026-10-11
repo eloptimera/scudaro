@@ -29,7 +29,7 @@
   "stage.scroll": "مرّر",
   "shop.all": "كل المنتجات",
   "shop.eyebrow": "Scudaro · أزياء شارع ليوم السباق",
-  "shop.lead": "تُصنع حسب الطلب وتُطبع لكل قطعة. شحن مجاني للطلبات فوق {amount}.",
+  "shop.lead": "كميات محدودة وبلا إعادة طباعة. شحن مجاني للطلبات فوق {amount}.",
   "shop.filter": "تصفية المنتجات",
   "shop.filterAll": "الكل",
   "shop.kind.tee": "تيشيرتات",
@@ -165,5 +165,6 @@
   "newsletter.unsub.done": "تم إلغاء اشتراكك. لن تصلك رسائل أخرى منا.",
   "newsletter.invalid.title": "رابط غير صالح",
   "newsletter.invalid": "هذا الرابط غير صالح أو منتهي الصلاحية.",
-  "nav.track": "تتبع الطلب"
+  "nav.track": "تتبع الطلب",
+  "pdp.sizeGuide": "دليل المقاسات"
 }

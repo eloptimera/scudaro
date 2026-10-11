@@ -474,6 +474,8 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .pdp__label { margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .opt { margin-bottom: 24px; }
 .opt__values { display: flex; flex-wrap: wrap; gap: 8px; }
+.pdp__sizeguide { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.pdp__sizeguide:hover { color: var(--red); }
 .pdp__label-value { font-weight: 500; letter-spacing: .04em; text-transform: none; color: var(--ink); }
 .swatch {
   display: inline-flex; align-items: center; gap: 10px;

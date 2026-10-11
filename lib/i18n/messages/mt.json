@@ -29,7 +29,7 @@
   "stage.scroll": "Skrollja",
   "shop.all": "Il-prodotti kollha",
   "shop.eyebrow": "Scudaro · Streetwear għall-jum tat-tellieqa",
-  "shop.lead": "Magħmul fuq ordni, stampat biċċa biċċa. Kunsinna b'xejn fuq {amount}.",
+  "shop.lead": "Edizzjonijiet limitati, bla ristampar. Kunsinna b'xejn fuq {amount}.",
   "shop.filter": "Iffiltra l-prodotti",
   "shop.filterAll": "Kollha",
   "shop.kind.tee": "T-shirts",
@@ -163,5 +163,6 @@
   "newsletter.unsub.done": "Ikkanċellajt l-abbonament. Mhux se tirċievi aktar emails mingħandna.",
   "newsletter.invalid.title": "Link mhux validu",
   "newsletter.invalid": "Dan il-link mhuwiex validu jew skada.",
-  "nav.track": "Segwi l-ordni"
+  "nav.track": "Segwi l-ordni",
+  "pdp.sizeGuide": "Gwida tad-daqsijiet"
 }

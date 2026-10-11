@@ -29,7 +29,7 @@
   "stage.scroll": "Scrollaigh",
   "shop.all": "Gach táirge",
   "shop.eyebrow": "Scudaro · Éadaí sráide lae rásaí",
-  "shop.lead": "Déanta ar ordú, priontáilte in aghaidh an phíosa. Seachadadh saor in aisce thar {amount}.",
+  "shop.lead": "Tréimhsí teoranta, gan athchlónna. Seachadadh saor in aisce thar {amount}.",
   "shop.filter": "Scag táirgí",
   "shop.filterAll": "Uile",
   "shop.kind.tee": "T-léinte",
@@ -164,5 +164,6 @@
   "newsletter.unsub.done": "Tá tú díchláraithe. Ní gheobhaidh tú tuilleadh ríomhphost uainn.",
   "newsletter.invalid.title": "Nasc neamhbhailí",
   "newsletter.invalid": "Níl an nasc seo bailí nó tá sé imithe in éag.",
-  "nav.track": "Rianaigh ordú"
+  "nav.track": "Rianaigh ordú",
+  "pdp.sizeGuide": "Treoir mhéide"
 }
