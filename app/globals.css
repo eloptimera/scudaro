@@ -776,3 +776,21 @@ html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: n
 .faq__a { padding: 0 0 24px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 .faq__a p { margin: 0 0 12px; }
 .faq__a a { color: var(--ink); font-weight: 600; text-decoration: underline; }
+
+/* Track order */
+.track__form { display: grid; gap: 16px; max-width: 480px; margin: 24px 0 0; }
+.track__field { display: grid; gap: 6px; }
+.track__field label { color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.track__field input { min-height: 48px; padding: 0 14px; background: #131315; border: 1px solid var(--line); color: var(--ink); font: inherit; font-size: 16px; }
+.track__field input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.track__form .btn { justify-self: start; }
+.track__out { margin-top: 24px; max-width: 480px; }
+.track__error { margin: 0; padding: 14px 16px; border: 1px solid var(--red); color: var(--ink); }
+.track__card { padding: 24px; border: 1px solid var(--line); background: #131315; display: grid; gap: 12px; }
+.track__card p { margin: 0; }
+.track__order { color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 22px; text-transform: uppercase; }
+.track__status { display: flex; align-items: baseline; gap: 12px; }
+.track__status strong { color: var(--ink); font-size: 18px; }
+.track__label { margin-inline-end: 8px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #8a8a8a; }
+.track__ship { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+.track__ship .btn { justify-self: start; margin-top: 4px; }
