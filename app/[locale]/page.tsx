@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import CarZoom from "@/components/CarZoom";
 import LocalLink from "@/components/LocalLink";
 import RaceStrip from "@/components/RaceStrip";
+import Shop from "@/components/Shop";
 import Stage from "@/components/Stage";
 import { info } from "@/lib/content/info";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
@@ -11,7 +12,7 @@ import { getF1 } from "@/lib/f1";
 import { isLocale } from "@/lib/i18n/config";
 import { alternatesFor } from "@/lib/i18n/seo";
 import { getT } from "@/lib/i18n/server";
-import { getCollections } from "@/lib/shopify";
+import { getCollections, getProducts } from "@/lib/shopify";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Home({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  const [collections, f1, t] = await Promise.all([getCollections(locale), getF1(), getT(locale)]);
+  const [collections, products, f1, t] = await Promise.all([getCollections(locale), getProducts(locale), getF1(), getT(locale)]);
 
   const faq = info(locale).faq;
 
@@ -38,6 +39,7 @@ export default async function Home({ params }: Props) {
       <Stage collections={collections} />
 
       <div className="announce">{t("home.announce", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}</div>
+      <Shop products={products} title={t("shop.all")} level={2} />
       <CarZoom next={f1.next} last={f1.last} />
       <RaceStrip next={f1.next} last={f1.last} />
       <section className="cta" aria-labelledby="cta-title">

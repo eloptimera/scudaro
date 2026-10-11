@@ -14,12 +14,17 @@ export default function Shop({
   products,
   title,
   crumb,
+  level = 1,
 }: {
   products: Product[];
   title: string;
   /** Back link shown above the title. */
   crumb?: { href: string; label: string };
+  /** 1 on the shop page (the page title). 2 when the shop is a section on another page (home). */
+  level?: 1 | 2;
 }) {
+  const Title = level === 2 ? "h2" : "h1";
+  const Name = level === 2 ? "h3" : "h2";
   const { t, plural, locale } = useI18n();
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState<Sort>("featured");
@@ -42,7 +47,7 @@ export default function Shop({
           </LocalLink>
         )}
         <p className="shop__eyebrow">{t("shop.eyebrow")}</p>
-        <h1 id="shop-title">{title}</h1>
+        <Title id="shop-title" className="shop__title">{title}</Title>
         <p className="shop__lead">
           {t("shop.lead", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}
         </p>
@@ -104,7 +109,7 @@ export default function Shop({
                 </div>
                 <div className="card__info">
                   <p className="card__kind">{t(`shop.name.${p.kind}`)}</p>
-                  <h2 className="card__name">{p.title}</h2>
+                  <Name className="card__name">{p.title}</Name>
                   <p className="card__price">
                     <span>{formatMoney(p.price, locale)}</span>
                     {p.compareAt && <s>{formatMoney(p.compareAt, locale)}</s>}

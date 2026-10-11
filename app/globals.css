@@ -217,7 +217,7 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .shop__crumb { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .shop__crumb:hover { color: var(--ink); }
 .shop__eyebrow { margin: 16px 0 8px; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--red); }
-.shop h1, .about h2 {
+.shop h1, .shop .shop__title, .about h2 {
   margin: 0;
   font-family: var(--display);
   font-weight: 800;
