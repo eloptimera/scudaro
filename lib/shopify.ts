@@ -535,7 +535,9 @@ function unwrap(p: CartPayload): Cart {
   if (p.userErrors?.length) throw new Error(p.userErrors.map((e) => e.message).join("; "));
   if (p.warnings?.length) console.warn("[cart] Shopify cart warnings", JSON.stringify(p.warnings));
   if (!p.cart) throw new Error("Shopify returned no cart");
-  return toCart(p.cart);
+  const cart = toCart(p.cart);
+  if (p.warnings?.length) cart.warnings = p.warnings.map((w) => w.code);
+  return cart;
 }
 
 export async function shopifyGetCart(cartId: string, locale: Locale = DEFAULT_LOCALE): Promise<Cart | null> {

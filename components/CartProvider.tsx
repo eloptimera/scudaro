@@ -67,7 +67,9 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         // Shopify only adds what is in stock. If the variant did not make it into the cart, say so instead of
         // opening a drawer that looks like the add worked.
         if (!next.lines.some((l) => l.variantId === variantId && l.quantity > 0)) {
-          setError(t("cart.soldOutVariant"));
+          // Only claim "sold out" when Shopify itself says so; any other reason gets the generic error.
+          const stock = next.warnings?.some((c) => c === "MERCHANDISE_OUT_OF_STOCK" || c === "MERCHANDISE_NOT_ENOUGH_STOCK");
+          setError(t(stock ? "cart.soldOutVariant" : "cart.error"));
           return false;
         }
         setOpen(true);

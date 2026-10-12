@@ -81,4 +81,6 @@ export type Cart = {
   totalQuantity: number;
   subtotal: Money;
   lines: CartLine[];
+  /** Shopify cart warning codes from the last add (e.g. MERCHANDISE_OUT_OF_STOCK). */
+  warnings?: string[];
 };
