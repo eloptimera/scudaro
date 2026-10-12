@@ -53,13 +53,20 @@ async function authHeaders(forCart: boolean): Promise<Record<string, string>> {
 
 type GqlOptions = { revalidate?: number; tags?: string[]; locale?: Locale };
 
-/** Adds `@inContext(language: $language)` to the (first) operation of a query so Shopify returns translated text. */
+/**
+ * Adds `@inContext(language: $language)` to the (first) operation of a query so Shopify returns translated text.
+ * If the operation already has an `@inContext(...)` (e.g. a country), the language is merged into it, because a
+ * query may only carry one such directive.
+ */
 function inLanguage(query: string): string {
-  return query.replace(
+  const withVars = query.replace(
     /\b(query|mutation)\s+(\w+)\s*(\(([^)]*)\))?/,
     (_m, kind: string, name: string, _p: string, vars?: string) =>
-      `${kind} ${name}(${vars ? `${vars}, ` : ""}$language: LanguageCode) @inContext(language: $language)`,
+      `${kind} ${name}(${vars ? `${vars}, ` : ""}$language: LanguageCode)`,
   );
+  return /@inContext\(/.test(withVars)
+    ? withVars.replace(/@inContext\(([^)]*)\)/, (_m, args: string) => `@inContext(${args}, language: $language)`)
+    : withVars.replace("$language: LanguageCode)", "$language: LanguageCode) @inContext(language: $language)");
 }
 
 /**
@@ -275,19 +282,45 @@ async function loadAllVariants(p: RawProduct, locale: Locale): Promise<RawProduc
   return { ...p, variants: { nodes } };
 }
 
+/**
+ * The visitor's country (set by Vercel). Shopify only reports availability correctly WITH a country: without one it
+ * says "available" for a product that the cart then refuses for every real buyer.
+ */
+async function buyerCountry(): Promise<string | undefined> {
+  try {
+    const c = (await headers()).get("x-vercel-ip-country")?.trim().toUpperCase();
+    return c && /^[A-Z]{2}$/.test(c) ? c : undefined;
+  } catch {
+    return undefined; // outside a request scope
+  }
+}
+
 export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE): Promise<Product | null> {
   if (!isShopifyEnabled) return MOCK_PRODUCTS.find((p) => p.handle === handle) ?? null;
-  const data = await storefront<{ product: RawProduct | null }>(
-    /* GraphQL */ `
-      ${PRODUCT_FRAGMENT}
-      query Product($handle: String!) {
-        product(handle: $handle) { ...ProductFields }
-      }
-    `,
-    { handle },
-    // Product page = the buying decision: always fresh (no data cache), so a variant that Shopify refuses is never shown as in stock.
-    { locale },
-  );
+  const run = (country?: string) =>
+    storefront<{ product: RawProduct | null }>(
+      /* GraphQL */ `
+        ${PRODUCT_FRAGMENT}
+        query Product($handle: String!) ${country ? `@inContext(country: ${country})` : ""} {
+          product(handle: $handle) { ...ProductFields }
+        }
+      `,
+      { handle },
+      // Product page = the buying decision: no data cache, and availability as seen from the visitor's country.
+      { locale },
+    );
+  const country = await buyerCountry();
+  let data: { product: RawProduct | null };
+  if (country) {
+    try {
+      data = await run(country);
+    } catch (err) {
+      console.error(`Product query for country ${country} failed, retrying without a country`, err);
+      data = await run();
+    }
+  } else {
+    data = await run();
+  }
   if (!data.product || !data.product.variants.nodes.length) return null;
   return toProduct(await loadAllVariants(data.product, locale));
 }
