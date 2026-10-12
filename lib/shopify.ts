@@ -266,7 +266,7 @@ async function loadAllVariants(p: RawProduct, locale: Locale): Promise<RawProduc
         }
       `,
       { id: p.id, after: endCursor },
-      { revalidate: 300, tags: ["products"], locale },
+      { locale },
     );
     if (!page.node) break;
     nodes.push(...page.node.variants.nodes);
@@ -285,7 +285,8 @@ export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE
       }
     `,
     { handle },
-    { revalidate: 300, tags: ["products"], locale },
+    // Product page = the buying decision: always fresh (no data cache), so a variant that Shopify refuses is never shown as in stock.
+    { locale },
   );
   if (!data.product || !data.product.variants.nodes.length) return null;
   return toProduct(await loadAllVariants(data.product, locale));
