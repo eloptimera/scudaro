@@ -455,6 +455,8 @@ const CART_FRAGMENT = /* GraphQL */ `
           ... on ProductVariant {
             id
             title
+            availableForSale
+            currentlyNotInStock
             price { amount currencyCode }
             image { url altText }
             product { handle title images(first: 1) { nodes { url altText } } }
@@ -477,6 +479,8 @@ type RawCart = {
       merchandise: {
         id: string;
         title: string;
+        availableForSale?: boolean;
+        currentlyNotInStock?: boolean;
         price: RawMoney;
         image: { url: string; altText: string | null } | null;
         product: { handle: string; title: string; images: { nodes: { url: string; altText: string | null }[] } };
@@ -486,6 +490,18 @@ type RawCart = {
 };
 
 function toCart(c: RawCart): Cart {
+  const dropped = c.lines.nodes.filter((l) => l.quantity <= 0);
+  if (dropped.length) {
+    // Diagnostics: shows in Vercel runtime logs why a line came back empty.
+    console.warn("[cart] Shopify returned zero-quantity lines", JSON.stringify(dropped.map((l) => ({
+      quantity: l.quantity,
+      variant: l.merchandise.id,
+      title: l.merchandise.product.title,
+      variantTitle: l.merchandise.title,
+      availableForSale: l.merchandise.availableForSale,
+      currentlyNotInStock: l.merchandise.currentlyNotInStock,
+    }))));
+  }
   return {
     id: c.id,
     checkoutUrl: c.checkoutUrl,
@@ -509,10 +525,15 @@ function toCart(c: RawCart): Cart {
   };
 }
 
-type CartPayload = { cart: RawCart | null; userErrors: { message: string }[] };
+type CartPayload = {
+  cart: RawCart | null;
+  userErrors: { message: string }[];
+  warnings?: { code: string; message: string; target: string }[];
+};
 
 function unwrap(p: CartPayload): Cart {
   if (p.userErrors?.length) throw new Error(p.userErrors.map((e) => e.message).join("; "));
+  if (p.warnings?.length) console.warn("[cart] Shopify cart warnings", JSON.stringify(p.warnings));
   if (!p.cart) throw new Error("Shopify returned no cart");
   return toCart(p.cart);
 }
@@ -531,7 +552,7 @@ export async function shopifyCreateCart(variantId: string, quantity: number, loc
     /* GraphQL */ `
       ${CART_FRAGMENT}
       mutation CartCreate($lines: [CartLineInput!]) {
-        cartCreate(input: { lines: $lines }) { cart { ...CartFields } userErrors { message } }
+        cartCreate(input: { lines: $lines }) { cart { ...CartFields } userErrors { message } warnings { code message target } }
       }
     `,
     { lines: [{ merchandiseId: variantId, quantity }] },
@@ -545,7 +566,7 @@ export async function shopifyAddLine(cartId: string, variantId: string, quantity
     /* GraphQL */ `
       ${CART_FRAGMENT}
       mutation CartAdd($cartId: ID!, $lines: [CartLineInput!]!) {
-        cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ...CartFields } userErrors { message } }
+        cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ...CartFields } userErrors { message } warnings { code message target } }
       }
     `,
     { cartId, lines: [{ merchandiseId: variantId, quantity }] },
