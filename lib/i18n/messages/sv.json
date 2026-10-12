@@ -77,6 +77,7 @@
   "cart.noteDemo": "Demoläge – anslut Shopify för att aktivera kassan.",
   "cart.checkout": "Till kassan",
   "cart.error": "Något gick fel när varukorgen uppdaterades. Försök igen.",
+  "cart.soldOutVariant": "Den storleken eller färgen tog just slut, så den lades inte i varukorgen. Välj en annan.",
   "footer.legal": "Juridiskt",
   "footer.cookies": "Cookies",
   "footer.org": "Org.nr {no}",

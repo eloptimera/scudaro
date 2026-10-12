@@ -77,6 +77,7 @@
   "cart.noteDemo": "Demo mode – connect Shopify to enable checkout.",
   "cart.checkout": "Checkout",
   "cart.error": "Something went wrong updating your cart. Please try again.",
+  "cart.soldOutVariant": "That size or colour just sold out, so it wasn't added to your cart. Please pick another.",
   "footer.legal": "Legal",
   "footer.cookies": "Cookies",
   "footer.org": "Org. no. {no}",

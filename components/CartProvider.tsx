@@ -37,15 +37,16 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     getCartAction(locale).then(setCart).catch(() => setCart(null));
   }, [locale]);
 
-  const run = useCallback(async (fn: () => Promise<Cart>): Promise<boolean> => {
+  const run = useCallback(async (fn: () => Promise<Cart>): Promise<Cart | null> => {
     setBusy(true);
     setError(null);
     try {
-      setCart(await fn());
-      return true;
+      const next = await fn();
+      setCart(next);
+      return next;
     } catch {
       setError(t("cart.error"));
-      return false;
+      return null;
     } finally {
       setBusy(false);
     }
@@ -61,9 +62,16 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       open: () => setOpen(true),
       close: () => setOpen(false),
       add: async (variantId) => {
-        const ok = await run(() => addToCartAction(variantId, 1, locale));
-        if (ok) setOpen(true);
-        return ok;
+        const next = await run(() => addToCartAction(variantId, 1, locale));
+        if (!next) return false;
+        // Shopify only adds what is in stock. If the variant did not make it into the cart, say so instead of
+        // opening a drawer that looks like the add worked.
+        if (!next.lines.some((l) => l.variantId === variantId && l.quantity > 0)) {
+          setError(t("cart.soldOutVariant"));
+          return false;
+        }
+        setOpen(true);
+        return true;
       },
       setQuantity: async (lineId, quantity) => {
         await run(() => updateLineAction(lineId, quantity, locale));
@@ -72,7 +80,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         await run(() => removeLineAction(lineId, locale));
       },
     }),
-    [cart, isOpen, busy, error, run, locale],
+    [cart, isOpen, busy, error, run, locale, t],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

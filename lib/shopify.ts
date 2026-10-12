@@ -491,7 +491,9 @@ function toCart(c: RawCart): Cart {
     checkoutUrl: c.checkoutUrl,
     totalQuantity: c.totalQuantity,
     subtotal: money(c.cost.subtotalAmount),
-    lines: c.lines.nodes.map((l): CartLine => {
+    // Shopify can hand back a line with quantity 0 when the variant has no stock to give (it clamps the
+    // requested quantity to what is available). Showing it gives a ghost "€0 × 0" row, so drop it.
+    lines: c.lines.nodes.filter((l) => l.quantity > 0).map((l): CartLine => {
       const img = l.merchandise.image ?? l.merchandise.product.images.nodes[0] ?? null;
       return {
         id: l.id,

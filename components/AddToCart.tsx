@@ -26,7 +26,7 @@ const hasValue = (v: Variant, name: string, value: string) => v.options.some((o)
 const matches = (v: Variant, choice: Choice) => Object.entries(choice).every(([n, val]) => hasValue(v, n, val));
 
 export default function AddToCart({ product, onColorImage }: { product: Product; onColorImage?: (img: Img) => void }) {
-  const { add, busy } = useCart();
+  const { add, busy, error } = useCart();
   const { t, locale } = useI18n();
   const single = product.variants.length === 1 && product.variants[0].title === "Default Title";
 
@@ -177,6 +177,7 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
         >
           {buttonLabel}
         </button>
+        {error && <p className="pdp__error" role="alert">{error}</p>}
       </div>
       <ul className="pdp__perks">
         <li>
