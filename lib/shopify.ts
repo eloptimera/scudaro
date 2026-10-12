@@ -604,3 +604,85 @@ export async function shopifyRemoveLine(cartId: string, lineId: string, locale: 
   );
   return unwrap(data.cartLinesRemove);
 }
+
+/* ---------------------- Diagnostics (temporary) ---------------------- */
+
+type DebugVariant = { id: string; title: string; availableForSale: boolean; currentlyNotInStock: boolean };
+type DebugProduct = { id: string; handle: string; title: string; variants: { nodes: DebugVariant[] } };
+
+/**
+ * TEMPORARY: compares fresh (uncached) Storefront availability with the cached product data the site renders from,
+ * then puts EVERY variant of the matched products into ONE cart (same country/buyer context) and reports, per
+ * variant, what Shopify answered. Creates an anonymous cart that is never checked out. Remove once solved.
+ */
+export async function debugCartCompare(needles: string[]) {
+  if (!isShopifyEnabled) return { error: "Shopify is not configured" };
+  const ctx = "@inContext(country: SE, language: EN)";
+
+  const fresh = await storefrontRaw<{ products: { nodes: DebugProduct[] } }>(
+    /* GraphQL */ `
+      query DebugProducts ${ctx} {
+        products(first: 100) {
+          nodes { id handle title variants(first: 100) { nodes { id title availableForSale currentlyNotInStock } } }
+        }
+      }
+    `,
+    {},
+    {}, // no `revalidate` → cache: "no-store"
+  );
+  const wanted = fresh.products.nodes.filter((p) => needles.some((n) => p.title.toLowerCase().includes(n.toLowerCase())));
+  if (!wanted.length) return { error: "No product matched", needles, titles: fresh.products.nodes.map((p) => p.title) };
+
+  // What the site itself renders from (goes through the 5-minute data cache).
+  const cached = new Map<string, boolean>();
+  for (const p of await getProducts()) for (const v of p.variants) cached.set(v.id, v.availableForSale);
+
+  const variants = wanted.flatMap((p) => p.variants.nodes.map((v) => ({ product: p.title, ...v })).slice(0, 50)).slice(0, 80);
+  const cart = await storefrontRaw<{
+    cartCreate: {
+      cart: { id: string; lines: { nodes: { id: string; quantity: number; merchandise: { id: string } }[] } } | null;
+      userErrors: { message: string; field: string[] | null }[];
+      warnings: { code: string; message: string; target: string }[];
+    };
+  }>(
+    /* GraphQL */ `
+      mutation DebugCart($lines: [CartLineInput!]) ${ctx} {
+        cartCreate(input: { lines: $lines }) {
+          cart { id lines(first: 100) { nodes { id quantity merchandise { ... on ProductVariant { id } } } } }
+          userErrors { message field }
+          warnings { code message target }
+        }
+      }
+    `,
+    { lines: variants.map((v) => ({ merchandiseId: v.id, quantity: 1 })) },
+    {},
+  );
+
+  const { cart: made, userErrors, warnings } = cart.cartCreate;
+  const lineByVariant = new Map((made?.lines.nodes ?? []).map((l) => [l.merchandise.id, l]));
+  const lineKey = (id: string) => id.split("?")[0];
+  const warnByLine = new Map<string, { code: string; message: string }>();
+  for (const w of warnings) warnByLine.set(lineKey(w.target), { code: w.code, message: w.message });
+
+  return {
+    country: "SE",
+    note: "One cart, all variants of the matched products, same request context.",
+    userErrors,
+    rawWarningCount: warnings.length,
+    rows: variants.map((v) => {
+      const line = lineByVariant.get(v.id);
+      const warn = line ? warnByLine.get(lineKey(line.id)) : undefined;
+      return {
+        product: v.product,
+        variant: v.title,
+        variantId: v.id,
+        freshAvailableForSale: v.availableForSale,
+        freshCurrentlyNotInStock: v.currentlyNotInStock,
+        cachedAvailableForSale: cached.get(v.id) ?? null,
+        cacheDiffers: cached.has(v.id) && cached.get(v.id) !== v.availableForSale,
+        cartLine: line ? { quantity: line.quantity } : "absent",
+        warning: warn ?? null,
+      };
+    }),
+  };
+}
