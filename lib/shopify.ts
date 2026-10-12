@@ -200,19 +200,34 @@ function toProduct(p: RawProduct): Product {
   };
 }
 
+/** Storefront queries are capped in size/cost, so we page through ALL products in chunks and nothing is left out. */
+const PAGE_SIZE = 50;
+const MAX_PAGES = 40;
+
 export async function getProducts(locale: Locale = DEFAULT_LOCALE): Promise<Product[]> {
   if (!isShopifyEnabled) return MOCK_PRODUCTS;
-  const data = await storefront<{ products: { nodes: RawProduct[] } }>(
-    /* GraphQL */ `
-      ${PRODUCT_FRAGMENT}
-      query Products {
-        products(first: 24, sortKey: CREATED_AT, reverse: true) { nodes { ...ProductFields } }
-      }
-    `,
-    {},
-    { revalidate: 300, tags: ["products"], locale },
-  );
-  return data.products.nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct);
+  const nodes: RawProduct[] = [];
+  let after: string | null = null;
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const data: { products: { pageInfo: { hasNextPage: boolean; endCursor: string | null }; nodes: RawProduct[] } } =
+      await storefront(
+        /* GraphQL */ `
+          ${PRODUCT_FRAGMENT}
+          query Products($first: Int!, $after: String) {
+            products(first: $first, after: $after, sortKey: CREATED_AT, reverse: true) {
+              pageInfo { hasNextPage endCursor }
+              nodes { ...ProductFields }
+            }
+          }
+        `,
+        { first: PAGE_SIZE, after },
+        { revalidate: 300, tags: ["products"], locale },
+      );
+    nodes.push(...data.products.nodes);
+    if (!data.products.pageInfo.hasNextPage || !data.products.pageInfo.endCursor) break;
+    after = data.products.pageInfo.endCursor;
+  }
+  return nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct);
 }
 
 type RawVariant = RawProduct["variants"]["nodes"][number];
@@ -364,7 +379,7 @@ export async function getCollection(handle: string, locale: Locale = DEFAULT_LOC
           title
           description
           image { url altText }
-          products(first: 24) {
+          products(first: 50) {
             nodes {
               ...ProductFields
               featuredImage { url altText }
