@@ -306,22 +306,29 @@ export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE
         }
       `,
       { handle },
-      // Product page = the buying decision: no data cache, and availability as seen from the visitor's country.
+      // Product page = the buying decision: no data cache.
       { locale },
     );
+
+  // Prices, images and text come from the plain query, so the page shows the same currency as the rest of the site.
+  const data = await run();
+  if (!data.product || !data.product.variants.nodes.length) return null;
+
+  // Availability alone is taken from the visitor's country: without one Shopify can say "available" for a variant
+  // that the cart then refuses. (A country query also converts prices to the local market currency, hence the overlay.)
   const country = await buyerCountry();
-  let data: { product: RawProduct | null };
   if (country) {
     try {
-      data = await run(country);
+      const local = await run(country);
+      const avail = new Map((local.product?.variants.nodes ?? []).map((v) => [v.id, v.availableForSale]));
+      for (const v of data.product.variants.nodes) {
+        const a = avail.get(v.id);
+        if (a !== undefined) v.availableForSale = a;
+      }
     } catch (err) {
-      console.error(`Product query for country ${country} failed, retrying without a country`, err);
-      data = await run();
+      console.error(`Availability query for country ${country} failed, using the default context`, err);
     }
-  } else {
-    data = await run();
   }
-  if (!data.product || !data.product.variants.nodes.length) return null;
   return toProduct(await loadAllVariants(data.product, locale));
 }
 
