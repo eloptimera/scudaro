@@ -386,7 +386,15 @@ function toCollection(c: RawCollection): Collection {
   };
 }
 
-/** All non-empty collections, newest first – these are the slides of the home carousel. */
+/** Carousel pinning: the Grid 26 collection always opens the carousel, NEED always closes it. */
+function carouselRank(c: Collection): number {
+  const key = `${c.handle} ${c.title}`.toLowerCase();
+  if (/grid[\s-]*(20)?26/.test(key)) return 0;
+  if (/(^|[\s-])need([\s-]|$)/.test(key)) return 2;
+  return 1;
+}
+
+/** All non-empty collections – the slides of the home carousel. Grid 26 first, NEED last, the rest newest first. */
 export async function getCollections(locale: Locale = DEFAULT_LOCALE): Promise<Collection[]> {
   if (!isShopifyEnabled) return MOCK_COLLECTIONS;
   const data = await storefront<{ collections: { nodes: RawCollection[] } }>(
@@ -401,7 +409,8 @@ export async function getCollections(locale: Locale = DEFAULT_LOCALE): Promise<C
   );
   return data.collections.nodes
     .filter((c) => !HIDDEN_COLLECTIONS.has(c.handle) && c.products.nodes.length > 0)
-    .map(toCollection);
+    .map(toCollection)
+    .sort((a, b) => carouselRank(a) - carouselRank(b)); // Array.sort is stable, so the rest keep their order
 }
 
 /** One collection plus the products in it (for /collections/[handle]). */

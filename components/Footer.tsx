@@ -7,6 +7,7 @@ import { getPolicies } from "@/lib/shopify";
 import LanguageSwitcher from "./LanguageSwitcher";
 import LocalLink from "./LocalLink";
 import Newsletter from "./Newsletter";
+import SocialIcon from "./SocialIcon";
 
 export default async function Footer({ locale }: { locale: Locale }) {
   const [policies, t] = await Promise.all([getPolicies(locale), getT(locale)]);
@@ -36,8 +37,8 @@ export default async function Footer({ locale }: { locale: Locale }) {
 
       <nav className="footer-links footer-social" aria-label="Social media">
         {SOCIAL.map((s) => (
-          <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer">
-            {s.name}
+          <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Scudaro on ${s.name}`}>
+            <SocialIcon name={s.name} />
           </a>
         ))}
       </nav>
