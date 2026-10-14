@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { COMPANY } from "@/lib/config";
+import { COMPANY, SOCIAL } from "@/lib/config";
 import type { Locale } from "@/lib/i18n/config";
 import { info } from "@/lib/content/info";
 import { getT } from "@/lib/i18n/server";
@@ -32,6 +32,14 @@ export default async function Footer({ locale }: { locale: Locale }) {
           <LocalLink key={p.handle} href={`/policies/${p.handle}`}>{p.title}</LocalLink>
         ))}
         <LocalLink href="/cookies">{t("footer.cookies")}</LocalLink>
+      </nav>
+
+      <nav className="footer-links footer-social" aria-label="Social media">
+        {SOCIAL.map((s) => (
+          <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer">
+            {s.name}
+          </a>
+        ))}
       </nav>
 
       {(company.length > 0 || COMPANY.email) && (
