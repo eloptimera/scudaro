@@ -12,6 +12,31 @@ import Reviews from "./Reviews";
 
 type Sort = "featured" | "low" | "high";
 
+/** "Grid Collection Tee - Talent 1" → { type: "tee", design: "talent 1" }. */
+const GRID = /^grid collection (tee|hoodie)\s*[-–]\s*(.+)$/i;
+
+/**
+ * Featured order: Grid Collection tees and hoodies first, paired by design – tee, then the matching hoodie –
+ * so each pair sits side by side in the grid (tee left, hoodie right). Everything else follows in Shopify's order.
+ */
+function groupGridPairs(list: Product[]): Product[] {
+  const pairs = new Map<string, { tee?: Product; hoodie?: Product }>();
+  const rest: Product[] = [];
+  for (const p of list) {
+    const m = GRID.exec(p.title.trim());
+    if (!m) {
+      rest.push(p);
+      continue;
+    }
+    const design = m[2].trim().toLowerCase().replace(/\s+/g, " ");
+    const pair = pairs.get(design) ?? {};
+    pair[m[1].toLowerCase() as "tee" | "hoodie"] = p;
+    pairs.set(design, pair);
+  }
+  const grouped = [...pairs.values()].flatMap((pair) => [pair.tee, pair.hoodie].filter((p): p is Product => !!p));
+  return [...grouped, ...rest];
+}
+
 export default function Shop({
   products,
   title,
@@ -39,6 +64,7 @@ export default function Shop({
     .filter((p) => filter === "all" || p.kind === filter)
     .slice()
     .sort((a, b) => (sort === "low" ? a.price.amount - b.price.amount : sort === "high" ? b.price.amount - a.price.amount : 0));
+  const ordered = sort === "featured" ? groupGridPairs(visible) : visible;
 
   return (
     <section className="shop" id="shop" aria-labelledby="shop-title">
@@ -114,7 +140,7 @@ export default function Shop({
         <p style={{ color: "var(--muted)" }}>{t("shop.empty")}</p>
       ) : (
         <div className="grid" key={`${filter}-${sort}`}>
-          {visible.map((p, i) => {
+          {ordered.map((p, i) => {
             const soldOut = p.variants.every((v) => !v.availableForSale);
             const tag = soldOut ? t("card.soldout") : p.tag;
             return (
