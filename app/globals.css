@@ -297,7 +297,7 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .card__kind { margin: 0 0 4px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .card__name { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.35; letter-spacing: .02em; }
 .card__price { margin: 6px 0 0; display: flex; gap: 10px; align-items: baseline; font-size: 14px; font-variant-numeric: tabular-nums; }
-.card__price s { color: #85858c; font-size: 13px; }
+.card__price s { color: var(--red); font-size: 13px; text-decoration-thickness: 1.5px; }
 
 @media (prefers-reduced-motion: no-preference) {
   .grid > .card { animation: card-in .5s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 40ms); }
@@ -495,7 +495,7 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
 .pdp__crumbs:hover { color: var(--ink); }
 .pdp__title { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(40px, 5vw, 72px); line-height: .95; text-transform: uppercase; }
 .pdp__price { margin: 14px 0 0; font-size: 20px; font-weight: 600; }
-.pdp__price s { margin-inline-start: 10px; font-size: 15px; font-weight: 400; color: #666; }
+.pdp__price s { margin-inline-start: 10px; font-size: 15px; font-weight: 400; color: var(--red); text-decoration-thickness: 1.5px; }
 .pdp__desc { margin: 22px 0 30px; max-width: 52ch; color: var(--muted); }
 .pdp__details { margin: 22px 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .pdp__details summary {
