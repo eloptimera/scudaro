@@ -51,6 +51,20 @@ export default function Shop({
         <p className="shop__lead">
           {t("shop.lead", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}
         </p>
+        <ul className="shop__perks">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2" /></svg>
+            <span>{t("pdp.perk.delivery")}</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4" /></svg>
+            <span>{t("pdp.perk.return")}</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z" /></svg>
+            <span>{t("shop.perk.trusted")}</span>
+          </li>
+        </ul>
       </header>
 
       {products.length > 0 && (

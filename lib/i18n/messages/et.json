@@ -165,5 +165,6 @@
   "pdp.sizeGuide": "Suuruste tabel",
   "pdp.perk.ship": "Tasuta kohaletoimetamine alates {amount}",
   "pdp.perk.return": "14 päeva tagastusõigus",
-  "pdp.perk.delivery": "Tavaliselt kohal alla 7 päevaga"
+  "pdp.perk.delivery": "Tavaliselt kohal alla 7 päevaga",
+  "shop.perk.trusted": "Meid usaldab üle 500 kliendi"
 }

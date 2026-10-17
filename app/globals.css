@@ -230,6 +230,9 @@ body:has(.stage-wrap) .site-header { margin-bottom: calc(var(--header-h) * -1); 
   text-transform: uppercase;
 }
 .shop__lead { margin: 16px 0 0; max-width: 52ch; color: var(--muted); font-size: 16px; }
+.shop__perks { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 20px 0 0; padding: 0; list-style: none; }
+.shop__perks li { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+.shop__perks svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .about h2 { font-size: clamp(36px, 5vw, 64px); line-height: 1; }
 
 .shop__bar {

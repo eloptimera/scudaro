@@ -166,5 +166,6 @@
   "pdp.sizeGuide": "Size guide",
   "pdp.perk.ship": "Free shipping over {amount}",
   "pdp.perk.return": "14-day returns",
-  "pdp.perk.delivery": "Usually delivered in under 7 days"
+  "pdp.perk.delivery": "Usually delivered in under 7 days",
+  "shop.perk.trusted": "Trusted by 500+ customers"
 }

@@ -165,5 +165,6 @@
   "pdp.sizeGuide": "Таблица с размери",
   "pdp.perk.ship": "Безплатна доставка над {amount}",
   "pdp.perk.return": "14 дни за връщане",
-  "pdp.perk.delivery": "Обикновено доставка до 7 дни"
+  "pdp.perk.delivery": "Обикновено доставка до 7 дни",
+  "shop.perk.trusted": "Над 500 клиенти ни се доверяват"
 }

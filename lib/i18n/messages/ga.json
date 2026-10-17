@@ -168,5 +168,6 @@
   "pdp.sizeGuide": "Treoir mhéide",
   "pdp.perk.ship": "Seachadadh saor in aisce thar {amount}",
   "pdp.perk.return": "Aischur 14 lá",
-  "pdp.perk.delivery": "Seachadta de ghnáth i níos lú ná 7 lá"
+  "pdp.perk.delivery": "Seachadta de ghnáth i níos lú ná 7 lá",
+  "shop.perk.trusted": "Tá muinín ag breis is 500 custaiméir asainn"
 }

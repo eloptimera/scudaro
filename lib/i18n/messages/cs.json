@@ -167,5 +167,6 @@
   "pdp.sizeGuide": "Tabulka velikostí",
   "pdp.perk.ship": "Doprava zdarma nad {amount}",
   "pdp.perk.return": "14 dní na vrácení",
-  "pdp.perk.delivery": "Obvykle doručení do 7 dnů"
+  "pdp.perk.delivery": "Obvykle doručení do 7 dnů",
+  "shop.perk.trusted": "Důvěřuje nám přes 500 zákazníků"
 }

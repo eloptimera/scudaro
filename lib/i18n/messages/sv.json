@@ -166,5 +166,6 @@
   "pdp.sizeGuide": "Storleksguide",
   "pdp.perk.ship": "Fri frakt över {amount}",
   "pdp.perk.return": "14 dagars retur",
-  "pdp.perk.delivery": "Levereras oftast på under 7 dagar"
+  "pdp.perk.delivery": "Levereras oftast på under 7 dagar",
+  "shop.perk.trusted": "500+ kunder litar på oss"
 }

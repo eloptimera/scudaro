@@ -166,5 +166,6 @@
   "pdp.sizeGuide": "Ghid de mărimi",
   "pdp.perk.ship": "Livrare gratuită peste {amount}",
   "pdp.perk.return": "Retur în 14 de zile",
-  "pdp.perk.delivery": "De obicei livrat în mai puțin de 7 zile"
+  "pdp.perk.delivery": "De obicei livrat în mai puțin de 7 zile",
+  "shop.perk.trusted": "Peste 500 de clienți au încredere în noi"
 }

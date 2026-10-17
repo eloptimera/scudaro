@@ -169,5 +169,6 @@
   "pdp.sizeGuide": "دليل المقاسات",
   "pdp.perk.ship": "شحن مجاني للطلبات فوق {amount}",
   "pdp.perk.return": "إرجاع خلال 14 يومًا",
-  "pdp.perk.delivery": "عادةً يصل خلال أقل من 7 أيام"
+  "pdp.perk.delivery": "عادةً يصل خلال أقل من 7 أيام",
+  "shop.perk.trusted": "يثق بنا أكثر من 500 عميل"
 }

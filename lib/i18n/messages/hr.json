@@ -166,5 +166,6 @@
   "pdp.sizeGuide": "Tablica veličina",
   "pdp.perk.ship": "Besplatna dostava iznad {amount}",
   "pdp.perk.return": "14 dana za povrat",
-  "pdp.perk.delivery": "Obično isporuka za manje od 7 dana"
+  "pdp.perk.delivery": "Obično isporuka za manje od 7 dana",
+  "shop.perk.trusted": "Vjeruje nam više od 500 kupaca"
 }

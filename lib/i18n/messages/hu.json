@@ -165,5 +165,6 @@
   "pdp.sizeGuide": "Mérettáblázat",
   "pdp.perk.ship": "Ingyenes szállítás {amount} felett",
   "pdp.perk.return": "14 napos visszaküldés",
-  "pdp.perk.delivery": "Általában 7 napon belül megérkezik"
+  "pdp.perk.delivery": "Általában 7 napon belül megérkezik",
+  "shop.perk.trusted": "Több mint 500 vásárló bízik bennünk"
 }

@@ -165,5 +165,6 @@
   "pdp.sizeGuide": "Kokotaulukko",
   "pdp.perk.ship": "Ilmainen toimitus yli {amount}",
   "pdp.perk.return": "14 päivän palautusoikeus",
-  "pdp.perk.delivery": "Yleensä perillä alle 7 päivässä"
+  "pdp.perk.delivery": "Yleensä perillä alle 7 päivässä",
+  "shop.perk.trusted": "Yli 500 asiakkaan luottama"
 }

@@ -167,5 +167,6 @@
   "pdp.sizeGuide": "Tabela rozmiarów",
   "pdp.perk.ship": "Darmowa dostawa od {amount}",
   "pdp.perk.return": "14 dni na zwrot",
-  "pdp.perk.delivery": "Zwykle dostawa w mniej niż 7 dni"
+  "pdp.perk.delivery": "Zwykle dostawa w mniej niż 7 dni",
+  "shop.perk.trusted": "Zaufało nam ponad 500 klientów"
 }
