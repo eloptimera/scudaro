@@ -171,5 +171,10 @@
   "shop.perk.trusted": "Dôveruje nám viac ako 500 zákazníkov",
   "shop.reviews.title": "Čo hovoria zákazníci",
   "shop.reviews.verified": "Overený kupujúci",
-  "shop.reviews.more": "Ďalšie recenzie na Instagrame"
+  "shop.reviews.more": "Ďalšie recenzie na Instagrame",
+  "promo.off": "Zľava {percent} % na celú objednávku",
+  "promo.use": "s kódom",
+  "promo.copy": "Kopírovať",
+  "promo.copied": "Skopírované!",
+  "promo.copyLabel": "Skopírovať zľavový kód {code}"
 }

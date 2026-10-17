@@ -170,5 +170,10 @@
   "shop.perk.trusted": "Mums uzticas vairāk nekā 500 klientu",
   "shop.reviews.title": "Ko saka klienti",
   "shop.reviews.verified": "Pārbaudīts pircējs",
-  "shop.reviews.more": "Vairāk atsauksmju Instagram"
+  "shop.reviews.more": "Vairāk atsauksmju Instagram",
+  "promo.off": "{percent}% atlaide visam pasūtījumam",
+  "promo.use": "ar kodu",
+  "promo.copy": "Kopēt",
+  "promo.copied": "Nokopēts!",
+  "promo.copyLabel": "Kopēt atlaides kodu {code}"
 }

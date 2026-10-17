@@ -169,5 +169,10 @@
   "shop.perk.trusted": "Meid usaldab üle 500 kliendi",
   "shop.reviews.title": "Mida kliendid ütlevad",
   "shop.reviews.verified": "Kinnitatud ostja",
-  "shop.reviews.more": "Rohkem arvustusi Instagramis"
+  "shop.reviews.more": "Rohkem arvustusi Instagramis",
+  "promo.off": "{percent}% allahindlust kogu tellimuselt",
+  "promo.use": "koodiga",
+  "promo.copy": "Kopeeri",
+  "promo.copied": "Kopeeritud!",
+  "promo.copyLabel": "Kopeeri sooduskood {code}"
 }

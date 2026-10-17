@@ -169,5 +169,10 @@
   "shop.perk.trusted": "500+ klanten vertrouwen ons",
   "shop.reviews.title": "Wat klanten zeggen",
   "shop.reviews.verified": "Geverifieerde koper",
-  "shop.reviews.more": "Meer reviews op Instagram"
+  "shop.reviews.more": "Meer reviews op Instagram",
+  "promo.off": "{percent}% korting op je hele bestelling",
+  "promo.use": "met code",
+  "promo.copy": "Kopiëren",
+  "promo.copied": "Gekopieerd!",
+  "promo.copyLabel": "Kortingscode {code} kopiëren"
 }

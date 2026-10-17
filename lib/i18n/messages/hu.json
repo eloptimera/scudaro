@@ -169,5 +169,10 @@
   "shop.perk.trusted": "Több mint 500 vásárló bízik bennünk",
   "shop.reviews.title": "Ezt mondják a vásárlók",
   "shop.reviews.verified": "Ellenőrzött vásárló",
-  "shop.reviews.more": "További vélemények az Instagramon"
+  "shop.reviews.more": "További vélemények az Instagramon",
+  "promo.off": "{percent}% kedvezmény a teljes rendelésre",
+  "promo.use": "a kóddal:",
+  "promo.copy": "Másolás",
+  "promo.copied": "Másolva!",
+  "promo.copyLabel": "{code} kedvezménykód másolása"
 }

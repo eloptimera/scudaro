@@ -169,5 +169,10 @@
   "shop.perk.trusted": "Μας εμπιστεύονται πάνω από 500 πελάτες",
   "shop.reviews.title": "Τι λένε οι πελάτες",
   "shop.reviews.verified": "Επαληθευμένος αγοραστής",
-  "shop.reviews.more": "Περισσότερες κριτικές στο Instagram"
+  "shop.reviews.more": "Περισσότερες κριτικές στο Instagram",
+  "promo.off": "{percent}% έκπτωση σε όλη την παραγγελία",
+  "promo.use": "με τον κωδικό",
+  "promo.copy": "Αντιγραφή",
+  "promo.copied": "Αντιγράφηκε!",
+  "promo.copyLabel": "Αντιγραφή κωδικού έκπτωσης {code}"
 }

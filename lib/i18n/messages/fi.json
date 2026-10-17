@@ -169,5 +169,10 @@
   "shop.perk.trusted": "Yli 500 asiakkaan luottama",
   "shop.reviews.title": "Asiakkaat sanovat",
   "shop.reviews.verified": "Varmennettu ostaja",
-  "shop.reviews.more": "Lisää arvosteluja Instagramissa"
+  "shop.reviews.more": "Lisää arvosteluja Instagramissa",
+  "promo.off": "{percent} % alennus koko tilauksesta",
+  "promo.use": "koodilla",
+  "promo.copy": "Kopioi",
+  "promo.copied": "Kopioitu!",
+  "promo.copyLabel": "Kopioi alennuskoodi {code}"
 }

@@ -170,5 +170,10 @@
   "shop.perk.trusted": "Oltre 500 clienti si fidano di noi",
   "shop.reviews.title": "Cosa dicono i clienti",
   "shop.reviews.verified": "Acquirente verificato",
-  "shop.reviews.more": "Altre recensioni su Instagram"
+  "shop.reviews.more": "Altre recensioni su Instagram",
+  "promo.off": "{percent}% di sconto su tutto l'ordine",
+  "promo.use": "con il codice",
+  "promo.copy": "Copia",
+  "promo.copied": "Copiato!",
+  "promo.copyLabel": "Copia il codice sconto {code}"
 }

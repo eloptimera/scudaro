@@ -171,5 +171,10 @@
   "shop.perk.trusted": "Zaupa nam več kot 500 strank",
   "shop.reviews.title": "Kaj pravijo kupci",
   "shop.reviews.verified": "Preverjen kupec",
-  "shop.reviews.more": "Več mnenj na Instagramu"
+  "shop.reviews.more": "Več mnenj na Instagramu",
+  "promo.off": "{percent} % popusta na celotno naročilo",
+  "promo.use": "s kodo",
+  "promo.copy": "Kopiraj",
+  "promo.copied": "Kopirano!",
+  "promo.copyLabel": "Kopiraj kodo za popust {code}"
 }

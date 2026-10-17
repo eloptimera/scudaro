@@ -171,5 +171,10 @@
   "shop.perk.trusted": "Aktar minn 500 klijent jafdawna",
   "shop.reviews.title": "X'jgħidu l-klijenti",
   "shop.reviews.verified": "Xerrej ivverifikat",
-  "shop.reviews.more": "Aktar reviews fuq Instagram"
+  "shop.reviews.more": "Aktar reviews fuq Instagram",
+  "promo.off": "{percent}% skont fuq l-ordni kollha",
+  "promo.use": "bil-kodiċi",
+  "promo.copy": "Ikkopja",
+  "promo.copied": "Ikkupjat!",
+  "promo.copyLabel": "Ikkopja l-kodiċi tal-iskont {code}"
 }

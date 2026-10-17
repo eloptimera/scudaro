@@ -56,3 +56,6 @@ export const PRICE_REDUCTION = {
   amount: 5,
   endsAt: "2026-11-01T00:00:00+01:00",
 } as const;
+
+/** Discount code promoted on the home page, shop page and every product page. Set to null to hide it everywhere. */
+export const PROMO_CODE: { code: string; percent: number } | null = { code: "10OFF", percent: 10 };

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CarZoom from "@/components/CarZoom";
 import LocalLink from "@/components/LocalLink";
+import PromoCode from "@/components/PromoCode";
 import RaceStrip from "@/components/RaceStrip";
 import Shop from "@/components/Shop";
 import Stage from "@/components/Stage";
@@ -37,6 +38,8 @@ export default async function Home({ params }: Props) {
       <h1 className="sr-only">{t("home.h1")}</h1>
 
       <Stage collections={collections} />
+
+      <PromoCode variant="bar" />
 
       <div className="announce">{t("home.announce", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}</div>
       <Shop products={products} title={t("shop.all")} level={2} />

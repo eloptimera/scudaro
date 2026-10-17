@@ -7,6 +7,7 @@ import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { useI18n } from "./I18nProvider";
 import LocalLink from "./LocalLink";
 import ProductVisual from "./ProductVisual";
+import PromoCode from "./PromoCode";
 import Reviews from "./Reviews";
 
 type Sort = "featured" | "low" | "high";
@@ -66,6 +67,7 @@ export default function Shop({
             <span>{t("shop.perk.trusted")}</span>
           </li>
         </ul>
+        {level === 1 && <PromoCode />}
       </header>
 
       {level === 1 && <Reviews className="reviews--shop" />}

@@ -169,5 +169,10 @@
   "shop.perk.trusted": "深受 500+ 位顾客信赖",
   "shop.reviews.title": "顾客评价",
   "shop.reviews.verified": "已验证买家",
-  "shop.reviews.more": "在 Instagram 上查看更多评价"
+  "shop.reviews.more": "在 Instagram 上查看更多评价",
+  "promo.off": "全单享 {percent}% 折扣",
+  "promo.use": "使用优惠码",
+  "promo.copy": "复制",
+  "promo.copied": "已复制！",
+  "promo.copyLabel": "复制优惠码 {code}"
 }

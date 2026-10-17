@@ -169,5 +169,10 @@
   "shop.perk.trusted": "Над 500 клиенти ни се доверяват",
   "shop.reviews.title": "Какво казват клиентите",
   "shop.reviews.verified": "Потвърден купувач",
-  "shop.reviews.more": "Още отзиви в Instagram"
+  "shop.reviews.more": "Още отзиви в Instagram",
+  "promo.off": "{percent}% отстъпка за цялата поръчка",
+  "promo.use": "с код",
+  "promo.copy": "Копирай",
+  "promo.copied": "Копирано!",
+  "promo.copyLabel": "Копирай кода за отстъпка {code}"
 }

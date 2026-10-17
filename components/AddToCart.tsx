@@ -8,6 +8,7 @@ import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
 import { useI18n } from "./I18nProvider";
 import LocalLink from "./LocalLink";
+import PromoCode from "./PromoCode";
 import Reviews from "./Reviews";
 
 type Group = { name: string; values: string[] };
@@ -116,6 +117,7 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
         {formatMoney(price, locale)}
         {compareAt && compareAt.amount > price.amount && <s>{formatMoney(compareAt, locale)}</s>}
       </p>
+      <PromoCode />
 
       {product.description && (
         <details className="pdp__details">

@@ -170,5 +170,10 @@
   "shop.perk.trusted": "500+ kunder litar på oss",
   "shop.reviews.title": "Det här säger kunderna",
   "shop.reviews.verified": "Verifierad köpare",
-  "shop.reviews.more": "Fler recensioner på Instagram"
+  "shop.reviews.more": "Fler recensioner på Instagram",
+  "promo.off": "{percent} % rabatt på hela ordern",
+  "promo.use": "med koden",
+  "promo.copy": "Kopiera",
+  "promo.copied": "Kopierad!",
+  "promo.copyLabel": "Kopiera rabattkoden {code}"
 }

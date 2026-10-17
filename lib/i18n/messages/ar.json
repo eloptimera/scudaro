@@ -173,5 +173,10 @@
   "shop.perk.trusted": "يثق بنا أكثر من 500 عميل",
   "shop.reviews.title": "ماذا يقول عملاؤنا",
   "shop.reviews.verified": "مشترٍ موثّق",
-  "shop.reviews.more": "مزيد من المراجعات على Instagram"
+  "shop.reviews.more": "مزيد من المراجعات على Instagram",
+  "promo.off": "خصم {percent}% على طلبك بالكامل",
+  "promo.use": "باستخدام الرمز",
+  "promo.copy": "نسخ",
+  "promo.copied": "تم النسخ!",
+  "promo.copyLabel": "نسخ رمز الخصم {code}"
 }

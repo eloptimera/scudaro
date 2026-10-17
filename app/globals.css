@@ -922,7 +922,7 @@ html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: n
 .contact__done { margin: 0; padding: 14px 16px; border: 1px solid var(--ink); color: var(--ink); line-height: 1.5; }
 
 /* Customer reviews (dropdown on the shop page and every product page) */
-.reviews--shop { margin: 24px 0 0; }
+.reviews--shop { margin: 0; border-top: 0; }
 .reviews--pdp { margin: 22px 0 0; }
 .reviews__count { margin-left: auto; padding-right: 12px; color: var(--muted); font-weight: 400; }
 .reviews__body { padding: 0 0 18px; }
@@ -936,3 +936,22 @@ html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: n
 .review__by { display: flex; flex-direction: column; gap: 2px; margin: 0; font-size: 13px; }
 .review__name { color: var(--ink); font-weight: 600; }
 .review__meta { color: var(--muted); font-size: 12px; }
+
+/* Discount code callout (home bar, shop page, product pages) */
+.promo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.promo__text { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.4; }
+.promo__text strong { font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.promo__code {
+  display: inline-flex; align-items: stretch; min-height: 44px; padding: 0;
+  border: 1.5px dashed var(--red); background: transparent; color: var(--ink);
+}
+.promo__value { display: flex; align-items: center; padding: 0 14px; font-size: 15px; font-weight: 700; letter-spacing: .14em; }
+.promo__action {
+  display: flex; align-items: center; padding: 0 14px; background: var(--red); color: #fff;
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+}
+.promo__code:hover .promo__action { background: #a31217; }
+.promo--box { margin: 18px 0 0; padding: 14px 16px; border: 1px solid var(--red); background: rgba(196, 22, 28, .1); justify-content: space-between; }
+.shop__hero .promo--box { margin-top: 24px; max-width: 640px; }
+.promo--bar { justify-content: center; padding: 14px 16px; background: #0e0e10; }
+.promo--bar .promo__text { font-size: 15px; }

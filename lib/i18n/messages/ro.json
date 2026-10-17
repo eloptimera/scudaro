@@ -170,5 +170,10 @@
   "shop.perk.trusted": "Peste 500 de clienți au încredere în noi",
   "shop.reviews.title": "Ce spun clienții",
   "shop.reviews.verified": "Cumpărător verificat",
-  "shop.reviews.more": "Mai multe recenzii pe Instagram"
+  "shop.reviews.more": "Mai multe recenzii pe Instagram",
+  "promo.off": "{percent}% reducere la întreaga comandă",
+  "promo.use": "cu codul",
+  "promo.copy": "Copiază",
+  "promo.copied": "Copiat!",
+  "promo.copyLabel": "Copiază codul de reducere {code}"
 }
