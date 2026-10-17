@@ -42,31 +42,33 @@ export default function Shop({
 
   return (
     <section className="shop" id="shop" aria-labelledby="shop-title">
-      <header className="shop__hero">
-        {crumb && (
-          <LocalLink href={crumb.href} className="shop__crumb">
-            <span className="dir-arrow" aria-hidden="true">&larr;</span> {crumb.label}
-          </LocalLink>
-        )}
-        <p className="shop__eyebrow">{t("shop.eyebrow")}</p>
-        <Title id="shop-title" className="shop__title">{title}</Title>
-        <p className="shop__lead">
-          {t("shop.lead", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}
-        </p>
-        <ul className="shop__perks">
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2" /></svg>
-            <span>{t("pdp.perk.delivery")}</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4" /></svg>
-            <span>{t("pdp.perk.return")}</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z" /></svg>
-            <span>{t("shop.perk.trusted")}</span>
-          </li>
-        </ul>
+      <header className={`shop__hero${level === 1 ? " shop__hero--promo" : ""}`}>
+        <div className="shop__intro">
+          {crumb && (
+            <LocalLink href={crumb.href} className="shop__crumb">
+              <span className="dir-arrow" aria-hidden="true">&larr;</span> {crumb.label}
+            </LocalLink>
+          )}
+          <p className="shop__eyebrow">{t("shop.eyebrow")}</p>
+          <Title id="shop-title" className="shop__title">{title}</Title>
+          <p className="shop__lead">
+            {t("shop.lead", { amount: formatMoney(FREE_SHIPPING_THRESHOLD, locale) })}
+          </p>
+          <ul className="shop__perks">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2" /></svg>
+              <span>{t("pdp.perk.delivery")}</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4" /></svg>
+              <span>{t("pdp.perk.return")}</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z" /></svg>
+              <span>{t("shop.perk.trusted")}</span>
+            </li>
+          </ul>
+        </div>
         {level === 1 && <PromoCode />}
       </header>
 

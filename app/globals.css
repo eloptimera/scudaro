@@ -953,5 +953,12 @@ html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: n
 .promo__code:hover .promo__action { background: #a31217; }
 .promo--box { margin: 18px 0 0; padding: 14px 16px; border: 1px solid var(--red); background: rgba(196, 22, 28, .1); justify-content: space-between; }
 .shop__hero .promo--box { margin-top: 24px; max-width: 640px; }
+@media (min-width: 900px) {
+  .shop__hero--promo { display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+  .shop__hero--promo .shop__intro { min-width: 0; }
+  .shop__hero--promo .promo--box { flex: none; flex-direction: column; align-items: flex-start; gap: 12px; margin: 0; padding: 20px 22px; max-width: 360px; }
+  .shop__hero--promo .promo__text { font-size: 14px; color: var(--muted); }
+  .shop__hero--promo .promo__text strong { display: block; margin-bottom: 2px; font-size: 20px; color: var(--ink); }
+}
 .promo--bar { justify-content: center; padding: 14px 16px; background: #0e0e10; }
 .promo--bar .promo__text { font-size: 15px; }
