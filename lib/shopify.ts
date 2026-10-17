@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { MOCK_COLLECTIONS, MOCK_PRODUCTS, mockCollectionProducts } from "./mock";
 import { DEFAULT_LOCALE, shopifyLanguage, type Locale } from "./i18n/config";
 import type { Cart, CartLine, Collection, Img, Money, Policy, Product, ProductKind, Variant } from "./types";
+import { PRICE_REDUCTION } from "./config";
 
 /* ------------------------------------------------------------------ *
  * Shopify Storefront API client.
@@ -177,6 +178,15 @@ function tagValue(tags: string[], key: string): string | undefined {
   return t ? t.slice(key.length + 1).trim() : undefined;
 }
 
+/** Shopify's compare-at price if set, otherwise the site-wide reduction while it runs (see PRICE_REDUCTION). */
+function withReduction(price: Money, compareAt: Money | null): Money | null {
+  if (compareAt && compareAt.amount > price.amount) return compareAt;
+  if (PRICE_REDUCTION.amount > 0 && Date.now() < Date.parse(PRICE_REDUCTION.endsAt)) {
+    return { amount: Math.round((price.amount + PRICE_REDUCTION.amount) * 100) / 100, currencyCode: price.currencyCode };
+  }
+  return null;
+}
+
 function toProduct(p: RawProduct): Product {
   const variants: Variant[] = p.variants.nodes.map((v) => ({
     id: v.id,
@@ -184,7 +194,7 @@ function toProduct(p: RawProduct): Product {
     options: v.selectedOptions?.length ? v.selectedOptions : [{ name: "Size", value: v.title }],
     availableForSale: v.availableForSale,
     price: money(v.price),
-    compareAt: v.compareAtPrice ? money(v.compareAtPrice) : null,
+    compareAt: withReduction(money(v.price), v.compareAtPrice ? money(v.compareAtPrice) : null),
     image: v.image ? { url: v.image.url, alt: v.image.altText ?? p.title } : null,
   }));
   const cheapest = variants.reduce((a, b) => (b.price.amount < a.price.amount ? b : a), variants[0]);

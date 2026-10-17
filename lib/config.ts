@@ -44,3 +44,15 @@ export const REVIEWS = [
     en: "Great cap! Fits perfectly and the details on the embroidery are spot on.",
   },
 ] as const;
+
+/**
+ * Price reduction shown on the site: every product shows its previous price (current price + `amount`)
+ * struck through in red, until `endsAt`. Afterwards nothing is shown – no code change needed.
+ * EU/Swedish law: the struck-through price must be the lowest price actually charged in the 30 days
+ * before the reduction, and a reduction can't run indefinitely. Keep `endsAt` close.
+ * A compare-at price set in Shopify always takes precedence over this.
+ */
+export const PRICE_REDUCTION = {
+  amount: 5,
+  endsAt: "2026-11-01T00:00:00+01:00",
+} as const;
