@@ -3,10 +3,11 @@
 import { useId, useState, type CSSProperties } from "react";
 import type { Product } from "@/lib/types";
 import { formatMoney } from "@/lib/format";
-import { FREE_SHIPPING_THRESHOLD, REVIEWS, SOCIAL } from "@/lib/config";
+import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { useI18n } from "./I18nProvider";
 import LocalLink from "./LocalLink";
 import ProductVisual from "./ProductVisual";
+import Reviews from "./Reviews";
 
 type Sort = "featured" | "low" | "high";
 
@@ -67,33 +68,7 @@ export default function Shop({
         </ul>
       </header>
 
-      {level === 1 && (
-        <section className="reviews" aria-labelledby="reviews-title">
-          <div className="reviews__head">
-            <h2 id="reviews-title" className="reviews__title">{t("shop.reviews.title")}</h2>
-            <a className="reviews__more" href={SOCIAL[0].href} target="_blank" rel="noopener noreferrer">
-              {t("shop.reviews.more")} <span className="dir-arrow" aria-hidden="true">&rarr;</span>
-            </a>
-          </div>
-          <ul className="reviews__list">
-            {REVIEWS.map((r) => (
-              <li key={r.name} className="review">
-                <blockquote className="review__quote" lang={locale === "sv" ? "sv" : "en"}>
-                  <p>&ldquo;{locale === "sv" ? r.quote : r.en}&rdquo;</p>
-                </blockquote>
-                <p className="review__by">
-                  <span className="review__name">{r.name}</span>
-                  <span className="review__meta">
-                    {t("shop.reviews.verified")}
-                    {r.product ? ` · ${r.product}` : ""}
-                  </span>
-                </p>
-                {locale !== "sv" && <p className="review__note">{t("shop.reviews.translated")}</p>}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {level === 1 && <Reviews className="reviews--shop" />}
 
       {products.length > 0 && (
         <div className="shop__bar">

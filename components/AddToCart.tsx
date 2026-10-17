@@ -8,6 +8,7 @@ import { FREE_SHIPPING_THRESHOLD } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
 import { useI18n } from "./I18nProvider";
 import LocalLink from "./LocalLink";
+import Reviews from "./Reviews";
 
 type Group = { name: string; values: string[] };
 type Choice = Record<string, string>;
@@ -193,6 +194,7 @@ export default function AddToCart({ product, onColorImage }: { product: Product;
           <span>{t("pdp.perk.delivery")}</span>
         </li>
       </ul>
+      <Reviews className="reviews--pdp" />
     </>
   );
 }
