@@ -170,5 +170,9 @@
   "pdp.perk.ship": "شحن مجاني للطلبات فوق {amount}",
   "pdp.perk.return": "إرجاع خلال 14 يومًا",
   "pdp.perk.delivery": "عادةً يصل خلال أقل من 7 أيام",
-  "shop.perk.trusted": "يثق بنا أكثر من 500 عميل"
+  "shop.perk.trusted": "يثق بنا أكثر من 500 عميل",
+  "shop.reviews.title": "ماذا يقول عملاؤنا",
+  "shop.reviews.verified": "مشترٍ موثّق",
+  "shop.reviews.more": "مزيد من المراجعات على Instagram",
+  "shop.reviews.translated": "مترجم من السويدية"
 }

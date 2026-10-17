@@ -166,5 +166,9 @@
   "pdp.perk.ship": "Ilmainen toimitus yli {amount}",
   "pdp.perk.return": "14 päivän palautusoikeus",
   "pdp.perk.delivery": "Yleensä perillä alle 7 päivässä",
-  "shop.perk.trusted": "Yli 500 asiakkaan luottama"
+  "shop.perk.trusted": "Yli 500 asiakkaan luottama",
+  "shop.reviews.title": "Asiakkaat sanovat",
+  "shop.reviews.verified": "Varmennettu ostaja",
+  "shop.reviews.more": "Lisää arvosteluja Instagramissa",
+  "shop.reviews.translated": "Käännetty ruotsista"
 }

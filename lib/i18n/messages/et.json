@@ -166,5 +166,9 @@
   "pdp.perk.ship": "Tasuta kohaletoimetamine alates {amount}",
   "pdp.perk.return": "14 päeva tagastusõigus",
   "pdp.perk.delivery": "Tavaliselt kohal alla 7 päevaga",
-  "shop.perk.trusted": "Meid usaldab üle 500 kliendi"
+  "shop.perk.trusted": "Meid usaldab üle 500 kliendi",
+  "shop.reviews.title": "Mida kliendid ütlevad",
+  "shop.reviews.verified": "Kinnitatud ostja",
+  "shop.reviews.more": "Rohkem arvustusi Instagramis",
+  "shop.reviews.translated": "Tõlgitud rootsi keelest"
 }

@@ -166,5 +166,9 @@
   "pdp.perk.ship": "Безплатна доставка над {amount}",
   "pdp.perk.return": "14 дни за връщане",
   "pdp.perk.delivery": "Обикновено доставка до 7 дни",
-  "shop.perk.trusted": "Над 500 клиенти ни се доверяват"
+  "shop.perk.trusted": "Над 500 клиенти ни се доверяват",
+  "shop.reviews.title": "Какво казват клиентите",
+  "shop.reviews.verified": "Потвърден купувач",
+  "shop.reviews.more": "Още отзиви в Instagram",
+  "shop.reviews.translated": "Преведено от шведски"
 }

@@ -166,5 +166,9 @@
   "pdp.perk.ship": "Gratis Versand ab {amount}",
   "pdp.perk.return": "14 Tage Rückgabe",
   "pdp.perk.delivery": "Lieferung meist in unter 7 Tagen",
-  "shop.perk.trusted": "Über 500 Kunden vertrauen uns"
+  "shop.perk.trusted": "Über 500 Kunden vertrauen uns",
+  "shop.reviews.title": "Das sagen unsere Kunden",
+  "shop.reviews.verified": "Verifizierter Käufer",
+  "shop.reviews.more": "Mehr Bewertungen auf Instagram",
+  "shop.reviews.translated": "Aus dem Schwedischen übersetzt"
 }

@@ -166,5 +166,9 @@
   "pdp.perk.ship": "Gratis verzending vanaf {amount}",
   "pdp.perk.return": "14 dagen retour",
   "pdp.perk.delivery": "Meestal bezorgd in minder dan 7 dagen",
-  "shop.perk.trusted": "500+ klanten vertrouwen ons"
+  "shop.perk.trusted": "500+ klanten vertrouwen ons",
+  "shop.reviews.title": "Wat klanten zeggen",
+  "shop.reviews.verified": "Geverifieerde koper",
+  "shop.reviews.more": "Meer reviews op Instagram",
+  "shop.reviews.translated": "Vertaald uit het Zweeds"
 }

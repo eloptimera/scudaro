@@ -168,5 +168,9 @@
   "pdp.perk.ship": "Doprava zdarma nad {amount}",
   "pdp.perk.return": "14 dní na vrácení",
   "pdp.perk.delivery": "Obvykle doručení do 7 dnů",
-  "shop.perk.trusted": "Důvěřuje nám přes 500 zákazníků"
+  "shop.perk.trusted": "Důvěřuje nám přes 500 zákazníků",
+  "shop.reviews.title": "Co říkají zákazníci",
+  "shop.reviews.verified": "Ověřený kupující",
+  "shop.reviews.more": "Další recenze na Instagramu",
+  "shop.reviews.translated": "Přeloženo ze švédštiny"
 }

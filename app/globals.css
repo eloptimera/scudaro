@@ -920,3 +920,19 @@ html[lang="ar"] .consent__btn, html[lang="zh"] .consent__btn { text-transform: n
 .contact__notice a { text-decoration: underline; }
 .contact__out { min-height: 1.5em; }
 .contact__done { margin: 0; padding: 14px 16px; border: 1px solid var(--ink); color: var(--ink); line-height: 1.5; }
+
+/* Customer reviews on the shop page */
+.reviews { padding: 32px 0 8px; }
+.reviews__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 16px; }
+.reviews__title { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--red); }
+.reviews__more { color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: .02em; text-decoration: underline; text-underline-offset: 4px; }
+.reviews__more:hover { color: var(--red); }
+.reviews__list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 760px) { .reviews__list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.review { display: flex; flex-direction: column; gap: 12px; padding: 20px; border: 1px solid var(--line); background: #131315; }
+.review__quote { margin: 0; flex: 1; }
+.review__quote p { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.5; }
+.review__by { display: flex; flex-direction: column; gap: 2px; margin: 0; font-size: 13px; }
+.review__name { color: var(--ink); font-weight: 600; }
+.review__meta, .review__note { color: var(--muted); font-size: 12px; }
+.review__note { margin: 0; }

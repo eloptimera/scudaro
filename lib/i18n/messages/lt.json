@@ -168,5 +168,9 @@
   "pdp.perk.ship": "Nemokamas pristatymas nuo {amount}",
   "pdp.perk.return": "Grąžinimas per 14 dienų",
   "pdp.perk.delivery": "Paprastai pristatoma per mažiau nei 7 dienas",
-  "shop.perk.trusted": "Mumis pasitiki daugiau nei 500 klientų"
+  "shop.perk.trusted": "Mumis pasitiki daugiau nei 500 klientų",
+  "shop.reviews.title": "Ką sako klientai",
+  "shop.reviews.verified": "Patvirtintas pirkėjas",
+  "shop.reviews.more": "Daugiau atsiliepimų „Instagram“",
+  "shop.reviews.translated": "Išversta iš švedų kalbos"
 }

@@ -169,5 +169,9 @@
   "pdp.perk.ship": "Seachadadh saor in aisce thar {amount}",
   "pdp.perk.return": "Aischur 14 lá",
   "pdp.perk.delivery": "Seachadta de ghnáth i níos lú ná 7 lá",
-  "shop.perk.trusted": "Tá muinín ag breis is 500 custaiméir asainn"
+  "shop.perk.trusted": "Tá muinín ag breis is 500 custaiméir asainn",
+  "shop.reviews.title": "Cad a deir custaiméirí",
+  "shop.reviews.verified": "Ceannaitheoir fíoraithe",
+  "shop.reviews.more": "Tuilleadh léirmheasanna ar Instagram",
+  "shop.reviews.translated": "Aistrithe ón tSualainnis"
 }

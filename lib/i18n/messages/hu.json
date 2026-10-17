@@ -166,5 +166,9 @@
   "pdp.perk.ship": "Ingyenes szállítás {amount} felett",
   "pdp.perk.return": "14 napos visszaküldés",
   "pdp.perk.delivery": "Általában 7 napon belül megérkezik",
-  "shop.perk.trusted": "Több mint 500 vásárló bízik bennünk"
+  "shop.perk.trusted": "Több mint 500 vásárló bízik bennünk",
+  "shop.reviews.title": "Ezt mondják a vásárlók",
+  "shop.reviews.verified": "Ellenőrzött vásárló",
+  "shop.reviews.more": "További vélemények az Instagramon",
+  "shop.reviews.translated": "Svéd nyelvből fordítva"
 }

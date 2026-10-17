@@ -166,5 +166,9 @@
   "pdp.perk.ship": "Δωρεάν αποστολή άνω των {amount}",
   "pdp.perk.return": "Επιστροφές 14 ημερών",
   "pdp.perk.delivery": "Συνήθως παράδοση σε λιγότερο από 7 ημέρες",
-  "shop.perk.trusted": "Μας εμπιστεύονται πάνω από 500 πελάτες"
+  "shop.perk.trusted": "Μας εμπιστεύονται πάνω από 500 πελάτες",
+  "shop.reviews.title": "Τι λένε οι πελάτες",
+  "shop.reviews.verified": "Επαληθευμένος αγοραστής",
+  "shop.reviews.more": "Περισσότερες κριτικές στο Instagram",
+  "shop.reviews.translated": "Μετάφραση από τα σουηδικά"
 }

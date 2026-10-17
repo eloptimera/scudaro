@@ -168,5 +168,9 @@
   "pdp.perk.ship": "Kunsinna b'xejn fuq {amount}",
   "pdp.perk.return": "Treġġigħ lura fi 14 jum",
   "pdp.perk.delivery": "Normalment jaslu f'inqas minn 7 ijiem",
-  "shop.perk.trusted": "Aktar minn 500 klijent jafdawna"
+  "shop.perk.trusted": "Aktar minn 500 klijent jafdawna",
+  "shop.reviews.title": "X'jgħidu l-klijenti",
+  "shop.reviews.verified": "Xerrej ivverifikat",
+  "shop.reviews.more": "Aktar reviews fuq Instagram",
+  "shop.reviews.translated": "Tradott mill-Iżvediż"
 }

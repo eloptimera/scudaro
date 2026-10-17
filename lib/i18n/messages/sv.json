@@ -167,5 +167,9 @@
   "pdp.perk.ship": "Fri frakt över {amount}",
   "pdp.perk.return": "14 dagars retur",
   "pdp.perk.delivery": "Levereras oftast på under 7 dagar",
-  "shop.perk.trusted": "500+ kunder litar på oss"
+  "shop.perk.trusted": "500+ kunder litar på oss",
+  "shop.reviews.title": "Det här säger kunderna",
+  "shop.reviews.verified": "Verifierad köpare",
+  "shop.reviews.more": "Fler recensioner på Instagram",
+  "shop.reviews.translated": "Översatt från svenska"
 }

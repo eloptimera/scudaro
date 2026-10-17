@@ -167,5 +167,9 @@
   "pdp.perk.ship": "Portes grátis acima de {amount}",
   "pdp.perk.return": "Devoluções em 14 dias",
   "pdp.perk.delivery": "Normalmente entregue em menos de 7 dias",
-  "shop.perk.trusted": "Mais de 500 clientes confiam em nós"
+  "shop.perk.trusted": "Mais de 500 clientes confiam em nós",
+  "shop.reviews.title": "O que dizem os clientes",
+  "shop.reviews.verified": "Comprador verificado",
+  "shop.reviews.more": "Mais avaliações no Instagram",
+  "shop.reviews.translated": "Traduzido do sueco"
 }

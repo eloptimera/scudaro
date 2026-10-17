@@ -167,5 +167,9 @@
   "pdp.perk.ship": "Besplatna dostava iznad {amount}",
   "pdp.perk.return": "14 dana za povrat",
   "pdp.perk.delivery": "Obično isporuka za manje od 7 dana",
-  "shop.perk.trusted": "Vjeruje nam više od 500 kupaca"
+  "shop.perk.trusted": "Vjeruje nam više od 500 kupaca",
+  "shop.reviews.title": "Što kažu kupci",
+  "shop.reviews.verified": "Provjereni kupac",
+  "shop.reviews.more": "Više recenzija na Instagramu",
+  "shop.reviews.translated": "Prevedeno sa švedskog"
 }
