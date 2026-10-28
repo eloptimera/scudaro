@@ -63,7 +63,7 @@ export default async function Footer({ locale }: { locale: Locale }) {
       >
         <span className="built-by__text">{t("footer.builtBy")}</span>
         <span className="built-by__brand" aria-hidden="true">
-          <span className="built-by__badge">Tab</span>
+          <Image src="/tab-marketing.png" alt="" className="built-by__badge" width={108} height={72} />
           <span className="built-by__name">Marketing</span>
         </span>
       </a>
