@@ -53,6 +53,20 @@ export default async function Footer({ locale }: { locale: Locale }) {
       <LanguageSwitcher className="lang--footer" />
 
       <p className="legal">{t("footer.rights")}</p>
+
+      <a
+        className="built-by"
+        href="https://www.treatlymarketing.se"
+        target="_blank"
+        rel="noopener"
+        aria-label={`${t("footer.builtBy")} Tab Marketing`}
+      >
+        <span className="built-by__text">{t("footer.builtBy")}</span>
+        <span className="built-by__brand" aria-hidden="true">
+          <span className="built-by__badge">Tab</span>
+          <span className="built-by__name">Marketing</span>
+        </span>
+      </a>
     </footer>
   );
 }
