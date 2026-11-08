@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { headers } from "next/headers";
 import { MOCK_COLLECTIONS, MOCK_PRODUCTS, mockCollectionProducts } from "./mock";
 import { DEFAULT_LOCALE, shopifyLanguage, type Locale } from "./i18n/config";
@@ -134,6 +135,37 @@ const PRODUCT_FRAGMENT = /* GraphQL */ `
   }
 `;
 
+/**
+ * Lighter fragment for product LISTS (home, /products, collections, related, sitemap). Lists only show the first image,
+ * the price and sold-out state, so 1 image instead of 30 and no per-variant image. This cuts the JSON that every render
+ * has to parse by an order of magnitude.
+ */
+const PRODUCT_LIST_FRAGMENT = /* GraphQL */ `
+  fragment ProductFields on Product {
+    id
+    handle
+    title
+    description
+    productType
+    tags
+    images(first: 1) { nodes { url altText } }
+    variants(first: 100) {
+      pageInfo { hasNextPage endCursor }
+      nodes {
+        id
+        title
+        selectedOptions { name value }
+        availableForSale
+        price { amount currencyCode }
+        compareAtPrice { amount currencyCode }
+      }
+    }
+  }
+`;
+
+/** Cache window for all catalogue reads. Shopify webhooks → /api/revalidate clear it instantly on changes. */
+const CATALOGUE_TTL = 300;
+
 type RawMoney = { amount: string; currencyCode: string };
 type RawProduct = {
   id: string;
@@ -221,7 +253,7 @@ function toProduct(p: RawProduct): Product {
 const PAGE_SIZE = 50;
 const MAX_PAGES = 40;
 
-export async function getProducts(locale: Locale = DEFAULT_LOCALE): Promise<Product[]> {
+export const getProducts = cache(async function getProducts(locale: Locale = DEFAULT_LOCALE): Promise<Product[]> {
   if (!isShopifyEnabled) return MOCK_PRODUCTS;
   const nodes: RawProduct[] = [];
   let after: string | null = null;
@@ -229,7 +261,7 @@ export async function getProducts(locale: Locale = DEFAULT_LOCALE): Promise<Prod
     const data: { products: { pageInfo: { hasNextPage: boolean; endCursor: string | null }; nodes: RawProduct[] } } =
       await storefront(
         /* GraphQL */ `
-          ${PRODUCT_FRAGMENT}
+          ${PRODUCT_LIST_FRAGMENT}
           query Products($first: Int!, $after: String) {
             products(first: $first, after: $after, sortKey: CREATED_AT, reverse: true) {
               pageInfo { hasNextPage endCursor }
@@ -238,14 +270,14 @@ export async function getProducts(locale: Locale = DEFAULT_LOCALE): Promise<Prod
           }
         `,
         { first: PAGE_SIZE, after },
-        { revalidate: 300, tags: ["products"], locale },
+        { revalidate: CATALOGUE_TTL, tags: ["products"], locale },
       );
     nodes.push(...data.products.nodes);
     if (!data.products.pageInfo.hasNextPage || !data.products.pageInfo.endCursor) break;
     after = data.products.pageInfo.endCursor;
   }
   return nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct);
-}
+});
 
 type RawVariant = RawProduct["variants"]["nodes"][number];
 
@@ -283,7 +315,7 @@ async function loadAllVariants(p: RawProduct, locale: Locale): Promise<RawProduc
         }
       `,
       { id: p.id, after: endCursor },
-      { locale },
+      { revalidate: CATALOGUE_TTL, tags: ["products"], locale },
     );
     if (!page.node) break;
     nodes.push(...page.node.variants.nodes);
@@ -293,19 +325,16 @@ async function loadAllVariants(p: RawProduct, locale: Locale): Promise<RawProduc
 }
 
 /**
- * The visitor's country (set by Vercel). Shopify only reports availability correctly WITH a country: without one it
- * says "available" for a product that the cart then refuses for every real buyer.
+ * Country used for the availability check. Shopify only reports availability correctly WITH a country: without one it
+ * can say "available" for a product that the cart then refuses for every real buyer.
+ *
+ * This used to be the visitor's country (x-vercel-ip-country), but reading request headers forces every product page
+ * to be rendered from scratch on every hit, which burned the whole team's Active CPU quota. A fixed market country
+ * lets the page be cached (ISR). The cart still validates availability for the real buyer at add-to-cart.
  */
-async function buyerCountry(): Promise<string | undefined> {
-  try {
-    const c = (await headers()).get("x-vercel-ip-country")?.trim().toUpperCase();
-    return c && /^[A-Z]{2}$/.test(c) ? c : undefined;
-  } catch {
-    return undefined; // outside a request scope
-  }
-}
+const AVAILABILITY_COUNTRY = (process.env.SHOPIFY_AVAILABILITY_COUNTRY?.trim().toUpperCase() || "SE").replace(/[^A-Z]/g, "").slice(0, 2);
 
-export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE): Promise<Product | null> {
+export const getProduct = cache(async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE): Promise<Product | null> {
   if (!isShopifyEnabled) return MOCK_PRODUCTS.find((p) => p.handle === handle) ?? null;
   const run = (country?: string) =>
     storefront<{ product: RawProduct | null }>(
@@ -316,8 +345,8 @@ export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE
         }
       `,
       { handle },
-      // Product page = the buying decision: no data cache.
-      { locale },
+      // Cached like the rest of the catalogue; webhooks → /api/revalidate clear it on stock/price changes.
+      { revalidate: CATALOGUE_TTL, tags: ["products"], locale },
     );
 
   // Prices, images and text come from the plain query, so the page shows the same currency as the rest of the site.
@@ -326,8 +355,8 @@ export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE
 
   // Availability alone is taken from the visitor's country: without one Shopify can say "available" for a variant
   // that the cart then refuses. (A country query also converts prices to the local market currency, hence the overlay.)
-  const country = await buyerCountry();
-  if (country) {
+  const country = AVAILABILITY_COUNTRY;
+  if (country.length === 2) {
     try {
       const local = await run(country);
       const avail = new Map((local.product?.variants.nodes ?? []).map((v) => [v.id, v.availableForSale]));
@@ -340,7 +369,7 @@ export async function getProduct(handle: string, locale: Locale = DEFAULT_LOCALE
     }
   }
   return toProduct(await loadAllVariants(data.product, locale));
-}
+});
 
 /* ---------------------------- Collections ---------------------------- */
 
@@ -415,7 +444,7 @@ export async function getCollections(locale: Locale = DEFAULT_LOCALE): Promise<C
       }
     `,
     {},
-    { revalidate: 300, tags: ["collections"], locale },
+    { revalidate: CATALOGUE_TTL, tags: ["collections"], locale },
   );
   return data.collections.nodes
     .filter((c) => !HIDDEN_COLLECTIONS.has(c.handle) && c.products.nodes.length > 0)
@@ -424,14 +453,14 @@ export async function getCollections(locale: Locale = DEFAULT_LOCALE): Promise<C
 }
 
 /** One collection plus the products in it (for /collections/[handle]). */
-export async function getCollection(handle: string, locale: Locale = DEFAULT_LOCALE): Promise<{ collection: Collection; products: Product[] } | null> {
+export const getCollection = cache(async function getCollection(handle: string, locale: Locale = DEFAULT_LOCALE): Promise<{ collection: Collection; products: Product[] } | null> {
   if (!isShopifyEnabled) {
     const collection = MOCK_COLLECTIONS.find((c) => c.handle === handle);
     return collection ? { collection, products: mockCollectionProducts(handle) } : null;
   }
   const data = await storefront<{ collection: (RawCollection & { products: { nodes: RawProduct[] } }) | null }>(
     /* GraphQL */ `
-      ${PRODUCT_FRAGMENT}
+      ${PRODUCT_LIST_FRAGMENT}
       query Collection($handle: String!) {
         collection(handle: $handle) {
           id
@@ -450,7 +479,7 @@ export async function getCollection(handle: string, locale: Locale = DEFAULT_LOC
       }
     `,
     { handle },
-    { revalidate: 300, tags: ["collections", "products"], locale },
+    { revalidate: CATALOGUE_TTL, tags: ["collections", "products"], locale },
   );
   const raw = data.collection;
   if (!raw) return null;
@@ -459,7 +488,7 @@ export async function getCollection(handle: string, locale: Locale = DEFAULT_LOC
     collection: toCollection({ ...raw, products: { nodes } }),
     products: nodes.filter((p) => p.variants.nodes.length > 0).map(toProduct),
   };
-}
+});
 
 /* ------------------------------ Policies ------------------------------ */
 
@@ -468,7 +497,7 @@ export async function getCollection(handle: string, locale: Locale = DEFAULT_LOC
  * they are shown in the footer. Policies that are empty are left out. Never throws: if Shopify
  * is unreachable (or the token may not read policies) the site simply shows no policy links.
  */
-export async function getPolicies(locale: Locale = DEFAULT_LOCALE): Promise<Policy[]> {
+export const getPolicies = cache(async function getPolicies(locale: Locale = DEFAULT_LOCALE): Promise<Policy[]> {
   if (!isShopifyEnabled) return [];
   try {
     type RawPolicy = { handle: string; title: string; body: string } | null;
@@ -487,7 +516,7 @@ export async function getPolicies(locale: Locale = DEFAULT_LOCALE): Promise<Poli
         }
       `,
       {},
-      { revalidate: 300, tags: ["policies"], locale },
+      { revalidate: CATALOGUE_TTL, tags: ["policies"], locale },
     );
     const { termsOfService, privacyPolicy, refundPolicy, shippingPolicy } = data.shop;
     return [termsOfService, privacyPolicy, refundPolicy, shippingPolicy].filter(
@@ -497,7 +526,7 @@ export async function getPolicies(locale: Locale = DEFAULT_LOCALE): Promise<Poli
     console.error("getPolicies: could not load shop policies", err);
     return [];
   }
-}
+});
 
 /* ------------------------------- Cart -------------------------------- */
 
