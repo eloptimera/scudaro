@@ -34,6 +34,11 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
   };
 }
 
+/** Languages are rendered on first visit and then cached (see the pages' `revalidate`). */
+export function generateStaticParams() {
+  return [];
+}
+
 export const viewport: Viewport = { themeColor: "#0b0b0c" };
 
 export default async function RootLayout({ children, params }: Props) {

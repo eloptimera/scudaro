@@ -8,8 +8,13 @@ import { getPolicies } from "@/lib/shopify";
 
 type Props = { params: Promise<{ locale: string; handle: string }> };
 
-// Rendered per request (policy data itself is cached 5 min) so a Shopify hiccup can never fail a deploy.
-export const dynamic = "force-dynamic";
+// Cached (ISR): built on the first visit, then served from Vercel's cache and refreshed in the background at most
+// every 5 minutes. Shopify webhooks -> /api/revalidate refresh it immediately. Never force-dynamic: rendering every hit
+// (bots crawling 26 languages x every product) used up the team's whole Active CPU quota.
+export const revalidate = 300;
+export function generateStaticParams() {
+  return []; // nothing at build time (a Shopify hiccup can't fail a deploy); every page is cached on first visit
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, handle } = await params;
